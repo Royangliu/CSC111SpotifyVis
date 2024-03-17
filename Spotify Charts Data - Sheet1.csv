@@ -1,0 +1,159 @@
+City,Country,Continent,"1st_song, artist, # of streams","2nd_song, artist, # of streams","3rd_song, artist, # of streams","4th_song, artist, # of streams","5th_song, artist, # of streams"
+Buenos Aires,Argentina,South America,"La Morocha, Luck Ra, 3552305","QUE ME FALTE TODO, Luck Ra, 3110247","La_Original.mp3, Emilia, 3082734","Una Foto Remix, Mesita, 3462190","Inocente, Roze Oficial, 3016631"
+Córdoba,Argentina,South America,"QUE ME FALTE TODO, Luck Ra, 3110247","La Morocha, Luck Ra, 3552305","La_Original.mp3, Emilia, 3082734","Inocente, Roze Oficial, 3016631","Una Foto Remix, Mesita, 3462190"
+Rosario,Argentina,South America,"La Morocha, Luck Ra, 3552305","QUE ME FALTE TODO, Luck Ra, 3110247","La_Original.mp3, Emilia, 3082734","Inocente, Roze Oficial, 3016631","Una Foto Remix, Mesita, 3462190"
+Brisbane,Australia,Australia,"Lovin On Me, Jack Harlow, 22826001","greedy, Tate McRae, 1554256","Stick Season, Noah Kahan, 1530532","I Remember Everything, Zach Bryan, 1237522","Last Night, Morgan Wallen, 981236"
+Melbourne,Australia,Australia,"Lovin On Me, Jack Harlow, 22826001","greedy, Tate McRae, 1554256","Stick Season, Noah Kahan, 1530532","Cruel Summer, Taylor Swift, 1263788","Prada, cassö, 1181104"
+Perth,Australia,Australia,"Lovin On Me, Jack Harlow, 22826001","greedy, Tate McRae, 1554256","Stick Season, Noah Kahan, 1530532","Paint The Town Red, Doja cat, 1166556","Prada, cassö, 1181104"
+Sydney,Australia,Australia,"Lovin On Me, Jack Harlow, 22826001","greedy, Tate McRae, 1554256","Stick Season, Noah Kahan, 1530532","Cruel Summer, Taylor Swift, 1263788","Paint The Town Red, Doja cat, 1166556"
+Vienna,Austria,Europe,"Time, Luciano, 272760","Vois sur ton chemin, Bennett, 179116","greedy, Tate McRae, 178280","Wonderful life, Luciano, 199267","Prada, cassö, 160467"
+NA,Belarus,Europe,"Прощание, Три дня дождя, 71997","Пыяла, Aigel, 65253","Love me again, V, 60495","Дымок, Ицык Цыпер, 59973","Lost angeles, Friendly thug 52 Ngg, 58469"
+Brussels,Belgium ,Europe,"Prada, cassö, 410776","Paint The Town Red, Doja Cat, 24911","Si No Estás, iñigo quintero, 304439","Strangers, Kenya Grace, 301867","Vois sur ton chemin, Bennett, 270822"
+La Paz,Bolivia,South America,"Luna, Feid, 276124","Según Quién, Maluma, 227837","Qlona, Karol G, 207133","Perro Negro, Bad Bunny, 218693","Bellakeo, peso Pluma, 213595"
+Santa Cruz,Bolivia,South America,"Luna, Feid, 276124","Según Quién, Maluma, 227837","Perro Negro, Bad Bunny, 218693","Qlona, Karol G, 207133","Alv, Arcángel, 201601"
+Belém,Brazil,South America,"Let's Go 4, Dj GBR, 8222343","Daqui pra Sempre, Manu, 5436593","Me Leva Pra Casa, Lauana Prado, 7664636","Maria Mariah, JC NO BEAT, 0","Tem Café, Henry Freitas, 2717501"
+Belo Horizonte,Brazil,South America,"Me Leva Pra Casa, Lauana Prado, 7664636","Maria Mariah, JC NO BEAT, 0","Let's Go 4, Dj GBR, 8222343","Barulho Do Foguete, Zé Neto, 5628015","Deja Vu, Luan Santana, 9144585"
+Brasília,Brazil,South America,"Me Leva Pra Casa, Lauana Prado, 7664636","Maria Mariah, JC NO BEAT, 0","Let's Go 4, Dj GBR, 8222343","Barulho Do Foguete, Zé Neto, 5628015","Deja Vu, Luan Santana, 9144585"
+Campinas,Brazil,South America,"Maria Mariah, JC NO BEAT, 0","Let's Go 4, Dj GBR, 8222343","Me Leva Pra Casa, Lauana Prado, 7664636","Barulho Do Foguete, Zé Neto, 5628015","Deja Vu, Luan Santana, 9144585"
+Campo Grande,Brazil,South America,"Me Leva Pra Casa, Lauana Prado, 7664636","Maria Mariah, JC NO BEAT, 0","Deja Vu, Luan Santana, 9144585","Barulho Do Foguete, Zé Neto, 5628015","Fronteira, Ana Castela, 6268204"
+Cuiabá,Brazil,South America,"Me Leva Pra Casa, Lauana Prado, 7664636","Maria Mariah, JC NO BEAT, 0","Deja Vu, Luan Santana, 9144585","Barulho Do Foguete, Zé Neto, 5628015","Fronteira, Ana Castela, 6268204"
+Curitiba,Brazil ,South America,"Maria Mariah, JC NO BEAT, 0","Me Leva Pra Casa, Lauana Prado, 7664636","Let's Go 4, Dj GBR, 8222343","Barulho Do Foguete, Zé Neto, 5628015","Deja Vu, Luan Santana, 9144585"
+Florianópolis,Brazil ,South America,"Maria Mariah, JC NO BEAT, 0","Me Leva Pra Casa, Lauana Prado, 7664636","Let's Go 4, Dj GBR, 8222343","Barulho Do Foguete, Zé Neto, 5628015","Canudinho, Gusttavo Lima, 5582361"
+Fortalexa,Brazil ,South America,"Tem Café, Henry Freitas, 2717501","Let's Go 4, Dj GBR, 8222343","Daqui pra Sempre, Manu, 5436593","Tenho Que Me Decidir, MC PH, 6289704","Maria Mariah, JC NO BEAT, 0"
+Goiânia,Brazil ,South America,"Me Leva Pra Casa, Lauana Prado, 7664636","Deja Vu, Luan Santana, 9144585","Canudinho, Gusttavo Lima, 5582361","Maria Mariah, JC NO BEAT, 0","Barulho Do Foguete, Zé Neto, 5628015"
+Manaus,Brazil ,South America,"Let's Go 4, Dj GBR, 8222343","Daqui pra Sempre, Manu, 5436593","Maria Mariah, JC NO BEAT, 0","Tenho Que Me Decidir, MC PH, 6289704","10 Carros, Chefin, 4953202"
+Porto Alegre,Brazil ,South America,"Maria Mariah, JC NO BEAT, 0","Me Leva Pra Casa, Lauana Prado, 7664636","Let's Go 4, Dj GBR, 8222343","Barulho Do Foguete, Zé Neto, 5628015","Canudinho, Gusttavo Lima, 5582361"
+Recife,Brazil ,South America,"Tem Café, Henry Freitas, 2717501","Let's Go 4, Dj GBR, 8222343","10 Carros, Chefin, 4953202","Tenho Que Me Decidir, MC PH, 6289704","Daqui pra Sempre, Manu, 5436593"
+Rio de Janeiro,Brazil ,South America,"10 Carros, Chefin, 4953202","Tenho Que Me Decidir, MC PH, 6289704","Let's Go 4, Dj GBR, 8222343","Loucura, Borges, 3801181","Me Leva Pra Casa, Lauana Prado, 7664636"
+Salvador,Brazil ,South America,"Let's Go 4, Dj GBR, 8222343","Tenho Que Me Decidir, MC PH, 6289704","10 Carros, Chefin, 4953202","Cama Repetida, Leo Santana, 3896941","Daqui pra Sempre, Manu, 5436593"
+São Paulo,Brazil ,South America,"Let's Go 4, Dj GBR, 8222343","Maria Mariah, JC NO BEAT, 0","Me Leva Pra Casa, Lauana Prado, 7664636","Tenho Que Me Decidir, MC PH, 6289704","Deja Vu, Luan Santana, 9144585"
+Uberlândia,Brazil ,South America,"Me Leva Pra Casa, Lauana Prado, 7664636","Maria Mariah, JC NO BEAT, 0","Deja Vu, Luan Santana, 9144585","Let's Go 4, Dj GBR, 8222343","Barulho Do Foguete, Zé Neto, 5628015"
+Calgary,Canada,North America,"Lovin On Me, Jack Harlow, 1663795","Stick Season, Noah Kahan, 1479782","greedy, Tate McRae, 1249856","I Remember Everything, Zach Bryan, 1151584","Cruel Summer, Taylor Swift, 1007462"
+Montreal,Canada,North America,"Lovin On Me, Jack Harlow, 1663795","greedy, Tate McRae, 1249856","Stick Season, Noah Kahan, 1479782","Lose Control, Teddy Swims, 898106","Paint The Town Red, Doja Cat, 919578"
+Ottawa,Canada,North America,"Lovin On Me, Jack Harlow, 1663795","Stick Season, Noah Kahan, 1479782","greedy, Tate McRae, 1249856","I Remember Everything, Zach Bryan, 1151584","Last Night, Morgan Wallen, 908633"
+Toronto,Canada,North America,"Lovin On Me, Jack Harlow, 1663795","greedy, Tate McRae, 1249856","Stick Season, Noah Kahan, 1479782","Cruel Summer, Taylor Swift, 1007462","Paint The Town Red, Doja Cat, 919578"
+Vancouver,Canada,North America,"Lovin On Me, Jack Harlow, 1663795","Stick Season, Noah Kahan, 1479782","greedy, Tate McRae, 1249856","Cruel Summer, Taylor Swift, 1007462","I Remember Everything, Zach Bryan, 1151584"
+Concepción,Chile,South America,"Princesita De..., Jere Klein, 3225260","Ando, Jere Klein, 2080932","X ESO BB, Jere Klein, 1888807","Daytona, Cris Mj, 1893420","¿Cuál Es Su Nombre?, Lucky Brown, 1541033"
+Santiago ,Chile,South America,"Princesita De..., Jere Klein, 3225260","Ando, Jere Klein, 2080932","X ESO BB, Jere Klein, 1888807","Daytona, Cris Mj, 1893420","¿Cuál Es Su Nombre?, Lucky Brown, 1541033"
+Bogotá,Colombia,South America,"Luna, Feid, 2498259","Perro negro, bad bunny, 1729841","Cual es esa, Feid, 1506198","Qlona, Karol G, 1261274","Según Quién, Maluma, 1189193"
+Medellín,Colombia,South America,"Luna, Feid, 2498259","Perro negro, bad bunny, 1729841","Qlona, Karol G, 1261274","Cual es esa, Feid, 1506198","Amargura, Karol G, 1050060"
+Santiago de Cali,Colombia,South America,"Luna, Feid, 2498259","Perro negro, bad bunny, 1729841","Cual es esa, Feid, 1506198","La diabla, Xavi, 1490474","Qlona, Karol G, 1261274"
+San José,Costa Rica,North America,"Según Quién, Maluma, 290158","Perro negro, bad bunny, 280269","Luna, Feid, 307128","Primera Cita, Carin Leon, 235741","Qlona, Karol G, 223495"
+NA,Cyprus,Europe,"OAED, SNIK, 30181","Allou, TOQUEL, 24877","A la carte, Kleo, 20544","Ekptotos Aggelos, Nikos Oikonomopoulos, 20303","greedy, Tate McRae, 19611"
+Prague,Czech Republic ,Europe,"Dopamin, Viktor Sheen, ","Safír, Calin, 235427","cool, Grey256, 329881","Habibi, Stein27, 208856","MMA, Ben Cristovao, 207248"
+Copenhagen,Denmark,Europe,"555, Gilli, 476358","I know, D1ma, 415465","Lovin On Me, Jack Harlow, 378842","greedy, Tate McRae, 314193","Uden Dig, Ukendt Kunstner, 280075"
+Frederikberg,Denmark,Europe,"555, Gilli, 476358","I know, D1ma, 415465","Lovin On Me, Jack Harlow, 378842","Danser med Dæmoner, Baloosh, 369046","Tak For Sidst, Gobs, 337172"
+Santo Domingo Este,Dominican Republic,North America,"Toretto, El Alfa, 444785","Deconecte, El Alfa, 375479","Luces Tenues, Anuel AA, 85096","Eso E, Donaty, 144646","Monaco, Ban bunny, 170652"
+Guayaquil,Ecuador,South America,"Perro negro, bad bunny, 574488","Luna, Feid, 700015","Qlona, Karol G, 389229","Según Quién, Maluma, 359353","Es un secreto, Plan B, 311659"
+Quito,Ecuador,South America,"Luna, Feid, 700015","Perro negro, bad bunny, 574488","Qlona, Karol G, 389229","La Diabla, Xavi, 480939","Según Quién, Maluma, 359353"
+Cairo,Egypt,,",سيبك من اللي خلع - من فيلم حمص وحلاوة",,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+Riga,Latvia,Europe,"Lovin On Me, Jack Harlow, 37261","Strangers, Kenya Grace, 31788","greedy, Tate Mcrae, 32405","Prada, cassö, 27678","Paint The Town Red, Doja Cat, 24911"
+Vilnius,Lithuania ,Europe,"Apkabink, Jessica Shy, 59745","Strangers, Kenya Grace, 47301","Lovin On Me, Jack Harlow , 47693","Prada, cassö, 42701","greedy, Tate Mcrae, 42789	"
+Kuala Lumpur ,Malaysia,Asia,"penjaga hati, Nadhif Basalamah, 648666","My Love Mine All Mine, Mitski, 575151","One Of The Girls (with JENNIE, Lily Rose Depp), The Weeknd, 542097","greedy, Tate Mcrae, 479177","Tak Segampang Itu, Anggi Marito, 401811"
+Ciudad Juárez,Mexico,North America,"La Diabla, Xavi, 19664866","La Víctima, Xavi, 13902815","Que Onda, Calle 24, 9653871","Rompe La Dompe, Peso Pluma, 9222582","HARLEY QUINN, Fuerza Regida, 9010296"
+Culiacán,Mexico,North America,"La Diabla, Xavi, 19664867","La Víctima, Xavi, 13902816","Rompe La Dompe, Peso Pluma, 9222582","HARLEY QUINN, Fuerza Regida, 9010296","Alucin, Eugenio Esquivel, 7204244"
+Guadalajara,Mexico,North America,"La Diabla, Xavi, 19664868","La Víctima, Xavi, 13902817","Rompe La Dompe, Peso Pluma, 9222582","Que Onda, Calle 24, 9653871","HARLEY QUINN, Fuerza Regida, 9010296"
+Mexico City,Mexico,North America,"La Diabla, Xavi, 19664869","La Víctima, Xavi, 13902818","Que Onda, Calle 24, 9653871","HARLEY QUINN, Fuerza Regida, 9010296","El Amor De Su Vida, Grupo Frontera, 7524666"
+Mérida,Mexico,North America,"La Diabla, Xavi, 19664870","La Víctima, Xavi, 13902819","HARLEY QUINN, Fuerza Regida, 9010296","Que Onda, Calle 24, 9653871","Bellakeo, Peso Pluma, 7340727"
+Monterrey,Mexico,North America,"La Diabla, Xavi, 19664871","La Víctima, Xavi, 13902820","Que Onda, Calle 24, 9653871","HARLEY QUINN, Fuerza Regida, 9010296","Rompe La Dompe, Peso Pluma, 9222582"
+Puebla City,Mexico,North America,"La Diabla, Xavi, 19664872","La Víctima, Xavi, 13902821","Que Onda, Calle 24, 9653871","HARLEY QUINN, Fuerza Regida, 9010296","El Amor De Su Vida, Grupo Frontera, 7524666"
+Querétaro City,Mexico,North America,"La Diabla, Xavi, 19664873","La Víctima, Xavi, 13902822","Que Onda, Calle 24, 9653871","HARLEY QUINN, Fuerza Regida, 9010296","Rompe La Dompe, Peso Pluma, 9222582"
+Tijuana,Mexico,North America,"La Diabla, Xavi, 19664874","La Víctima, Xavi, 13902823","Rompe La Dompe, Peso Pluma, 9222582","Que Onda, Calle 24, 9653871","HARLEY QUINN, Fuerza Regida, 9010296"
+Amsterdam,Netherlands,Europe,"Stick Season, Noah Kahan, 1351139","greedy, Tate McRae, 1021839","Prada, cassö, 900733","Lose Control, Teddy Swims, 951900","Lovin On Me, 840211"
+Rotterdam,Netherlands,Europe,"Stick Season, Noah Kahan, 1351139","Appel Mint Puur, Broederliefde, 797644","greedy, Tate McRae, 1021839","Prada, cassö, 900733","Lose Control, Teddy Swims, 951900"
+Utrecht,Netherlands,Europe,"Stick Season, Noah Kahan, 1351139","greedy, Tate McRae, 1021839","Prada, cassö, 900733","Satisfyer, Roxy Dekker, 893823","Lose Control, Teddy Swims, 951900"
+Auckland,New Zealand,Oceania,"Lovin On Me, Jack Harlow, 394844","greedy, Tate McRae, 230094","Water, Tyla, 195953","Dreams - 2004 Remaster, Fleetwood Mac, 201141","Cruel Summer, Taylor Swift, 192545"
+Christchurch,New Zealand,Oceania,"Lovin On Me, Jack Harlow, 394844","Stick Season, Noah Kahan, 247892","greedy, Tate McRae, 230094","I Remember Everything (feat. Kacey Musgraves), Zach Bryan, 150735","Dreams - 2004 Remaster, Fleetwood Mac, 201141"
+Managua,Nicaragua,North America,"La Diabla, Xavi, 183528","Según Quién, Maluma, 115858","La Víctima, Xavi, 110283","El Amor De Su Vida, Grupo Frontera, 98705","Perro Negro, Bad Bunny, 94723"
+Oslo,Norway,Europe,"wow, Ramón, 633030","Badebussen (feat. Kjartan Lauritzen), DJ MøMø, 508188","Lovin On Me, Jack Harlow, 353380","greedy, Tate McRae, 348290","Prada, cassö, 310995"
+Panama City,Panama,North America,"Perro Negro, Bad Bunny, 136303","Luna, Feid, 127448","La Diabla, Xavi, 127563","Qlona, Karol G, 95602","Lala, Myke Towers, 90542"
+Asunción,Paraguay,South America,"Según Quién, Maluma, 339156","Qlona, Karol G, 329971","Perro Negro, Bad Bunny, 324112","Ojitos Rojos, Grupo Frontera, 313964","Columbia, Quevedo, 302035"
+Arequipa,Peru ,South America,"Luna, Feid, 1684688","Perro Negro, Bad Bunny, 1151440","Qlona, Karol G, 889650","Bellakeo, Peso Pluma, 971186","Lala, Myke Towers, 828915"
+Lima,Peru ,South America,"Luna, Feid, 1684689","Perro Negro, Bad Bunny, 1151441","Qlona, Karol G, 889651","Lala, Myke Towers, 828915","Bellakeo, Peso Pluma, 971186"
+Cagayan de Oro,Philippines,Asia,"711, Toneejay, 4026281","Get Low, O Side Mafia, 4186715","Cruel Summer, Taylor Swift, 2613024","My Love Mine All Mine, Mitski, 2597074","homebdy (feat. Madman Stan), Demi, 2957120"
+Cebu City,Philippines,Asia,"711, Toneejay, 4026282","Cruel Summer, Taylor Swift, 2613024","My Love Mine All Mine, Mitski, 2597074","Ere, juan karlos, 2485604","Get Low, O Side Mafia, 4186715"
+Davao City,Philippines,Asia,"711, Toneejay, 4026283","Get Low, O Side Mafia, 4186715","Cruel Summer, Taylor Swift, 2613024","My Love Mine All Mine, Mitski, 2597074","homebdy (feat. Madman Stan), Demi, 2957120"
+Manila,Philippines,Asia,"711, Toneejay, 4026284","Get Low, O Side Mafia, 4186715","homebdy (feat. Madman Stan), Demi, 2957120","Alam Mo Ba Girl, Hev Abi, 2708455","Tingin, Cup of Joe, 2943149"
+Katowice,Poland,Europe,"Erotyczne Pif-Paf, Figo i Samogony, 1681488","Hipnoza, NIKOŚ, 1329388","Dzięki, że jesteś, Lanberry, 1181674","BFF, bambi, 1038397","Stan, Gibbs, 861372"
+Krakow,Poland,Europe,"Erotyczne Pif-Paf, Figo i Samogony, 1681489","Hipnoza, NIKOŚ, 1329389","Dzięki, że jesteś, Lanberry, 1181674","BFF, bambi, 1038397","Jestem Twoją Bajką, Kleks, 1133179"
+Poznan,Poland,Europe,"Erotyczne Pif-Paf, Figo i Samogony, 1681490","Hipnoza, NIKOŚ, 1329390","BFF, bambi, 1038397","Dzięki, że jesteś, Lanberry, 1181674","Jestem Twoją Bajką, Kleks, 1133180"
+Warsaw,Poland,Europe,"Erotyczne Pif-Paf, Figo i Samogony, 1681491","Hipnoza, NIKOŚ, 1329391","Dzięki, że jesteś, Lanberry, 1181674","BFF, bambi, 1038397","Jestem Twoją Bajką, Kleks, 1133181"
+Wroclaw,Poland,Europe,"Erotyczne Pif-Paf, Figo i Samogony, 1681492","Hipnoza, NIKOŚ, 1329392","Dzięki, że jesteś, Lanberry, 1181674","Całkiem Nowa Bajka, Kleks, 957810","BFF, bambi, 1038397"
+Lisbon,Portugal,Europe,"Tata, Slow J, 430823","Si No Estás, Íñigo Quintero, 415700","10 Carros, Chefin, 352323","Carro (feat. Dillaz), Bárbara Bandeira, 317,681","Novo Balanço, Veigh, 279007"
+Bucharest,Romania,Europe,"Freezing Cold, Robi, 235236","Fana, Jador, 231495","Romeo si Julieta, Alex Botea, 159340","Ciocolata, Tzanca Uraganu, 152892","Pe un pat, Iuli Neamtu, 136295"
+Riyadh,Saudi Arabia ,Asia,"My Love Mine All Mine, Mitski, 114330","One Of The Girls (with JENNIE, Lily Rose Depp), The Weeknd, 103037","greedy, Tate McRae, 78023","Popular (with Playboi Carti & Madonna) - From The Idol Vol. 1 (Music from the HBO Original Series), The Weeknd, 99915","I wanna be yours, Artic Monkeys, 69870"
+Singapore,Singapore,Asia,"greedy, Tate McRae, 293690","Cruel Summer, Taylor Swift, 257093","Perfect Night, Le Sserafim, 271083","Seven (feat. Latto) (Explicit Ver.), Jung Kook, 323740","My Love Mine All Mine, Mitski, 239854"
+Bratislava,Slovakia,Europe,"Pussy Power (feat. Porsche Boy), Similivinlife, 104907","Bejšíí, Separ, 93394","Sunset, Separ, 83026","Prada, cassö, 66362","Safír, Calin, 63823"
