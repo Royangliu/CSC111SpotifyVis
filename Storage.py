@@ -1,6 +1,5 @@
 from __future__ import annotations
-import csv
-from typing import Any, Optional, TextIO
+from typing import Any, Optional
 
 class Tree:
     """A recursive tree data structure.
@@ -111,10 +110,91 @@ class Tree:
                 str_so_far += subtree._str_indented(depth + 1)
             return str_so_far
 
-    def initialize_spotify_file(self, file_name: TextIO):
-        """Intializes this tree according to the provided csv file of the top songs data.
+    def insert_sequence(self, items: list) -> None:
+        """function from exercise 2
+
+        The inserted items form a chain of descendants, where:
+        - items[0] is a child of this tree's root
+        - items[1] is a child of items[0]
+        - items[2] is a child of items[1]
+        - etc.
+
+        Preconditions:
+            - not self.is_empty()
         """
+        if items:
+            in_subtrees = False
+            for subtree in self._subtrees:
+                if subtree._root == items[0] and not in_subtrees:
+                    subtree.insert_sequence(items[1:])
+                    in_subtrees = True
+
+            if not in_subtrees:
+                new_tree = Tree(items[0], [])
+                new_tree.insert_sequence(items[1:])
+                self._subtrees.append(new_tree)
+          
+    #Tree functions
+    def top_n(self, n: int, target: str) -> list[str]:
+      """
+      Returns the top n songs of a specific country. Returns [] if the country is not found.  
+      """
+      if self._root == target:
+        return self._search_songs(n, {})
+      elif self._subtrees == []:
+        return []
+      else:
+        for subtree in self._subtrees:
+          top = subtree.top_n(n, target)
+          if top != []:
+            return top
+
+        return []
         
+      
+      # if not self.__contains__(country):
+      #   return []
+      
+      # for subtree_conti in self._subtrees:
+      #   for subtree_country in subtree_conti._subtrees:
+      #     if self._root == country:
+      #       return subtree_country._search_songs(n)
+            
+
+    def _search_songs(self, n: int, songs: dict) -> dict:
+      """
+      This is a helper function for top_n, it returns the name of the top n songs. 
+      """
+      
+      if isinstance(self._root, Song):
+        if self._root.title in songs:
+          songs[self._root.title] += 1
+        else:
+          songs[self._root.title] = 1
+
+        return songs
+      else:
+        for subtree in self._subtrees:
+          subtree._search_songs(n, songs)
+
+        songs = dict(sorted(songs.items(), key=lambda x: x[1], reverse=True))
+        songs = list(songs)
+        if len(songs) >= n:
+          return songs[:n]
+        else:
+          return list(songs)
+
+        return songs
+      
+        
+      
+      # for city in self._subtrees:
+      #   for song in city._subtrees:
+      #     if song._root.title in songs:
+      #       songs[song._root.title] += 1
+      #     else:
+      #       songs[song._root.title] = 1
+
 
 
 class Song:
@@ -128,3 +208,14 @@ class Song:
     title: str
     artist: str
     streams: int
+
+    def __init__(self, title: str, artist: str, streams: int) -> None:
+      self.title = title
+      self.artist = artist
+      self.streams = streams
+
+# change streams to a dict?
+
+if __name__ == '__main__':
+  tree = Tree('World', [Tree('Can', [Tree('Canada', [Tree(Song('Richard', 'R', 5), [])])]), Tree('Stat', [Tree('US', [Tree(Song('Mina', 'M', 4), [])])])])
+  print(tree._search_songs(4, {}))
