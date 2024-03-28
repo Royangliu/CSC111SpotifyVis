@@ -14,6 +14,7 @@ def initialize_spotify_file(file_name: str) -> Tree:
             continent = row[2]
             new_tree.insert_sequence(['World', continent, country, city])
 
+            # Note, this doesn't consider countries without cities (says the city name is "NAN")
             for s in range(3, 8):
                 song = create_song_object(row[s])
                 new_tree.insert_sequence(['World', continent, country, city, song])
@@ -32,4 +33,9 @@ def create_song_object(string_data: str) -> Song:
     return Song(title, artist, streams)
 
 if __name__ == "__main__":
-    spotify_tree = initialize_spotify_file("Charts_Data.csv") # Make sure this is consistent with file names
+    spotify_tree = initialize_spotify_file("Test_set_main.csv") # Make sure this is consistent with file names
+    # print(spotify_tree.top_n(5, 'Canada'))
+    print(spotify_tree.most_common_song_country("Costa Rica"))
+  
+  
+  

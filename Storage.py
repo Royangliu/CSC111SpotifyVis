@@ -1,221 +1,349 @@
 from __future__ import annotations
-from typing import Any, Optional
+import csv
+from typing import Any, Optional, Union
 
 class Tree:
-    """A recursive tree data structure.
+        """A recursive tree data structure.
 
-    Note the relationship between this class and RecursiveList; the only major
-    difference is that _rest has been replaced by _subtrees to handle multiple
-    recursive sub-parts.
+        Note the relationship between this class and RecursiveList; the only major
+        difference is that _rest has been replaced by _subtrees to handle multiple
+        recursive sub-parts.
 
-    Representation Invariants:
-        - self._root is not None or self._subtrees == []
-        - all(not subtree.is_empty() for subtree in self._subtrees)
-    """
-    # Private Instance Attributes:
-    #   - _root:
-    #       The item stored at this tree's root, or None if the tree is empty.
-    #   - _subtrees:
-    #       The list of subtrees of this tree. This attribute is empty when
-    #       self._root is None (representing an empty tree). However, this attribute
-    #       may be empty when self._root is not None, which represents a tree consisting
-    #       of just one item.
-    _root: Optional[Any]
-    _subtrees: list[Tree]
-
-    def __init__(self, root: Optional[Any], subtrees: list[Tree]) -> None:
-        """Initialize a new Tree with the given root value and subtrees.
-
-        If root is None, the tree is empty.
-
-        Preconditions:
-            - root is not none or subtrees == []
+        Representation Invariants:
+                - self._root is not None or self._subtrees == []
+                - all(not subtree.is_empty() for subtree in self._subtrees)
         """
-        self._root = root
-        self._subtrees = subtrees
+        # Private Instance Attributes:
+        #   - _root:
+        #       The item stored at this tree's root, or None if the tree is empty.
+        #   - _subtrees:
+        #       The list of subtrees of this tree. This attribute is empty when
+        #       self._root is None (representing an empty tree). However, this attribute
+        #       may be empty when self._root is not None, which represents a tree consisting
+        #       of just one item.
+        _root: Optional[Any]
+        _subtrees: list[Tree]
 
-    def is_empty(self) -> bool:
-        """Return whether this tree is empty.
+        def __init__(self, root: Optional[Any], subtrees: list[Tree]) -> None:
+                """Initialize a new Tree with the given root value and subtrees.
 
-        >>> t1 = Tree(None, [])
-        >>> t1.is_empty()
-        True
-        >>> t2 = Tree(3, [])
-        >>> t2.is_empty()
-        False
-        """
-        return self._root is None
+                If root is None, the tree is empty.
 
-    def __len__(self) -> int:
-        """Return the number of items contained in this tree.
+                Preconditions:
+                        - root is not none or subtrees == []
+                """
+                self._root = root
+                self._subtrees = subtrees
 
-        >>> t1 = Tree(None, [])
-        >>> len(t1)
-        0
-        >>> t2 = Tree(3, [Tree(4, []), Tree(1, [])])
-        >>> len(t2)
-        3
-        """
-        if self.is_empty():
-            return 0
-        else:
-            size = 1  # count the root
-            for subtree in self._subtrees:
-                size += subtree.__len__()  # could also write len(subtree)
-            return size
+        def is_empty(self) -> bool:
+                """Return whether this tree is empty.
 
-    def __contains__(self, item: Any) -> bool:
-        """Return whether the given is in this tree.
+                >>> t1 = Tree(None, [])
+                >>> t1.is_empty()
+                True
+                >>> t2 = Tree(3, [])
+                >>> t2.is_empty()
+                False
+                """
+                return self._root is None
 
-        >>> t = Tree(1, [Tree(2, []), Tree(5, [])])
-        >>> t.__contains__(1)
-        True
-        >>> t.__contains__(5)
-        True
-        >>> t.__contains__(4)
-        False
-        """
-        if self.is_empty():
-            return False
-        elif self._root == item:
-            return True
-        else:
-            for subtree in self._subtrees:
-                if subtree.__contains__(item):
-                    return True
-            return False
+        def __len__(self) -> int:
+                """Return the number of items contained in this tree.
 
-    def __str__(self) -> str:
-        """Return a string representation of this tree.
+                >>> t1 = Tree(None, [])
+                >>> len(t1)
+                0
+                >>> t2 = Tree(3, [Tree(4, []), Tree(1, [])])
+                >>> len(t2)
+                3
+                """
+                if self.is_empty():
+                        return 0
+                else:
+                        size = 1  # count the root
+                        for subtree in self._subtrees:
+                                size += subtree.__len__()  # could also write len(subtree)
+                        return size
 
-        For each node, its item is printed before any of its
-        descendants' items. The output is nicely indented.
+        def __contains__(self, item: Any) -> bool:
+                """Return whether the given is in this tree.
 
-        You may find this method helpful for debugging.
-        """
-        return self._str_indented(0).rstrip()
+                >>> t = Tree(1, [Tree(2, []), Tree(5, [])])
+                >>> t.__contains__(1)
+                True
+                >>> t.__contains__(5)
+                True
+                >>> t.__contains__(4)
+                False
+                """
+                if self.is_empty():
+                        return False
+                elif self._root == item:
+                        return True
+                else:
+                        for subtree in self._subtrees:
+                                if subtree.__contains__(item):
+                                        return True
+                        return False
 
-    def _str_indented(self, depth: int) -> str:
-        """Return an indented string representation of this tree.
+        def __str__(self) -> str:
+                """Return a string representation of this tree.
 
-        The indentation level is specified by the <depth> parameter.
-        """
-        if self.is_empty():
-            return ''
-        else:
-            str_so_far = '  ' * depth + f'{self._root}\n'
-            for subtree in self._subtrees:
-                # Note that the 'depth' argument to the recursive call is
-                # modified.
-                str_so_far += subtree._str_indented(depth + 1)
-            return str_so_far
+                For each node, its item is printed before any of its
+                descendants' items. The output is nicely indented.
 
-    def insert_sequence(self, items: list) -> None:
-        """function from exercise 2
+                You may find this method helpful for debugging.
+                """
+                return self._str_indented(0).rstrip()
 
-        The inserted items form a chain of descendants, where:
-        - items[0] is a child of this tree's root
-        - items[1] is a child of items[0]
-        - items[2] is a child of items[1]
-        - etc.
+        def _str_indented(self, depth: int) -> str:
+                """Return an indented string representation of this tree.
 
-        Preconditions:
-            - not self.is_empty()
-        """
-        if items:
-            in_subtrees = False
-            for subtree in self._subtrees:
-                if subtree._root == items[0] and not in_subtrees:
-                    subtree.insert_sequence(items[1:])
-                    in_subtrees = True
-
-            if not in_subtrees:
-                new_tree = Tree(items[0], [])
-                new_tree.insert_sequence(items[1:])
-                self._subtrees.append(new_tree)
-          
-    #Tree functions
-    def top_n(self, n: int, target: str) -> list[str]:
-      """
-      Returns the top n songs of a specific country. Returns [] if the country is not found.  
-      """
-      if self._root == target:
-        return self._search_songs(n, {})
-      elif self._subtrees == []:
-        return []
-      else:
-        for subtree in self._subtrees:
-          top = subtree.top_n(n, target)
-          if top != []:
-            return top
-
-        return []
+                The indentation level is specified by the <depth> parameter.
+                """
+                if self.is_empty():
+                        return ''
+                else:
+                        str_so_far = '  ' * depth + f'{self._root}\n'
+                        for subtree in self._subtrees:
+                                # Note that the 'depth' argument to the recursive call is
+                                # modified.
+                                str_so_far += subtree._str_indented(depth + 1)
+                        return str_so_far
         
-      
-      # if not self.__contains__(country):
-      #   return []
-      
-      # for subtree_conti in self._subtrees:
-      #   for subtree_country in subtree_conti._subtrees:
-      #     if self._root == country:
-      #       return subtree_country._search_songs(n)
+        def insert_sequence(self, items: list) -> None:
+                """function from exercise 2
+
+                The inserted items form a chain of descendants, where:
+                - items[0] is a child of this tree's root
+                - items[1] is a child of items[0]
+                - items[2] is a child of items[1]
+                - etc.
+
+                Preconditions:
+                        - not self.is_empty()
+                """
+                if items:
+                        in_subtrees = False
+                        for subtree in self._subtrees:
+                                if subtree._root == items[0] and not in_subtrees:
+                                        subtree.insert_sequence(items[1:])
+                                        in_subtrees = True
+
+                        if not in_subtrees:
+                                new_tree = Tree(items[0], [])
+                                new_tree.insert_sequence(items[1:])
+                                self._subtrees.append(new_tree)
+                    
+        #Tree functions
+        def top_n(self, n: int, target: str) -> list[tuple]:
+            """
+            This function takes in the tree itself, an int representing the number of top songs to return, and a target representing whether you want to find top songs from the world, continent, country, or city.
+            Returns a list of tuple with the top n songs, their artists, and stream. Returns [] if the target is not found.       
+
+           Representation Invariants:
+                - n >= 1
+            """
+            if self._root == target:
+                return self._search_songs(n, {}, {}, {})
+            elif self._subtrees == []:
+                return []
+            else:
+                for subtree in self._subtrees:
+                    top = subtree.top_n(n, target)
+                    if top != []:
+                        return top
+
+                return []
+                
+
+        def _search_songs(self, n: int, songs: dict, s_and_artist: dict, s_and_stream: dict) -> list[tuple]:
+            """
+            This is a helper function for top_n, it returns the name of the top n songs. 
+            """
             
+            if isinstance(self._root, Song):
+                if self._root.title in songs:
+                    songs[self._root.title] += 1
+                else:
+                    songs[self._root.title] = 1
 
-    def _search_songs(self, n: int, songs: dict) -> dict:
-      """
-      This is a helper function for top_n, it returns the name of the top n songs. 
-      """
-      
-      if isinstance(self._root, Song):
-        if self._root.title in songs:
-          songs[self._root.title] += 1
-        else:
-          songs[self._root.title] = 1
+                s_and_artist[self._root.title] = self._root.artist
+                s_and_stream[self._root.title] = self._root.streams
+                return []
+                
+            else:
+                for subtree in self._subtrees:
+                    subtree._search_songs(n, songs, s_and_artist, s_and_stream)
+                    
+                songs = dict(sorted(songs.items(), key=lambda x: x[1], reverse=True))
+                songs = list(songs)
+                lst = []
+                for i in range(n):
+                    if i >= len(songs):
+                        return lst
+                        
+                    lst += [(songs[i], s_and_artist[songs[i]], s_and_stream[songs[i]])]
 
-        return songs
-      else:
-        for subtree in self._subtrees:
-          subtree._search_songs(n, songs)
+                return lst
 
-        songs = dict(sorted(songs.items(), key=lambda x: x[1], reverse=True))
-        songs = list(songs)
-        if len(songs) >= n:
-          return songs[:n]
-        else:
-          return list(songs)
 
-        return songs
-      
+        def common_artist(self, country1: str, country2: str) -> list[str]:
+          """Returns the most common artists between two countries"""
+          top_songs_1 = self.top_n(100, country1)
+          top_songs_2 = self.top_n(100, country2)
+
+          top_songs1_dict = {}
+          for song1 in top_songs_1:
+            if song1[1] in top_songs1_dict:
+              top_songs1_dict[song1[1]] += 1
+            else:
+              top_songs1_dict[song1[1]] = 1
+
+          top_songs2_dict = {}
+          for song2 in top_songs_2:
+            if song2[1] in top_songs2_dict:
+              top_songs2_dict[song2[1]] += 1
+            else:
+              top_songs2_dict[song2[1]] = 1
+
+          common_artist = {}
+          for artist in top_songs1_dict:
+            if artist in top_songs2_dict:
+              if top_songs1_dict[artist] <= top_songs2_dict[artist]:
+                common_artist[artist] = top_songs1_dict[artist]
+
+          common_artist = dict(sorted(common_artist.items(), key=lambda x: x[1], reverse=True))
+          common_artist = list(common_artist)
+          return common_artist
+
+
+        def common_song(self, country1: str, country2: str) -> list[str]:
+          """Returns the most commonly occurring songs between two countries"""
+          top_songs_1 = self.top_n(100, country1)
+          top_songs_2 = self.top_n(100, country2)
+
+          top_songs1_dict = {}
+          for song1 in top_songs_1:
+            if song1[0] in top_songs1_dict:
+              top_songs1_dict[song1[0]] += 1
+            else:
+              top_songs1_dict[song1[0]] = 1
+
+          top_songs2_dict = {}
+          for song2 in top_songs_2:
+            if song2[0] in top_songs2_dict:
+              top_songs2_dict[song2[0]] += 1
+            else:
+              top_songs2_dict[song2[0]] = 1
+
+          common_song = {}
+          for song in top_songs1_dict:
+            if song in top_songs2_dict:
+              if top_songs1_dict[song] <= top_songs2_dict[song]:
+                common_song[song] = top_songs1_dict[song]
+
+          common_song = dict(sorted(common_song.items(), key=lambda x: x[1], reverse=True))
+          common_song = list(common_song)
+          return common_song
+
+  
+        def most_common_artist_country(self, country1: str) -> list[str]:
+          """Returns the most similar country to the given country in terms of artists"""
+          
+          countries = set()
+          with open("Charts_Data.csv", 'r') as file:
+            data = csv.reader(file)
+            for line in data:
+              if line[1] not in countries and line[1] != country1:
+                countries.add(line[1])
+
+          country_top_artist = self.common_song_artist_helper(country1, 'artist')    
+          most_similar = {}
+          
+          for country in countries:
+            temp_country_list = self.common_song_artist_helper(country, 'artist')
+            for artist in temp_country_list:
+              if artist in country_top_artist:
+                if country in most_similar:
+                  most_similar[country] += 1
+                else:
+                  most_similar[country] = 1
+
+          most_similar = dict(sorted(most_similar.items(), key=lambda x: x[1], reverse=True))
+          most_similar = list(most_similar)
+
+          return most_similar[:1]
+
+  
+        def most_common_song_country(self, country1: str) -> list[str]:
+          """Returns the most similar country to the given country in terms of artists"""
+
+          countries = set()
+          with open("Charts_Data.csv", 'r') as file:
+            data = csv.reader(file)
+            for line in data:
+              if line[1] not in countries and line[1] != country1:
+                countries.add(line[1])
+
+          country_top_songs = self.common_song_artist_helper(country1, 'song')    
+          most_similar = {}
+
+          for country in countries:
+            temp_country_list = self.common_song_artist_helper(country, 'song')
+            for song in temp_country_list:
+              if song in country_top_songs:
+                if country in most_similar:
+                  most_similar[country] += 1
+                else:
+                  most_similar[country] = 1
+
+          most_similar = dict(sorted(most_similar.items(), key=lambda x: x[1], reverse=True))
+          most_similar = list(most_similar)
+
+          return most_similar[:1]
+          
+            
+        def common_song_artist_helper(self, country: str, type: str) -> list[str]:
+          """
+          Returns the top 5 artists in a particular country
+          
+          Representation Invariants:
+              -assert type in {'artist', 'song'}
+            
+          """
+          top_songs = self.top_n(5, country)
+          top = []
+
+          if type == 'artist':
+            for artist in top_songs:
+              top.append(artist[1])
+          else:
+            for song in top_songs:
+              top.append(song[0])
         
-      
-      # for city in self._subtrees:
-      #   for song in city._subtrees:
-      #     if song._root.title in songs:
-      #       songs[song._root.title] += 1
-      #     else:
-      #       songs[song._root.title] = 1
-
+          return top
 
 
 class Song:
-    """A class storing metadata of a song.
+        """A class storing metadata of a song.
 
-    Instance Attributes:
-        - title: the name of the song
-        - artist: the name of the artist
-        - streams: the number of streams of the song
-    """
-    title: str
-    artist: str
-    streams: int
+        Instance Attributes:
+                - title: the name of the song
+                - artist: the name of the artist
+                - streams: the number of streams of the song
+        """
+        title: str
+        artist: str
+        streams: Union[int, str]
 
-    def __init__(self, title: str, artist: str, streams: int) -> None:
-      self.title = title
-      self.artist = artist
-      self.streams = streams
+        def __init__(self, title: str, artist: str, streams: Union[int, str]) -> None:
+            self.title = title
+            self.artist = artist
+            self.streams = streams
 
 # change streams to a dict?
 
 if __name__ == '__main__':
-  tree = Tree('World', [Tree('Can', [Tree('Canada', [Tree(Song('Richard', 'R', 5), [])])]), Tree('Stat', [Tree('US', [Tree(Song('Mina', 'M', 4), [])])])])
-  print(tree._search_songs(4, {}))
+    tree = Tree('World', [Tree('Can', [Tree('Canada', [Tree(Song('Richard', 'R', 5), [])])]), Tree('Stat', [Tree('US', [Tree(Song('Mina', 'M', 4), []), Tree(Song('LAA', 'M', 4), [])])])])
+    print(tree.top_n(4, 'World'))
