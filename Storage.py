@@ -95,6 +95,21 @@ class Tree:
                 You may find this method helpful for debugging.
                 """
                 return self._str_indented(0).rstrip()
+
+        def _str_indented(self, depth: int) -> str:
+                """Return an indented string representation of this tree.
+
+                The indentation level is specified by the <depth> parameter.
+                """
+                if self.is_empty():
+                        return ''
+                else:
+                        str_so_far = '  ' * depth + f'{self._root}\n'
+                        for subtree in self._subtrees:
+                                # Note that the 'depth' argument to the recursive call is
+                                # modified.
+                                str_so_far += subtree._str_indented(depth + 1)
+                        return str_so_far
         
         def insert_sequence(self, items: list) -> None:
                 """function from exercise 2
@@ -243,7 +258,7 @@ class Tree:
   
         def most_common_artist_country(self, country1: str) -> list[str]:
           """Returns the most similar country to the given country in terms of artists
-          This function takes in a country name as an input and compares the artists of the top songs this country to all other countries 
+          This function takes in a country name as an input and compares the artists of the top songs from this country to the the artists of the top songs from all other countr
           """
           
           countries = set()
