@@ -29,7 +29,7 @@ def create_song_object(string_data: str) -> Song:
         "<title>, <main_artist>, <streams>"
     """
     split_str = string_data.split(', ')
-    title, artist, streams = split_str[0], split_str[1], int(split_str[2])
+    title, artist, streams = split_str[0].lower(), split_str[1].lower(), int(split_str[2])
     return Song(title, artist, streams)
 
 if __name__ == "__main__":

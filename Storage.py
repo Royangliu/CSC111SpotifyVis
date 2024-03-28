@@ -95,21 +95,6 @@ class Tree:
                 You may find this method helpful for debugging.
                 """
                 return self._str_indented(0).rstrip()
-
-        def _str_indented(self, depth: int) -> str:
-                """Return an indented string representation of this tree.
-
-                The indentation level is specified by the <depth> parameter.
-                """
-                if self.is_empty():
-                        return ''
-                else:
-                        str_so_far = '  ' * depth + f'{self._root}\n'
-                        for subtree in self._subtrees:
-                                # Note that the 'depth' argument to the recursive call is
-                                # modified.
-                                str_so_far += subtree._str_indented(depth + 1)
-                        return str_so_far
         
         def insert_sequence(self, items: list) -> None:
                 """function from exercise 2
@@ -159,7 +144,7 @@ class Tree:
 
         def _search_songs(self, n: int, songs: dict, s_and_artist: dict, s_and_stream: dict) -> list[tuple]:
             """
-            This is a helper function for top_n, it returns the name of the top n songs. 
+            This is a helper function for top_n, it returns the name, artist, and streams of the top n songs in a list of tuples. 
             """
             
             if isinstance(self._root, Song):
@@ -189,7 +174,11 @@ class Tree:
 
 
         def common_artist(self, country1: str, country2: str) -> list[str]:
-          """Returns the most common artists between two countries"""
+          """
+          
+          This function takes in two country names as inputs and compares the artists of the top songs from each country and outputs a list of the most commonly occurring artists between the two countries in descending order. 
+          
+          """
           top_songs_1 = self.top_n(100, country1)
           top_songs_2 = self.top_n(100, country2)
 
@@ -219,7 +208,11 @@ class Tree:
 
 
         def common_song(self, country1: str, country2: str) -> list[str]:
-          """Returns the most commonly occurring songs between two countries"""
+          """
+          
+          This function takes in two country names as inputs and compares the top songs from both and outputs a list of the most commonly occurring songs between them in descending order. 
+          
+          """
           top_songs_1 = self.top_n(100, country1)
           top_songs_2 = self.top_n(100, country2)
 
@@ -249,7 +242,9 @@ class Tree:
 
   
         def most_common_artist_country(self, country1: str) -> list[str]:
-          """Returns the most similar country to the given country in terms of artists"""
+          """Returns the most similar country to the given country in terms of artists
+          This function takes in a country name as an input and compares the artists of the top songs this country to all other countries 
+          """
           
           countries = set()
           with open("Charts_Data.csv", 'r') as file:
@@ -341,8 +336,6 @@ class Song:
             self.title = title
             self.artist = artist
             self.streams = streams
-
-# change streams to a dict?
 
 if __name__ == '__main__':
     tree = Tree('World', [Tree('Can', [Tree('Canada', [Tree(Song('Richard', 'R', 5), [])])]), Tree('Stat', [Tree('US', [Tree(Song('Mina', 'M', 4), []), Tree(Song('LAA', 'M', 4), [])])])])
