@@ -236,17 +236,16 @@ class Tree:
         common_song = list(common_song)
         return common_song
 
-    def most_common_artist_country(self, country1: str) -> list[str]:
+    def most_common_artist_country(self, country1: str, data: str) -> list[str]:
         """
-        Returns the most similar country to the given country in terms of artists
-        This function takes in a country name as an input and compares the artists of the top songs
-        this country to all other countries
+        This function takes in a country name and data file as an input and compares the artists of the top songs from 
+        this country to all other countries in data and outputs a list of the most common country
         """
 
         countries = set()
-        with open("Charts_Data.csv", 'r') as file:
-            data = csv.reader(file)
-            for line in data:
+        with open(data, 'r') as file:
+            info = csv.reader(file)
+            for line in info:
                 if line[1] not in countries and line[1] != country1:
                     countries.add(line[1])
 
@@ -268,13 +267,16 @@ class Tree:
 
         return most_similar[:1]
 
-    def most_common_song_country(self, country1: str) -> list[str]:
-        """Returns the most similar country to the given country in terms of artists"""
+    def most_common_song_country(self, country1: str, data: str) -> list[str]:
+        """
+        This function takes in a country name and data file as an input and compares the top songs from 
+        this country to the top songs in all other countries in data and outputs a list of the most common country
+        """
 
         countries = set()
-        with open("Charts_Data.csv", 'r') as file:
-            data = csv.reader(file)
-            for line in data:
+        with open(data, 'r') as file:
+            info = csv.reader(file)
+            for line in info:
                 if line[1] not in countries and line[1] != country1:
                     countries.add(line[1])
 
@@ -332,3 +334,4 @@ class Song:
         self.title = title
         self.artist = artist
         self.streams = streams
+  

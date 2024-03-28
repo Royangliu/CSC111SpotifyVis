@@ -38,3 +38,8 @@ if __name__ == "__main__":
     spotify_tree = initialize_spotify_file("Test_set_main.csv")  # Make sure this is consistent with file names
     print(spotify_tree.top_n(5, 'Canada'))
     # print(spotify_tree.most_common_song_country("Costa Rica"))
+
+    # visualization code
+    import visualization
+    
+    
