@@ -300,10 +300,10 @@ class Tree:
 
     def common_song_artist_helper(self, country: str, type: str) -> list[str]:
         """
-              Returns the top 5 artists in a particular country
+              Returns the top 5 artists/songs in a particular country
 
               Representation Invariants:
-                  -assert type in {'artist', 'song'}
+                  - type in {'artist', 'song'}
 
               """
         top_songs = self.top_n(5, country)
@@ -318,6 +318,71 @@ class Tree:
 
         return top
 
+    def recommend_common_song(self, songs: list[str], region_range: str, ranked = False) -> Song:
+        """Returns n number of new songs from the region who have the most common songs with the provided songs list.
+        
+        Preconditions:
+            - n >= 1
+            - all(song in self for song in songs)
+            - region_range in {'continent', 'country', 'city'}
+        """
+        scores = []
+        
+        if region_range == 'continent':
+            for continent in self._subtrees:
+                scores.append(continent.get_comparison_score(songs, region_range, ranked))
+        elif region_range == 'country':
+            for continent in self._subtrees:
+                for country in continent._subtrees:
+                    scores.append(country.get_comparison_score(songs, region_range, ranked))
+        else:
+            for continent in self._subtrees:
+                for country in continent._subtrees:
+                    for city in country._subtrees:
+                        scores.append(city.get_comparison_score(songs, region_range, ranked))
+
+        scores.sort(reverse=True)
+        has_song = False
+        while not has_song and :
+            
+
+    def get_comparison_score(self, songs: list[str], region_range: str, ranked = False) -> tuple[float, str]:
+        """Computes a comparison score of this region to the provided songs list on the following specifications:
+
+        Preconditions:
+            - self is a tree representing a region
+            - self has >= 1 song
+            - region_range in {'continent', 'country', 'city'}
+            - isinstance(self._root, str)
+        """
+        scores = []
+        num_occurance = 0
+        num_songs = 0
+
+        if region_range == 'continent':
+            for country in self._subtrees:
+                for city in country._subtrees:
+                    for song in city._subtrees:
+                        if isinstance(song._root, Song) and song._root.title in songs:
+                            num_occurance += 1
+                            num_songs += 1
+                            
+        elif region_range == 'country':
+            for city in self._subtrees:
+                for song in city._subtrees:
+                    if isinstance(song._root, Song) and song._root.title in songs:
+                        num_occurance += 1
+                        num_songs += 1
+                        
+        else:
+            for song in self._subtrees:
+                if isinstance(song._root, Song) and song._root.title in songs:
+                    num_occurance += 1
+                    num_songs += 1
+
+        if num_songs == 0:
+            return (0, self._root)
+        return (num_occurance/num_songs, self._root)
 
 class Song:
     """A class storing metadata of a song.
@@ -325,13 +390,16 @@ class Song:
           - title: the name of the song
           - artist: the name of the artist
           - streams: the number of streams of the song
+          - rank: The rank of the song in the city/country
     """
     title: str
     artist: str
     streams: Union[int, str]
+    rank: int
 
-    def __init__(self, title: str, artist: str, streams: Union[int, str]) -> None:
+    def __init__(self, title: str, artist: str, streams: Union[int, str], rank: int) -> None:
         self.title = title
         self.artist = artist
         self.streams = streams
+        self.rank = rank
   
