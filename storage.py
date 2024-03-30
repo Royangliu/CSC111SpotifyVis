@@ -1,7 +1,7 @@
 """Module containing all classes for project 2
 """
-import python_ta
 from __future__ import annotations
+import python_ta
 from typing import Any, Optional, Union
 
 
@@ -360,7 +360,7 @@ class Tree:
         return top
 
     def region_personality(self, n: int, songs: list[str], 
-                           region_range: str, ranked: bool=False) -> list[tuple[float, list[str]]]:
+                           region_range: str, ranked: bool = False) -> list[tuple[float, list[str]]]:
         """Returns a list with n tuples containing regions who have the highest similarity score to the given songs.
         along with their scores.
 
@@ -396,7 +396,7 @@ class Tree:
         scores.sort(reverse=True)
         return scores[:min(len(scores), n)]
 
-    def recommend_songs(self, n: int, songs: list[str], region_range: str, ranked: bool=False) -> list[Song]:
+    def recommend_songs(self, n: int, songs: list[str], region_range: str, ranked: bool = False) -> list[Song]:
         """Returns a max of n new song recommendations from the top 5 regions with the highest
         similarity score with the songs list.
 
@@ -433,7 +433,7 @@ class Tree:
 
         return set()
 
-    def get_comparison_score(self, songs: list[str], region_range: str, ranked: bool=False) -> tuple[float, str]:
+    def get_comparison_score(self, songs: list[str], region_range: str, ranked: bool = False) -> tuple[float, str]:
         """Computes a comparison score of this region to the provided songs list.
 
         
