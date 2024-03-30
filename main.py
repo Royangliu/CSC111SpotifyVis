@@ -1,5 +1,5 @@
 import csv
-from Storage import Tree, Song
+from storage import Tree, Song
 
 
 def initialize_spotify_file(file_name: str) -> Tree:

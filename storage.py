@@ -1,3 +1,6 @@
+"""Module containing all classes for project 2
+"""
+import python_ta
 from __future__ import annotations
 from typing import Any, Optional, Union
 
@@ -273,7 +276,7 @@ class Tree:
         common_song = list(common_song)
         return common_song
 
-    def most_common_artist_country(self, country1: str, data: str) -> list[str]:
+    def most_common_artist_country(self, country1: str) -> list[str]:
         """
         This function takes in a country name as an input and compares the artists of the top songs from 
         this country to all other countries in the tree and outputs a list of the most common country
@@ -293,11 +296,10 @@ class Tree:
         for country in countries:
             temp_country_list = self.common_song_artist_helper(country, 'artist')
             for artist in temp_country_list:
-                if artist in country_top_artist:
-                    if country in most_similar:
-                        most_similar[country] += 1
-                    else:
-                        most_similar[country] = 1
+                if artist in country_top_artist and country in most_similar:
+                    most_similar[country] += 1
+                elif artist in country_top_artist:
+                    most_similar[country] = 1
 
         most_similar = dict(
             sorted(most_similar.items(), key=lambda x: x[1], reverse=True))
@@ -326,11 +328,10 @@ class Tree:
         for country in countries:
             temp_country_list = self.common_song_artist_helper(country, 'song')
             for song in temp_country_list:
-                if song in country_top_songs:
-                    if country in most_similar:
-                        most_similar[country] += 1
-                    else:
-                        most_similar[country] = 1
+                if song in country_top_songs and country in most_similar:
+                    most_similar[country] += 1
+                elif song in country_top_songs:
+                    most_similar[country] = 1
 
         most_similar = dict(
             sorted(most_similar.items(), key=lambda x: x[1], reverse=True))
@@ -338,18 +339,18 @@ class Tree:
 
         return most_similar[:1]
 
-    def common_song_artist_helper(self, country: str, type: str) -> list[str]:
+    def common_song_artist_helper(self, country: str, c_type: str) -> list[str]:
         """
               Returns the top 5 artists/songs in a particular country
 
               Representation Invariants:
-                  - type in {'artist', 'song'}
+                  - c_type in {'artist', 'song'}
 
               """
         top_songs = self.top_n(5, country)
         top = []
 
-        if type == 'artist':
+        if c_type == 'artist':
             for artist in top_songs:
                 top.append(artist[1])
         else:
@@ -359,7 +360,7 @@ class Tree:
         return top
 
     def region_personality(self, n: int, songs: list[str], 
-                           region_range: str, ranked=False) -> list[tuple[float, list[str]]]:
+                           region_range: str, ranked: bool=False) -> list[tuple[float, list[str]]]:
         """Returns a list with n tuples containing regions who have the highest similarity score to the given songs.
         along with their scores.
 
@@ -395,7 +396,7 @@ class Tree:
         scores.sort(reverse=True)
         return scores[:min(len(scores), n)]
 
-    def recommend_songs(self, n: int, songs: list[str], region_range: str, ranked=False) -> list[Song]:
+    def recommend_songs(self, n: int, songs: list[str], region_range: str, ranked: bool=False) -> list[Song]:
         """Returns a max of n new song recommendations from the top 5 regions with the highest
         similarity score with the songs list.
 
@@ -432,7 +433,7 @@ class Tree:
 
         return set()
 
-    def get_comparison_score(self, songs: list[str], region_range: str, ranked=False) -> tuple[float, str]:
+    def get_comparison_score(self, songs: list[str], region_range: str, ranked: bool=False) -> tuple[float, str]:
         """Computes a comparison score of this region to the provided songs list.
 
         
@@ -493,7 +494,7 @@ class Tree:
         if num_songs == 0:
             return (0.0, self._root)
         else:
-            return (total_score/num_songs, self._root)
+            return (total_score / num_songs, self._root)
 
     
 class Song:
@@ -514,4 +515,11 @@ class Song:
         self.artist = artist
         self.streams = streams
         self.rank = rank
-  
+
+
+if __name__ == "__main__":
+    python_ta.check_all(config={
+        'extra-imports': [],  # the names (strs) of imported modules
+        'allowed-io': [],  # the names (strs) of functions that call print/open/input
+        'max-line-length': 120
+    })
