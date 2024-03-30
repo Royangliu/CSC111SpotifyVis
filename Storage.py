@@ -402,7 +402,7 @@ class Tree:
 
         return set()
 
-    def get_comparison_score(self, songs: list[str], region_range: str, ranked = False) -> tuple[float, str]:
+    def get_comparison_score(self, songs: list[str], region_range: str, ranked=False) -> tuple[float, str]:
         """Computes a comparison score of this region to the provided songs list.
 
         
