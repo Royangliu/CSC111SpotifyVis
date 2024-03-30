@@ -13,13 +13,13 @@ def initialize_spotify_file(file_name: str) -> Tree:
             city = row[0]
             country = row[1]
             continent = row[2]
-            new_tree.insert_sequence(['World', continent, country, city])
+            new_tree.insert_sequence([continent, country, city])
 
             # Note, this doesn't consider countries without cities (says the city name is "NAN")
             rank = 1
             for s in range(3, 8):
                 song = create_song_object(row[s], rank)
-                new_tree.insert_sequence(['World', continent, country, city, song])
+                new_tree.insert_sequence([continent, country, city, song])
                 rank += 1
 
     return new_tree
