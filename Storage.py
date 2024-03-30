@@ -123,7 +123,7 @@ class Tree:
             return self
         elif items:
             for subtree in self._subtrees:
-                if subtree._root == items[0] and not in_subtrees:
+                if subtree._root == items[0]:
                     return subtree.navigate_sequence(items[1:])
 
         return None
@@ -346,26 +346,26 @@ class Tree:
             for continent in self._subtrees:
                 com_score = continent.get_comparison_score(songs, region_range, ranked)
                 sequence = [com_score[1]]
-                scores.append(com_score[0], sequence)
+                scores.append((com_score[0], sequence))
                 
         elif region_range == 'country':
             for continent in self._subtrees:
                 for country in continent._subtrees:
                     com_score = country.get_comparison_score(songs, region_range, ranked)
                     sequence = [continent._root, com_score[1]]
-                    scores.append(com_score[0], sequence)scores.append(tuple(country.get_comparison_score(songs, region_range, ranked)))
+                    scores.append((com_score[0], sequence))
         else:
             for continent in self._subtrees:
                 for country in continent._subtrees:
                     for city in country._subtrees:
                         com_score = city.get_comparison_score(songs, region_range, ranked)
                         sequence = [continent._root, country._root, com_score[1]]
-                        scores.append(com_score[0], sequence)
+                        scores.append((com_score[0], sequence))
 
         scores.sort(reverse=True)
         return scores[:min(len(scores), n)]
 
-    def recommend_songs(self, n: int, songs: list[str], region_range: str, ranked = False) -> set[Song]:
+    def recommend_songs(self, n: int, songs: list[str], region_range: str, ranked = False) -> list[Song]:
         """Returns a max of n new song recommendations from the top 5 regions with the highest
         similarity score with the songs list.
 
