@@ -419,13 +419,15 @@ class Tree:
         Preconditions:
             - not isinstance(self._root, Song)
         """
-        if not self.is_empty():
+        if isinstance(self._root, Song):
+            return {self._root}
+        elif not self.is_empty():
             songs = set()
             for subtree in self._subtrees:
                 if isinstance(subtree._root, Song):
                     songs.add(subtree._root)
                 else:
-                    songs.union(subtree.get_songs())
+                    songs = songs.union(subtree.get_songs())
             return songs
 
         return set()
