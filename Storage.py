@@ -90,6 +90,31 @@ class Tree:
                     return True
             return False
 
+    def __str__(self) -> str:
+        """Return a string representation of this tree.
+
+        For each node, its item is printed before any of its
+        descendants' items. The output is nicely indented.
+
+        You may find this method helpful for debugging.
+        """
+        return self._str_indented(0).rstrip()
+
+    def _str_indented(self, depth: int) -> str:
+        """Return an indented string representation of this tree.
+
+        The indentation level is specified by the <depth> parameter.
+        """
+        if self.is_empty():
+            return ''
+        else:
+            str_so_far = '  ' * depth + f'{self._root}\n'
+            for subtree in self._subtrees:
+                # Note that the 'depth' argument to the recursive call is
+                # modified.
+                str_so_far += subtree._str_indented(depth + 1)
+            return str_so_far
+
     def insert_sequence(self, items: list) -> None:
         """
         function from exercise 2
@@ -340,6 +365,7 @@ class Tree:
             - all(song in self for song in songs)
             - region_range in {'continent', 'country', 'city'}
             - self._root == "World"
+            - 1 <= len(songs) <= 5
         """
         scores = []
         
@@ -372,7 +398,7 @@ class Tree:
 
         Preconditions:
             - self._root == 'World'
-        
+            - 1 <= len(songs) <= 5
         """
         recommendations = []
         scores = self.region_personality(5, songs, region_range, ranked)
@@ -423,6 +449,7 @@ class Tree:
             - region_range in {'continent', 'country', 'city'}
             - isinstance(self._root, str)
             - self is a "spotify" tree
+            - 1 <= len(songs) <= 5
         """
         total_score = 0
         num_songs = 0
@@ -438,29 +465,26 @@ class Tree:
                     for song in city._subtrees:
                         if song._root.title in songs and ranked:
                             total_score += 1 - (abs(ranked_dict[song._root.title] - song._root.rank) / 5)
-                            num_songs += 1
                         elif song._root.title in songs:
                             total_score += 1
-                            num_songs += 1
+                        num_songs += 1
                             
         elif region_range == 'country':
             for city in self._subtrees:
                 for song in city._subtrees:
                     if song._root.title in songs and ranked:
                         total_score += 1 - (abs(ranked_dict[song._root.title] - song._root.rank) / 5)
-                        num_songs += 1
                     elif song._root.title in songs:
                         total_score += 1
-                        num_songs += 1
+                    num_songs += 1
                         
         else:
             for song in self._subtrees:
                 if song._root.title in songs and ranked:
                     total_score += 1 - (abs(ranked_dict[song._root.title] - song._root.rank) / 5)
-                    num_songs += 1
                 elif song._root.title in songs:
                     total_score += 1
-                    num_songs += 1
+                num_songs += 1
 
         if num_songs == 0:
             return (0.0, self._root)
