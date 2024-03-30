@@ -415,9 +415,6 @@ class Tree:
         
     def get_songs(self) -> set[Song]:
         """Returns a set of all songs/leaves found in this tree
-
-        Preconditions:
-            - not isinstance(self._root, Song)
         """
         if isinstance(self._root, Song):
             return {self._root}
