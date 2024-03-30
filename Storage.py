@@ -1,5 +1,4 @@
 from __future__ import annotations
-import csv
 from typing import Any, Optional, Union
 
 
@@ -208,10 +207,11 @@ class Tree:
 
     def common_artist(self, country1: str, country2: str) -> list[str]:
         """
+        This function takes in two country names as inputs and compares the artists of the top songs
+        from each country and outputs a list of the most commonly occurring artists between the two countries 
+        in descending order.
 
-              This function takes in two country names as inputs and compares the artists of the top songs from each country and outputs a list of the most commonly occurring artists between the two countries in descending order.
-
-              """
+        """
         top_songs_1 = self.top_n(100, country1)
         top_songs_2 = self.top_n(100, country2)
 
@@ -242,8 +242,8 @@ class Tree:
 
     def common_song(self, country1: str, country2: str) -> list[str]:
         """
-        This function takes in two country names as inputs and compares the top songs from both and outputs a list of
-        the most commonly occurring songs between them in descending order.
+        This function takes in two country names as inputs and compares the top songs 
+        from both and outputs a list ofthe most commonly occurring songs between them in descending order.
         """
         top_songs_1 = self.top_n(100, country1)
         top_songs_2 = self.top_n(100, country2)
@@ -275,16 +275,17 @@ class Tree:
 
     def most_common_artist_country(self, country1: str, data: str) -> list[str]:
         """
-        This function takes in a country name and data file as an input and compares the artists of the top songs from 
-        this country to all other countries in data and outputs a list of the most common country
-        """
+        This function takes in a country name as an input and compares the artists of the top songs from 
+        this country to all other countries in the tree and outputs a list of the most common country
 
+        Preconditions:
+            - self._root == 'World'
+        """
+        
         countries = set()
-        with open(data, 'r') as file:
-            info = csv.reader(file)
-            for line in info:
-                if line[1] not in countries and line[1] != country1:
-                    countries.add(line[1])
+        for continent in self._subtrees:
+            for country in continent._subtrees:
+                countries.add(country._root)
 
         country_top_artist = self.common_song_artist_helper(country1, 'artist')
         most_similar = {}
@@ -304,18 +305,20 @@ class Tree:
 
         return most_similar[:1]
 
-    def most_common_song_country(self, country1: str, data: str) -> list[str]:
+    def most_common_song_country(self, country1: str) -> list[str]:
         """
-        This function takes in a country name and data file as an input and compares the top songs from 
-        this country to the top songs in all other countries in data and outputs a list of the most common country
+        This function takes in a country name as an input and compares the top songs from 
+        this country to the top songs in all other countries in the tree and outputs a list 
+        of the most common country
+
+        Preconditions:
+            - self._root == 'World'
         """
 
         countries = set()
-        with open(data, 'r') as file:
-            info = csv.reader(file)
-            for line in info:
-                if line[1] not in countries and line[1] != country1:
-                    countries.add(line[1])
+        for continent in self._subtrees:
+            for country in continent._subtrees:
+                countries.add(country._root)
 
         country_top_songs = self.common_song_artist_helper(country1, 'song')
         most_similar = {}
