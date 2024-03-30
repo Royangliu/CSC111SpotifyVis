@@ -417,7 +417,7 @@ class Tree:
         Preconditions:
             - not isinstance(self._root, Song)
         """
-        if not self.is_empty:
+        if not self.is_empty():
             songs = set()
             for subtree in self._subtrees:
                 if isinstance(subtree._root, Song):
