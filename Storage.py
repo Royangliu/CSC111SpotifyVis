@@ -401,14 +401,16 @@ class Tree:
             - 1 <= len(songs) <= 5
         """
         recommendations = []
+        recommended_songs = set()
         scores = self.region_personality(5, songs, region_range, ranked)
         for score in scores:
             sequence = score[1]
             region = self.navigate_sequence(sequence)
             region_songs = region.get_songs()
             for r_song in region_songs:
-                if r_song.title not in songs:
+                if r_song.title not in songs and r_song.title not in recommended_songs:
                     recommendations.append(r_song)
+                    recommended_songs.add(r_song.title)
         return recommendations[:min(n, len(recommendations))]
         
     def get_songs(self) -> set[Song]:

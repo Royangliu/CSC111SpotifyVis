@@ -81,6 +81,11 @@ if __name__ == "__main__":
     print(spotify_tree.top_n(5, 'Canada'))
     # print(spotify_tree.most_common_song_country("Costa Rica"))
 
+    songs = ['lovin on me', 'stick season', 'greedy', 'i remember everything', 'cruel summer']
+    a = spotify_tree.recommend_songs(5, songs, 'city', True)
+    for s in a:
+        print(s.title)
+
     # visualization code
     # import visualization
     
