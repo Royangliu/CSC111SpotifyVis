@@ -330,7 +330,8 @@ class Tree:
 
         return top
 
-    def region_song_personality_test(self, n: int, songs: list[str], region_range: str, ranked = False) -> list[tuple[float, list[str]]]:
+    def region_personality(self, n: int, songs: list[str], 
+                           region_range: str, ranked=False) -> list[tuple[float, list[str]]]:
         """Returns a list with n tuples containing regions who have the highest similarity score to the given songs.
         along with their scores.
 
@@ -365,7 +366,7 @@ class Tree:
         scores.sort(reverse=True)
         return scores[:min(len(scores), n)]
 
-    def recommend_songs(self, n: int, songs: list[str], region_range: str, ranked = False) -> list[Song]:
+    def recommend_songs(self, n: int, songs: list[str], region_range: str, ranked=False) -> list[Song]:
         """Returns a max of n new song recommendations from the top 5 regions with the highest
         similarity score with the songs list.
 
@@ -374,7 +375,7 @@ class Tree:
         
         """
         recommendations = []
-        scores = self.region_song_personality_test(5, songs, region_range, ranked)
+        scores = self.region_personality(5, songs, region_range, ranked)
         for score in scores:
             sequence = score[1]
             region = self.navigate_sequence(sequence)
@@ -401,7 +402,6 @@ class Tree:
 
         return set()
 
-    
     def get_comparison_score(self, songs: list[str], region_range: str, ranked = False) -> tuple[float, str]:
         """Computes a comparison score of this region to the provided songs list.
 
@@ -467,6 +467,7 @@ class Tree:
         else:
             return (total_score/num_songs, self._root)
 
+    
 class Song:
     """A class storing metadata of a song.
         Instance Attributes:
