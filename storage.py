@@ -447,7 +447,8 @@ class Tree:
     def region_personality(self, n: int, songs: list[str],
                            region_range: str, ranked: bool = False) -> list[tuple[float, list[str]]]:
         """Returns a list with n tuples containing regions who have the highest similarity score to the given songs.
-        along with their scores.
+        along with their scores. In each tuple, the first element is the score, and the second element contains a list
+        of the sequence to the region being tested.
 
         Preconditions:
             - n >= 1
@@ -502,6 +503,92 @@ class Tree:
                     recommendations.append(r_song)
                     recommended_songs.add(r_song.title)
         return recommendations[:min(lim[0], len(recommendations))]
+
+    # TODO: fetch geographical regions
+    def get_region_streams(self, kind: str) -> dict[str:int]:
+        """
+        Returns all geographical regions listed in the tree, based on the type specified
+    
+        Preconditions:
+            - kind in {"continent", "country", "city"}
+            - self.is_empty == False
+        """
+        def get_stream_stat(tree: Tree, target: str) -> int:
+            """
+            Returns the total stream count from the top 5 songs OVERALL from a tree's subroots since stream numbers are
+            taken from a country's total streams for one song (not by specific cities/states)
+    
+            Preconditions:
+                - tree.is_empty == False
+            """
+            return sum([song[2] for song in tree.top_n(5, target)])
+    
+        continents = self.get_regions_as_subtrees("continents")
+        countries = self.get_regions_as_subtrees("country")
+        cities = self.get_regions_as_subtrees("cities")
+    
+        # return roots of all subtrees listed in a given set
+        if kind == "continent":
+            return {continent._root: get_stream_stat(self, continent._root) for continent in continents}
+        elif kind == "country":
+            return {country._root: get_stream_stat(self, country._root) for country in countries}
+        else:
+            return {city._root: get_stream_stat(self, city._root) for city in cities}
+    
+    def get_region_top_songs(self, kind: str) -> dict[str:list[str]]:
+        """
+        Returns dictionary mapping parts of a region with lists of their top 5 songs in descending order of
+        number of streams.
+    
+        Preconditions:
+                - tree.is_empty == False
+        """
+        def get_top_5(tree: Tree, target: str) -> list[str]:
+            """
+            Returns list of the NAMES of the top 5 songs in a specific region in descending order of number of
+            streams.
+            """
+            return [song[0] for song in tree.top_n(5, target)]
+    
+        continents = self.get_regions_as_subtrees("continents")
+        countries = self.get_regions_as_subtrees("country")
+        cities = self.get_regions_as_subtrees("cities")
+    
+        if kind == "continent":
+            return {continent._root: get_top_5(self, continent._root) for continent in continents}
+        elif kind == "country":
+            return {country._root: get_top_5(self, country._root) for country in countries}
+        else:
+            return {city._root: get_top_5(self, city._root) for city in cities}
+    
+    def get_regions_as_subtrees(self, kind: str) -> set[Tree]:
+        """
+        Returns set of all different regions' subtrees based on the kind specified.
+    
+        Preconditions:
+            - kind in {"continent", "country", "city"}
+            - self.is_empty == False
+        """
+        continents = {continent for continent in self._subtrees}
+    
+        if (kind == 'country') or (kind == 'city'):
+            countries = set()
+            for continent in continents:
+                for country in continent._subtrees:
+                    countries.add(country)
+    
+        if kind == 'city':
+            cities = set()
+            for country in countries:
+                for city in country._subtrees:
+                    cities.add(city)
+    
+        if kind == "continent":
+            return continents
+        elif kind == "country":
+            return countries
+        else:
+            return cities
 
 
 class Song:
