@@ -10,7 +10,6 @@ def initialize_spotify_file(file_name: str) -> Tree:
     """Intializes this tree according to the provided csv file of the top songs data.
     """
     new_tree = Tree('World', [])
-
     with open(file_name, encoding="utf8") as file:
         reader = csv.reader(file)
         for row in reader:
@@ -43,7 +42,6 @@ def get_all_countries(file_name: str) -> list[str]:
     """Returns a list of all countries in the given file.
     """
     countries_list = []
-    
     with open(file_name, encoding="utf8") as file:
         reader = csv.reader(file)
         for row in reader:
@@ -56,7 +54,6 @@ def get_all_continents(file_name: str) -> list[str]:
     """Returns a list of all continents in the given file.
     """
     continents = []
-    
     with open(file_name, encoding="utf8") as file:
         reader = csv.reader(file)
         for row in reader:
@@ -69,7 +66,6 @@ def get_all_cities(file_name: str) -> list[str]:
     """Returns a list of all cities in the given file.
     """
     cities = []
-    
     with open(file_name, encoding="utf8") as file:
         reader = csv.reader(file)
         for row in reader:
@@ -87,8 +83,8 @@ if __name__ == "__main__":
     a = spotify_tree.region_personality(5, songs, 'city', True)
     print(a)
     b = spotify_tree.recommend_songs(5, 20, songs, 'city', True)
-    for s in b:
-        print(s.title)
+    for ah in b:
+        print(ah.title)
     # visualization code
     # import visualization
 

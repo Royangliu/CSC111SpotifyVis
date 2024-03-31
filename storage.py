@@ -284,7 +284,6 @@ class Tree:
         Preconditions:
             - self._root == 'World'
         """
-        
         countries = set()
         for continent in self._subtrees:
             for country in continent._subtrees:
@@ -361,7 +360,7 @@ class Tree:
 
         return top
 
-    def region_personality(self, n: int, songs: list[str], 
+    def region_personality(self, n: int, songs: list[str],
                            region_range: str, ranked: bool = False) -> list[tuple[float, list[str]]]:
         """Returns a list with n tuples containing regions who have the highest similarity score to the given songs.
         along with their scores.
@@ -417,8 +416,7 @@ class Tree:
             for r_song in region_songs:
                 if r_song.title not in songs and r_song.title not in recommended_songs:
                     recommendations.append(r_song)
-                    recommended_songs.add(r_song.title)
-                    
+                    recommended_songs.add(r_song.title)      
         return recommendations[:min(n, len(recommendations))]
 
     def get_songs(self) -> set[Song]:
@@ -430,8 +428,7 @@ class Tree:
             songs = set()
             for subtree in self._subtrees:
                 songs = songs.union(subtree.get_songs())
-            return songs
-            
+            return songs  
         return set()
 
     def get_comparison_score(self, songs: list[str], region_range: str, ranked: bool = False) -> tuple[float, str]:
@@ -464,7 +461,6 @@ class Tree:
         if ranked:
             for i in range(len(songs)):
                 ranked_dict[songs[i]] = i + 1
-                
         if region_range == 'continent':
             for country in self._subtrees:
                 for city in country._subtrees:
@@ -473,8 +469,7 @@ class Tree:
                             total_score += 1 - (abs(ranked_dict[song._root.title] - song._root.rank) / 5)
                         elif song._root.title in songs:
                             total_score += 1
-                        num_songs += 1
-                        
+                        num_songs += 1         
         elif region_range == 'country':
             for city in self._subtrees:
                 for song in city._subtrees:
@@ -483,7 +478,6 @@ class Tree:
                     elif song._root.title in songs:
                         total_score += 1
                     num_songs += 1
-                    
         else:
             for song in self._subtrees:
                 if song._root.title in songs and ranked:
@@ -524,3 +518,4 @@ if __name__ == "__main__":
         # 'allowed-io': [],  # the names (strs) of functions that call print/open/input
         'max-line-length': 120
     })
+    
