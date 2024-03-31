@@ -379,8 +379,7 @@ class Tree:
             for continent in self._subtrees:
                 com_score = continent.get_comparison_score(songs, region_range, ranked)
                 sequence = [com_score[1]]
-                scores.append((com_score[0], sequence))
-                
+                scores.append((com_score[0], sequence))  
         elif region_range == 'country':
             for continent in self._subtrees:
                 for country in continent._subtrees:
@@ -419,7 +418,6 @@ class Tree:
                 if r_song.title not in songs and r_song.title not in recommended_songs:
                     recommendations.append(r_song)
                     recommended_songs.add(r_song.title)
-
         return recommendations[:min(n, len(recommendations))]
 
     def get_songs(self) -> set[Song]:
@@ -432,7 +430,6 @@ class Tree:
             for subtree in self._subtrees:
                 songs = songs.union(subtree.get_songs())
             return songs
-
         return set()
 
     def get_comparison_score(self, songs: list[str], region_range: str, ranked: bool = False) -> tuple[float, str]:
@@ -465,7 +462,7 @@ class Tree:
         if ranked:
             for i in range(len(songs)):
                 ranked_dict[songs[i]] = i + 1
-
+                
         if region_range == 'continent':
             for country in self._subtrees:
                 for city in country._subtrees:
@@ -474,8 +471,7 @@ class Tree:
                             total_score += 1 - (abs(ranked_dict[song._root.title] - song._root.rank) / 5)
                         elif song._root.title in songs:
                             total_score += 1
-                        num_songs += 1
-                            
+                        num_songs += 1            
         elif region_range == 'country':
             for city in self._subtrees:
                 for song in city._subtrees:
@@ -483,8 +479,7 @@ class Tree:
                         total_score += 1 - (abs(ranked_dict[song._root.title] - song._root.rank) / 5)
                     elif song._root.title in songs:
                         total_score += 1
-                    num_songs += 1
-                        
+                    num_songs += 1        
         else:
             for song in self._subtrees:
                 if song._root.title in songs and ranked:
@@ -498,7 +493,6 @@ class Tree:
         else:
             return (total_score / num_songs, self._root)
 
-    
 class Song:
     """A class storing metadata of a song.
         Instance Attributes:

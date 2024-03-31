@@ -25,7 +25,6 @@ def initialize_spotify_file(file_name: str) -> Tree:
                 song = create_song_object(row[s], rank)
                 new_tree.insert_sequence([continent, country, city, song])
                 rank += 1
-
     return new_tree
 
 
@@ -50,7 +49,6 @@ def get_all_countries(file_name: str) -> list[str]:
         for row in reader:
             if row[1] not in countries_list:
                 countries_list.append(row[1])
-
     return countries_list
 
 
@@ -64,7 +62,6 @@ def get_all_continents(file_name: str) -> list[str]:
         for row in reader:
             if row[1] not in continents:
                 continents.append(row[1])
-    
     return continents
 
 
@@ -78,7 +75,6 @@ def get_all_cities(file_name: str) -> list[str]:
         for row in reader:
             if row[1] not in cities:
                 cities.append(row[1])
-    
     return cities
 
 
