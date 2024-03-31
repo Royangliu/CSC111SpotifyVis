@@ -1,5 +1,6 @@
 import csv
 from storage import Tree, Song
+import python_ta
 
 
 def initialize_spotify_file(file_name: str) -> Tree:
@@ -49,6 +50,7 @@ def get_all_countries(file_name: str) -> list[str]:
 
     return countries_list
 
+
 def get_all_continents(file_name: str) -> list[str]:
     """Returns a list of all continents in the given file.
     """
@@ -61,6 +63,7 @@ def get_all_continents(file_name: str) -> list[str]:
                 continents.append(row[1])
     
     return continents
+
 
 def get_all_cities(file_name: str) -> list[str]:
     """Returns a list of all cities in the given file.
@@ -89,5 +92,9 @@ if __name__ == "__main__":
         print(s.title)
     # visualization code
     # import visualization
-    
-    
+
+    python_ta.check_all(config={
+        #'extra-imports': ['storage.py'],  # the names (strs) of imported modules
+        #'allowed-io': [],  # the names (strs) of functions that call print/open/input
+        'max-line-length': 120
+    })

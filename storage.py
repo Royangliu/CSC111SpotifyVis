@@ -1,8 +1,8 @@
 """Module containing all classes for project 2
 """
 from __future__ import annotations
-import python_ta
 from typing import Any, Optional, Union
+import python_ta
 
 
 class Tree:
@@ -519,7 +519,7 @@ class Song:
 
 if __name__ == "__main__":
     python_ta.check_all(config={
-        'extra-imports': [],  # the names (strs) of imported modules
-        'allowed-io': [],  # the names (strs) of functions that call print/open/input
+        # 'extra-imports': [],  # the names (strs) of imported modules
+        # 'allowed-io': [],  # the names (strs) of functions that call print/open/input
         'max-line-length': 120
     })
