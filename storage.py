@@ -404,20 +404,20 @@ class Tree:
         if region_range == 'continent':
             for continent in self._subtrees:
                 com_score = continent.get_comparison_score(songs, ranked)
-                sequence = [com_score[1]]
-                scores.append((com_score[0], sequence))
+                sequence = [continent._root]
+                scores.append((com_score, sequence))
         elif region_range == 'country':
             countries = self.get_all_countries_sequence()
             for country in countries:
                 com_score = country[0].get_comparison_score(songs, ranked)
                 sequence = country[1]
-                scores.append((com_score[0], sequence))
+                scores.append((com_score, sequence))
         else:
             cities = self.get_all_cities_sequence()
             for city in cities:
                 com_score = city[0].get_comparison_score(songs, ranked)
                 sequence = city[1]
-                scores.append((com_score[0], sequence))
+                scores.append((com_score, sequence))
 
         scores.sort(reverse=True)
         return scores[:min(len(scores), n)]
@@ -458,12 +458,10 @@ class Tree:
             return songs
         return set()
 
-    def get_comparison_score(self, songs: list[str], ranked: bool = False) -> tuple[float, str]:
+    def get_comparison_score(self, songs: list[str], ranked: bool = False) -> float:
         """Computes a comparison score of this region to the provided songs list.
 
-
         The comparison score is calculated on the following specifications: TODO what the frick is this T-T
-
         - Not ranked:
             sim_score = total number of songs in common / total number of songs in this region
         - ranked:
@@ -472,7 +470,6 @@ class Tree:
             where each ranked_score is calculated as follows:
                 if song not in songs: ranked_score = 0
                 else: ranked_score = 1 - (abs(rank_of_song_in_songs - rank_of_song_in_city) / 5)
-
 
         Preconditions:
             - self is a tree representing a region
@@ -496,9 +493,9 @@ class Tree:
             num_songs += 1
 
         if num_songs == 0:
-            return (0.0, self._root)
+            return 0.0
         else:
-            return (total_score / num_songs, self._root)
+            return total_score / num_songs
 
 
 class Song:
