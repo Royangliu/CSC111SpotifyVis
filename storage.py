@@ -568,20 +568,19 @@ class Tree:
         Preconditions:
             - kind in {"continent", "country", "city"}
             - self.is_empty == False
+            - self._root == 'World'
         """
         continents = {continent for continent in self._subtrees}
     
-        if (kind == 'country') or (kind == 'city'):
-            countries = set()
-            for continent in continents:
-                for country in continent._subtrees:
-                    countries.add(country)
-    
-        if kind == 'city':
-            cities = set()
-            for country in countries:
-                for city in country._subtrees:
-                    cities.add(city)
+        countries = set()
+        for continent in continents:
+            for country in continent._subtrees:
+                countries.add(country)
+
+        cities = set()
+        for country in countries:
+            for city in country._subtrees:
+                cities.add(city)
     
         if kind == "continent":
             return continents
