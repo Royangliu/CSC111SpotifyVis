@@ -1,4 +1,10 @@
-"""Placeholder docstring
+"""
+CSC111 Project 2
+Group members: Colleen Chang, Richard Li, Roy Liu, Mina (Chieh-Yi) Wu
+
+File Description
+=============================================================================
+This is the main file for running the program.
 """
 import csv
 import python_ta

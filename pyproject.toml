@@ -9,6 +9,10 @@ readme = "README.md"
 python = "^3.10"
 plotly = "5.20.0"
 pycountry = "23.12.11"
+pandas = "2.2.1"
+country-converter = "1.2"
+numpy = "^1.26.4"
+python-ta = "^2.7.0"
 
 
 [build-system]

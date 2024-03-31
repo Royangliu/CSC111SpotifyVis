@@ -1,4 +1,10 @@
-"""Module containing all classes for project 2
+"""
+CSC111 Project 2
+Group members: Colleen Chang, Richard Li, Roy Liu, Mina (Chieh-Yi) Wu
+
+File Description
+=============================================================================
+This file contains the classes for the project.
 """
 from __future__ import annotations
 from typing import Any, Optional, Union
@@ -181,6 +187,18 @@ class Tree:
                 for city in country._subtrees:
                     cities.append((city, [continent._root, country._root, city._root]))
         return cities
+
+    def get_songs(self) -> set[Song]:
+        """Returns a set of all songs/leaves found in this tree
+        """
+        if isinstance(self._root, Song):
+            return {self._root}
+        elif not self.is_empty():
+            songs = set()
+            for subtree in self._subtrees:
+                songs = songs.union(subtree.get_songs())
+            return songs
+        return set()
 
     def top_n(self, n: int, target: str) -> list[tuple]:
         """
@@ -387,6 +405,45 @@ class Tree:
 
         return top
 
+    def get_comparison_score(self, songs: list[str], ranked: bool = False) -> float:
+        """Computes a comparison score of this region to the provided songs list.
+
+        The comparison score is calculated on the following specifications: TODO what the frick is this T-T
+        - Not ranked:
+            sim_score = total number of songs in common / total number of songs in this region
+        - ranked:
+            sim_score = sum(ranked_scores) / total number of songs in this region
+
+            where each ranked_score is calculated as follows:
+                if song not in songs: ranked_score = 0
+                else: ranked_score = 1 - (abs(rank_of_song_in_songs - rank_of_song_in_city) / 5)
+
+        Preconditions:
+            - self is a tree representing a region
+            - isinstance(self._root, str)
+            - 1 <= len(songs) <= 5
+        """
+        total_score = 0
+        num_songs = 0
+
+        ranked_dict = {}
+        if ranked:
+            for i in range(len(songs)):
+                ranked_dict[songs[i]] = i + 1
+
+        region_songs = self.get_songs()
+        for song in region_songs:
+            if song.title in songs and ranked:
+                total_score += 1 - (abs(ranked_dict[song.title] - song.rank) / 5)
+            elif song.title in songs:
+                total_score += 1
+            num_songs += 1
+
+        if num_songs == 0:
+            return 0.0
+        else:
+            return total_score / num_songs
+
     def region_personality(self, n: int, songs: list[str],
                            region_range: str, ranked: bool = False) -> list[tuple[float, list[str]]]:
         """Returns a list with n tuples containing regions who have the highest similarity score to the given songs.
@@ -445,57 +502,6 @@ class Tree:
                     recommendations.append(r_song)
                     recommended_songs.add(r_song.title)
         return recommendations[:min(lim[0], len(recommendations))]
-
-    def get_songs(self) -> set[Song]:
-        """Returns a set of all songs/leaves found in this tree
-        """
-        if isinstance(self._root, Song):
-            return {self._root}
-        elif not self.is_empty():
-            songs = set()
-            for subtree in self._subtrees:
-                songs = songs.union(subtree.get_songs())
-            return songs
-        return set()
-
-    def get_comparison_score(self, songs: list[str], ranked: bool = False) -> float:
-        """Computes a comparison score of this region to the provided songs list.
-
-        The comparison score is calculated on the following specifications: TODO what the frick is this T-T
-        - Not ranked:
-            sim_score = total number of songs in common / total number of songs in this region
-        - ranked:
-            sim_score = sum(ranked_scores) / total number of songs in this region
-
-            where each ranked_score is calculated as follows:
-                if song not in songs: ranked_score = 0
-                else: ranked_score = 1 - (abs(rank_of_song_in_songs - rank_of_song_in_city) / 5)
-
-        Preconditions:
-            - self is a tree representing a region
-            - isinstance(self._root, str)
-            - 1 <= len(songs) <= 5
-        """
-        total_score = 0
-        num_songs = 0
-
-        ranked_dict = {}
-        if ranked:
-            for i in range(len(songs)):
-                ranked_dict[songs[i]] = i + 1
-
-        region_songs = self.get_songs()
-        for song in region_songs:
-            if song.title in songs and ranked:
-                total_score += 1 - (abs(ranked_dict[song.title] - song.rank) / 5)
-            elif song.title in songs:
-                total_score += 1
-            num_songs += 1
-
-        if num_songs == 0:
-            return 0.0
-        else:
-            return total_score / num_songs
 
 
 class Song:
