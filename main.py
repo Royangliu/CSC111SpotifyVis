@@ -77,15 +77,16 @@ def get_all_cities(file_name: str) -> list[str]:
 
 
 if __name__ == "__main__":
-    spotify_tree = initialize_spotify_file("Test_set_main.csv")  # Make sure this is consistent with file names
+    spotify_tree = initialize_spotify_file("main_data.csv")  # Make sure this is consistent with file names
     print(spotify_tree.top_n(5, 'Canada'))
     # print(spotify_tree.most_common_song_country("Costa Rica"))
 
     songs = ['lovin on me', 'stick season', 'greedy', 'i remember everything', 'cruel summer']
-    a = spotify_tree.recommend_songs(5, songs, 'city', True)
-    for s in a:
+    a = spotify_tree.region_personality(5, songs, 'city', True)
+    print(a)
+    b = spotify_tree.recommend_songs(5, 20, songs, 'city', True)
+    for s in b:
         print(s.title)
-
     # visualization code
     # import visualization
     
