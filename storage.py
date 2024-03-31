@@ -288,7 +288,8 @@ class Tree:
         countries = set()
         for continent in self._subtrees:
             for country in continent._subtrees:
-                countries.add(country._root)
+                if country._root != country1:
+                    countries.add(country._root)
 
         country_top_artist = self.common_song_artist_helper(country1, 'artist')
         most_similar = {}
@@ -320,7 +321,8 @@ class Tree:
         countries = set()
         for continent in self._subtrees:
             for country in continent._subtrees:
-                countries.add(country._root)
+                if country._root != country1:
+                    countries.add(country._root)
 
         country_top_songs = self.common_song_artist_helper(country1, 'song')
         most_similar = {}
