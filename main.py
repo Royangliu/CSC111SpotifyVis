@@ -1,6 +1,9 @@
+"""Placeholder docstring
+"""
+
 import csv
-from storage import Tree, Song
 import python_ta
+from storage import Tree, Song
 
 
 def initialize_spotify_file(file_name: str) -> Tree:
@@ -94,7 +97,7 @@ if __name__ == "__main__":
     # import visualization
 
     python_ta.check_all(config={
-        #'extra-imports': ['storage.py'],  # the names (strs) of imported modules
-        #'allowed-io': [],  # the names (strs) of functions that call print/open/input
+        # 'extra-imports': ['storage.py'],  # the names (strs) of imported modules
+        # 'allowed-io': [],  # the names (strs) of functions that call print/open/input
         'max-line-length': 120
     })
