@@ -1,6 +1,5 @@
 """Placeholder docstring
 """
-
 import csv
 import python_ta
 from storage import Tree, Song
@@ -82,14 +81,17 @@ if __name__ == "__main__":
     songs = ['lovin on me', 'stick season', 'greedy', 'i remember everything', 'cruel summer']
     a = spotify_tree.region_personality(5, songs, 'city', True)
     print(a)
-    b = spotify_tree.recommend_songs(5, 20, songs, 'city', True)
+    b = spotify_tree.recommend_songs((5, 20), songs, 'city', True)
     for ah in b:
         print(ah.title)
     # visualization code
     # import visualization
 
     python_ta.check_all(config={
-        # 'extra-imports': ['storage.py'],  # the names (strs) of imported modules
-        # 'allowed-io': [],  # the names (strs) of functions that call print/open/input
+        # the names (strs) of imported modules
+        'extra-imports': ['storage', 'csv'],
+
+        # the names (strs) of functions that call print/open/input
+        'allowed-io': ['get_all_cities', 'get_all_continents', 'get_all_countries', 'initialize_spotify_file'],
         'max-line-length': 120
     })

@@ -422,8 +422,9 @@ class Tree:
         scores.sort(reverse=True)
         return scores[:min(len(scores), n)]
 
-    def recommend_songs(self, n: int, g: int, songs: list[str], region_range: str, ranked: bool = False) -> list[Song]:
-        """Returns a max of n new song recommendations from the top g regions with the highest
+    def recommend_songs(self, lim: tuple[int, int], songs: list[str],
+                        region_range: str, ranked: bool = False) -> list[Song]:
+        """Returns a max of lim[0] new song recommendations from the top lim[1] regions with the highest
         similarity score with the songs list.
 
         Preconditions:
@@ -432,7 +433,7 @@ class Tree:
         """
         recommendations = []
         recommended_songs = set()
-        scores = self.region_personality(g, songs, region_range, ranked)
+        scores = self.region_personality(lim[1], songs, region_range, ranked)
 
         for score in scores:
             sequence = score[1]
@@ -443,7 +444,7 @@ class Tree:
                 if r_song.title not in songs and r_song.title not in recommended_songs:
                     recommendations.append(r_song)
                     recommended_songs.add(r_song.title)
-        return recommendations[:min(n, len(recommendations))]
+        return recommendations[:min(lim[0], len(recommendations))]
 
     def get_songs(self) -> set[Song]:
         """Returns a set of all songs/leaves found in this tree
