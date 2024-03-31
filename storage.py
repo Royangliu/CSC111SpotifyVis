@@ -155,6 +155,33 @@ class Tree:
 
         return None
 
+    def get_all_countries_sequence(self) -> list[tuple[Tree, list[str]]]:
+        """Returns a list of tuples for each country. Each tuple contains a subtree representing
+        a country in this tree and a list of the sequence from a continent to the country.
+
+        Precondtions:
+            - self._root == 'World'
+        """
+        countries = []
+        for continent in self._subtrees:
+            for country in continent._subtrees:
+                countries.append((country, [continent._root, country._root]))
+        return countries
+
+    def get_all_cities_sequence(self) -> list[tuple[Tree, list[str]]]:
+        """Returns a list of tuples for each city. Each tuple contains a subtree representing
+        a city in this tree and a list of the sequence from a continent to the city.
+
+        Precondtions:
+            - self._root == 'World'
+        """
+        cities = []
+        for continent in self._subtrees:
+            for country in continent._subtrees:
+                for city in country._subtrees:
+                    cities.append((city, [continent._root, country._root, city._root]))
+        return cities
+
     def top_n(self, n: int, target: str) -> list[tuple]:
         """
         This function takes in the tree itself, an int representing the number of top songs to return,
@@ -211,7 +238,7 @@ class Tree:
     def common_artist(self, country1: str, country2: str) -> list[str]:
         """
         This function takes in two country names as inputs and compares the artists of the top songs
-        from each country and outputs a list of the most commonly occurring artists between the two countries 
+        from each country and outputs a list of the most commonly occurring artists between the two countries
         in descending order.
 
         """
@@ -245,7 +272,7 @@ class Tree:
 
     def common_song(self, country1: str, country2: str) -> list[str]:
         """
-        This function takes in two country names as inputs and compares the top songs 
+        This function takes in two country names as inputs and compares the top songs
         from both and outputs a list ofthe most commonly occurring songs between them in descending order.
         """
         top_songs_1 = self.top_n(100, country1)
@@ -278,7 +305,7 @@ class Tree:
 
     def most_common_artist_country(self, country1: str) -> list[str]:
         """
-        This function takes in a country name as an input and compares the artists of the top songs from 
+        This function takes in a country name as an input and compares the artists of the top songs from
         this country to all other countries in the tree and outputs a list of the most common country
 
         Preconditions:
@@ -309,8 +336,8 @@ class Tree:
 
     def most_common_song_country(self, country1: str) -> list[str]:
         """
-        This function takes in a country name as an input and compares the top songs from 
-        this country to the top songs in all other countries in the tree and outputs a list 
+        This function takes in a country name as an input and compares the top songs from
+        this country to the top songs in all other countries in the tree and outputs a list
         of the most common country
 
         Preconditions:
@@ -376,22 +403,21 @@ class Tree:
 
         if region_range == 'continent':
             for continent in self._subtrees:
-                com_score = continent.get_comparison_score(songs, region_range, ranked)
+                com_score = continent.get_comparison_score(songs, ranked)
                 sequence = [com_score[1]]
                 scores.append((com_score[0], sequence))
         elif region_range == 'country':
-            for continent in self._subtrees:
-                for country in continent._subtrees:
-                    com_score = country.get_comparison_score(songs, region_range, ranked)
-                    sequence = [continent._root, com_score[1]]
-                    scores.append((com_score[0], sequence))
+            countries = self.get_all_countries_sequence()
+            for country in countries:
+                com_score = country[0].get_comparison_score(songs, ranked)
+                sequence = country[1]
+                scores.append((com_score[0], sequence))
         else:
-            for continent in self._subtrees:
-                for country in continent._subtrees:
-                    for city in country._subtrees:
-                        com_score = city.get_comparison_score(songs, region_range, ranked)
-                        sequence = [continent._root, country._root, com_score[1]]
-                        scores.append((com_score[0], sequence))
+            cities = self.get_all_cities_sequence()
+            for city in cities:
+                com_score = city[0].get_comparison_score(songs, ranked)
+                sequence = city[1]
+                scores.append((com_score[0], sequence))
 
         scores.sort(reverse=True)
         return scores[:min(len(scores), n)]
@@ -416,7 +442,7 @@ class Tree:
             for r_song in region_songs:
                 if r_song.title not in songs and r_song.title not in recommended_songs:
                     recommendations.append(r_song)
-                    recommended_songs.add(r_song.title)      
+                    recommended_songs.add(r_song.title)
         return recommendations[:min(n, len(recommendations))]
 
     def get_songs(self) -> set[Song]:
@@ -428,30 +454,28 @@ class Tree:
             songs = set()
             for subtree in self._subtrees:
                 songs = songs.union(subtree.get_songs())
-            return songs  
+            return songs
         return set()
 
-    def get_comparison_score(self, songs: list[str], region_range: str, ranked: bool = False) -> tuple[float, str]:
+    def get_comparison_score(self, songs: list[str], ranked: bool = False) -> tuple[float, str]:
         """Computes a comparison score of this region to the provided songs list.
 
-        
+
         The comparison score is calculated on the following specifications: TODO what the frick is this T-T
-        
+
         - Not ranked:
             sim_score = total number of songs in common / total number of songs in this region
         - ranked:
             sim_score = sum(ranked_scores) / total number of songs in this region
-            
+
             where each ranked_score is calculated as follows:
                 if song not in songs: ranked_score = 0
                 else: ranked_score = 1 - (abs(rank_of_song_in_songs - rank_of_song_in_city) / 5)
 
-        
+
         Preconditions:
             - self is a tree representing a region
-            - region_range in {'continent', 'country', 'city'}
             - isinstance(self._root, str)
-            - self is a "spotify" tree
             - 1 <= len(songs) <= 5
         """
         total_score = 0
@@ -461,30 +485,14 @@ class Tree:
         if ranked:
             for i in range(len(songs)):
                 ranked_dict[songs[i]] = i + 1
-        if region_range == 'continent':
-            for country in self._subtrees:
-                for city in country._subtrees:
-                    for song in city._subtrees:
-                        if song._root.title in songs and ranked:
-                            total_score += 1 - (abs(ranked_dict[song._root.title] - song._root.rank) / 5)
-                        elif song._root.title in songs:
-                            total_score += 1
-                        num_songs += 1         
-        elif region_range == 'country':
-            for city in self._subtrees:
-                for song in city._subtrees:
-                    if song._root.title in songs and ranked:
-                        total_score += 1 - (abs(ranked_dict[song._root.title] - song._root.rank) / 5)
-                    elif song._root.title in songs:
-                        total_score += 1
-                    num_songs += 1
-        else:
-            for song in self._subtrees:
-                if song._root.title in songs and ranked:
-                    total_score += 1 - (abs(ranked_dict[song._root.title] - song._root.rank) / 5)
-                elif song._root.title in songs:
-                    total_score += 1
-                num_songs += 1
+
+        region_songs = self.get_songs()
+        for song in region_songs:
+            if song.title in songs and ranked:
+                total_score += 1 - (abs(ranked_dict[song.title] - song.rank) / 5)
+            elif song.title in songs:
+                total_score += 1
+            num_songs += 1
 
         if num_songs == 0:
             return (0.0, self._root)
@@ -496,7 +504,7 @@ class Song:
     """A class storing metadata of a song.
         Instance Attributes:
           - title: the name of the song
-          - artist: the name of the artist
+          - artist: the name of the first artist
           - streams: the number of streams of the song
           - rank: The rank of the song in the city/country
     """
@@ -518,4 +526,3 @@ if __name__ == "__main__":
         # 'allowed-io': [],  # the names (strs) of functions that call print/open/input
         'max-line-length': 120
     })
-    
