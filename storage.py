@@ -188,6 +188,8 @@ class Tree:
                     cities.append((city, [continent._root, country._root, city._root]))
         return cities
 
+      
+
     def get_songs(self) -> set[Song]:
         """Returns a set of all songs/leaves found in this tree
         """
@@ -199,6 +201,15 @@ class Tree:
                 songs = songs.union(subtree.get_songs())
             return songs
         return set()
+
+    def get_all_song_titles(self) -> set[str]:
+        """Returns all of the song titles in the tree
+        """
+        titles = set()
+        songs = self.get_songs()
+        for s in songs:
+            titles.add(s.title)
+        return titles
 
     def top_n(self, n: int, target: str) -> list[tuple]:
         """
@@ -349,7 +360,8 @@ class Tree:
         most_similar = dict(
             sorted(most_similar.items(), key=lambda x: x[1], reverse=True))
         most_similar = list(most_similar)
-
+        most_similar = most_similar[0]
+      
         return most_similar[:1]
 
     def most_common_song_country(self, country1: str) -> list[str]:
@@ -382,8 +394,9 @@ class Tree:
         most_similar = dict(
             sorted(most_similar.items(), key=lambda x: x[1], reverse=True))
         most_similar = list(most_similar)
+        most_similar = most_similar[0]
 
-        return most_similar[:1]
+        return most_similar
 
     def common_song_artist_helper(self, country: str, c_type: str) -> list[str]:
         """
@@ -592,11 +605,15 @@ class Tree:
 
 class Song:
     """A class storing metadata of a song.
-        Instance Attributes:
-          - title: the name of the song
-          - artist: the name of the first artist
-          - streams: the number of streams of the song
-          - rank: The rank of the song in the city/country
+    Instance Attributes:
+      - title: the name of the song
+      - artist: the name of the first artist
+      - streams: the number of streams of the song
+      - rank: The rank of the song in the city/country
+
+    Representation Invariants:
+        - self.streams >= 0
+        - 1 <= self.rank <= 5 
     """
     title: str
     artist: str

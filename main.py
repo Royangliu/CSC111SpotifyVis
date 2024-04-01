@@ -42,60 +42,252 @@ def create_song_object(string_data: str, rank: int) -> Song:
     title, artist, streams = split_str[0].lower(), split_str[1].lower(), int(split_str[2].strip())
     return Song(title, artist, streams, rank)
 
-
-def get_all_countries(file_name: str) -> list[str]:
-    """Returns a list of all countries in the given file.
+def get_personality_test(tree: Tree):
+    """Runs the personality test in the user input menu.
     """
-    countries_list = []
-    with open(file_name, encoding="utf8") as file:
-        reader = csv.reader(file)
-        for row in reader:
-            if row[1] not in countries_list:
-                countries_list.append(row[1])
-    return countries_list
+    print("Welcome to the Region Personality Test! This returns the regions who have the most similar top songs as your top list.")
 
+    num_regions = 0
+    while num_regions <= 0:
+        curr_input = input('Enter the number of scores you want to see in descending order (>= 1): ').strip()
+        if curr_input.isnumeric() and int(curr_input) > 0:
+            num_regions = int(curr_input)
+        else:
+            print('Invalid input')
 
-def get_all_continents(file_name: str) -> list[str]:
-    """Returns a list of all continents in the given file.
+    available_songs = tree.get_all_song_titles()
+    user_songs = get_user_top_songs(available_songs)
+    region_range = get_region_range()
+
+    ranked = input("Do you want the score to consider the rankings of the songs? (type 'Y' for yes): ").strip().lower()
+    if ranked == 'y':
+        ranked = True
+    else:
+        ranked = False
+
+    test = tree.region_personality(num_regions, user_songs, region_range, ranked)
+
+    print('Here are the top regions with the most similar top songs:')
+    count = 1
+    for region in test:
+        print(f'{count}. {region[1][len(region[1]) - 1]}: {region[0]}')
+        count += 1
+    print("\n")
+
+def run_recommendation(tree: Tree) -> None:
+    """Runs the song recommendation function for user interaction
     """
-    continents = []
-    with open(file_name, encoding="utf8") as file:
-        reader = csv.reader(file)
-        for row in reader:
-            if row[1] not in continents:
-                continents.append(row[1])
-    return continents
+    print("Welcome to the Song Recommender! This returns new song recommendations from the regions that have the most similar \
+    top songs as your top list")
 
+    max_rec = 0
+    while max_rec <= 0:
+        curr_input = input('Enter the max number of recommendations you want to see scored in descending order (>= 1): ').strip()
+        if curr_input.isnumeric() and int(curr_input) > 0:
+            max_rec = int(curr_input)
+        else:
+            print('Invalid input')
 
-def get_all_cities(file_name: str) -> list[str]:
-    """Returns a list of all cities in the given file.
+    max_region = 0
+    while max_region <= 0:
+        curr_input = input('Enter the max number of most similar regions you want to look through for a recommendation (>= 1): ').strip()
+        if curr_input.isnumeric() and int(curr_input) > 0:
+            max_region = int(curr_input)
+        else:
+            print('Invalid input')
+    
+    available_songs = tree.get_all_song_titles()
+    user_songs = get_user_top_songs(available_songs)
+    region = get_region_range()
+
+    ranked = input("Do you want the recommendation to consider the rankings of the songs? (type 'Y' for yes): ").strip().lower()
+    if ranked == 'y':
+        ranked = True
+    else:
+        ranked = False
+
+    recommendations = tree.recommend_songs((max_rec, max_region), user_songs, region, ranked)
+    print('Here are your recommendations:')
+    count = 1
+    for s in recommendations:
+        print(f'{count}. {s.title} by {s.artist}')
+        count += 1
+    print("\n")
+
+def get_region_range() -> str:
+    """Gets the user input for a region range ('continent', 'country', 'city')
     """
-    cities = []
-    with open(file_name, encoding="utf8") as file:
-        reader = csv.reader(file)
-        for row in reader:
-            if row[1] not in cities:
-                cities.append(row[1])
-    return cities
+    region = ''
+    while region not in {'continent', 'country', 'city'}:
+        region = input("What region range do you want to use? (continent, country, city): ").strip().lower()
+        if region not in {'continent', 'country', 'city'}:
+            print('Invalid input')
+    return region
 
+def get_user_top_songs(song_set: set[str]) -> list[str]:
+    """Gets the user input for their 1-5 top songs that are in the song_set.
+    """
+    user_songs = []
+    n = 0
+    while n < 1 or n > 5:
+        n = input("How many top songs do you want to use? (1-5 inclusive): ").strip()
+        if not n.isnumeric() or (int(n) < 1 or int(n) > 5):
+            n = 0
+            print("Invalid input. Please try again.")
+        else:
+            n = int(n)
+    i = 0
+    while i <= n:
+        song = input(f'Enter song #{i}: ').lower().strip()
+        if song not in song_set:
+            print('Song not found')
+        else:
+            i += 1
+            user_songs.append(song)
+    return user_songs
 
-# def get_personality_test(tree: Tree) -> None:
-#     """
-# 
-#     """
+    
+    
+
+def choice1(tree: Tree, all_choice: set) -> None:
+    """Prints the top n songs in a specific region of the user's choice.
+    """
+    print("\nLet's find the top songs in a region of your choice!")
+    choice = input("Enter any continent/country/city:(Capitalize the first letter): ").strip()
+    print(choice)
+        
+    while choice not in all_choice:
+        print("The input is either invalid or not in the database. Please try again.")
+        choice = input("Enter any continent/country/city:(Capitalize the first letter): ").strip()
+        
+    n = input("Please enter the number of top songs you would like to see: ").lower().strip()
+    print("\nP.s. Only the top 5 songs will be shown if n is greater than 5 and only the top 5 songs are avaliable for that region.")
+    while not n.isnumeric() or int(n) < 1:
+        print("Invalid input. Please try again.")
+        n = input("Please enter the number of top songs you would like to see: ").lower().strip()
+
+    output = spotify_tree.top_n(int(n), choice)
+    num = 1
+    for item in output:
+        print(str(num) + ". " + item[0] + " by " + item[1])
+        num += 1
+
+    print("\n")
+        
+
+def choice2(tree: Tree, all_countries: set) -> None:
+    """
+    """
+    print("You must be wondering what the most common artists between two countries of your choice are.\nAsk away!")
+  
+    choice1 = input("Enter the first country(Capitalize the first letter): ").strip()
+    choice2 = input("Enter the second country(Capitalize the first letter): ").strip()
+  
+    while choice1 not in all_countries:
+      print("Invalid input. Please try again.")
+      choice1 = input("Enter the first country(Capitalize the first letter): ").strip()
+      choice2 = input("Enter the second country(Capitalize the first letter): ").strip()
+      
+    print(tree.common_artist(choice1, choice2))
+    print("\n")
+
+def choice3(tree: Tree, all_countries: set) -> None:
+    print("You must be wondering what the most common songs between two countries of your choices are.\nAsk away!")
+
+    choice1 = input("Enter the first country(Capitalize the first letter): ").strip()
+    choice2 = input("Enter the second country(Capitalize the first letter): ").strip()
+
+    while choice1 not in all_countries:
+      print("Invalid input. Please try again.")
+      choice1 = input("Enter the first country(Capitalize the first letter): ").strip()
+      choice2 = input("Enter the second country(Capitalize the first letter): ").strip()
+
+    print(tree.common_song(choice1, choice2))
+    print("\n")
+
+def choice4(tree: Tree, all_countries: set) -> None:
+    print("You must be wondering which country has the most artists in common with your chosen country.\n Ask away!")
+  
+    choice1 = input("Enter the name of the country you're interested in(Capitalize the first letter): ").strip()
+  
+    while choice1 not in all_countries:
+      print("Invalid input. Please try again.")
+      choice1 = input("Enter the name of the country you're interested in(Capitalize the first letter): ").strip()
+  
+    print("The country that has the most artists in common with yours is: ",tree.most_common_artist_country(choice1),"!")
+    print("\n")
+
+def choice5(tree: Tree, all_countries: set) -> None:
+    print("You must be wondering which country has the most songs in common with your chosen country.\n Ask away!")
+
+    choice1 = input("Enter the name of the country you're interested in(Capitalize the first letter): ").strip()
+
+    while choice1 not in all_countries:
+      print("Invalid input. Please try again.")
+      choice1 = input("Enter the name of the country you're interested in(Capitalize the first letter): ").strip()
+
+    print("The country that has the most songs in common with yours is: ",tree.most_common_song_country(choice1),"!")
+    print("\n")
+
 
 
 if __name__ == "__main__":
-    spotify_tree = initialize_spotify_file("main_data.csv")  # Make sure this is consistent with file names
+    file = "main_data.csv"
+    spotify_tree = initialize_spotify_file(file)  # Make sure this is consistent with file names
+    all_choice = set()
+
+    for item in spotify_tree.get_all_cities_sequence():
+        all_choice.add(item[1][0])
+        all_choice.add(item[1][1])
+        all_choice.add(item[1][2])
+
+    all_countries = set()
+    for item in spotify_tree.get_all_countries_sequence():
+        all_countries.add(item[1][1])
+
     stop = False
+    invalid = False
     print("Welcome to the Spotify visualization program!")
 
-    while stop:
-        print("This is the main menu. Please select an option:\n")
-        print("1. Get the top n songs for a continent/country/city\n2. Find the most common artists between two countries\n3. Find the most common songs between two countries\n4. Find the most common artist")
+    while not stop:
+        if not invalid:
+            invalid = False
+            print("This is the main menu. Please select an option:\n")
+            print("1. Get the top n songs for a continent/country/city\n2. Find the most common artists between two countries\n3. Find the most common songs between two countries\n4. Find the most common countries between a country of your choice and the rest of the world based on top artists\n5. Find the most common countries between a country of your choice and the rest of the world based on top songs\n6. Find the your nationality based on song preference\n7. Find new song recoåmmendations for a specific continent/country/city\n8. VISUALIZATION OPTIONSSSS\n9. Exit the program")
+    
+            choice = input("Please enter your choice(1 ~ 9): ").lower().strip()
+        
 
-        print(spotify_tree.top_n(5, 'Canada'))
-        # print(spotify_tree.most_common_song_country("Costa Rica"))
+        if choice == "1":
+            choice1(spotify_tree, all_choice)
+        elif choice == "2":
+            choice2(spotify_tree, all_countries)
+        elif choice == "3":
+            choice3(spotify_tree, all_countries)
+        elif choice == "4":
+            choice4(spotify_tree, all_choice)
+        elif choice == "5":
+            choice5(spotify_tree, all_choice)
+        elif choice == "6":
+            get_personality_test(spotify_tree)
+        elif choice == "7":
+            run_recommendation(spotify_tree)
+        # elif choice == "8":
+        #     #TODO VISUALSSS
+        elif choice == "9":
+            stop = True
+        else:
+            print("Invalid input. Please try again.")
+            while choice not in {"1", "2", "3", "4", "5", "6", "7", "8", "9"}:
+                choice = input("Please enter your choice(1 ~ 9)").lower().strip()
+
+            invalid = True
+
+
+    print("Thank you for using the Spotify visualization program, we hope you enjoyed it!")
+    
+    # print(spotify_tree.top_n(5, 'Canada'))
+    # # print(spotify_tree.most_common_song_country("Costa Rica"))
 
 
 
@@ -103,12 +295,12 @@ if __name__ == "__main__":
 
 
     
-    songs = ['lovin on me', 'stick season', 'greedy', 'i remember everything', 'cruel summer']
-    a = spotify_tree.region_personality(5, songs, 'city', True)
-    print(a)
-    b = spotify_tree.recommend_songs((5, 20), songs, 'city', True)
-    for ah in b:
-        print(ah.title)
+    # songs = ['lovin on me', 'stick season', 'greedy', 'i remember everything', 'cruel summer']
+    # a = spotify_tree.region_personality(5, songs, 'city', True)
+    # print(a)
+    # b = spotify_tree.recommend_songs((5, 20), songs, 'city', True)
+    # for ah in b:
+    #     print(ah.title)
     # visualization code
     import visualization
 
