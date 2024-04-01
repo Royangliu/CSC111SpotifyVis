@@ -125,7 +125,7 @@ def get_region_range() -> str:
     return region
 
 def get_user_top_songs(song_set: set[str]) -> list[str]:
-    """Gets the user input for their 1-5 top songs that are in the song_set.
+    """Gets the user input for their 1-5 top songs that are in song_set.
     """
     user_songs = []
     n = 0
@@ -228,7 +228,6 @@ def choice5(tree: Tree, all_countries: set) -> None:
 
     print("The country that has the most songs in common with yours is: ",tree.most_common_song_country(choice1),"!")
     print("\n")
-
 
 
 if __name__ == "__main__":
