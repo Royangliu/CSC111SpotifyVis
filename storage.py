@@ -445,7 +445,7 @@ class Tree:
         region_songs = self.get_songs()
         for song in region_songs:
             if song.title in songs and ranked:
-                total_score += 1 - (abs(ranked_dict[song.title] - song.rank) / len(songs))
+                total_score += 1 - (abs(ranked_dict[song.title] - song.rank) / 5)
             elif song.title in songs:
                 total_score += 1
             num_songs += 1
