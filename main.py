@@ -243,9 +243,9 @@ if __name__ == "__main__":
     spotify_tree = initialize_spotify_file(file)  # Make sure this is consistent with file names
 
     # Initializes sets containing all song titles and location titles in the tree
-    all_continents = set() # delete if not needed
+    all_continents = set()  # delete if not needed
     all_countries = set()
-    all_cities = set() # delete if not needed
+    all_cities = set()  # delete if not needed
     all_songs = set()
     for item in spotify_tree.get_all_cities_sequence():
         all_continents.add(item[1][0])
@@ -259,7 +259,7 @@ if __name__ == "__main__":
 
     stop = False
     # invalid = False
-    print("Welcome to the Spotify visualization program!"
+    print("Welcome to the Spotify visualization program!\n"
           "This is the main menu. Please select an option:\n")
 
     while not stop:        
