@@ -46,7 +46,7 @@ def create_song_object(string_data: str, rank: int) -> Song:
 def get_personality_test(tree: Tree, available_songs: set[str]):
     """Runs the personality test in the user input menu.
     """
-    print("Welcome to the Region Personality Test! This returns the regions who have the most similar top songs as your top list.")
+    print("This choice returns the regions who have the most similar top songs as your top list.")
 
     num_regions = 0
     while num_regions <= 0:
@@ -78,12 +78,12 @@ def get_personality_test(tree: Tree, available_songs: set[str]):
 def run_recommendation(tree: Tree, available_songs: set[str]) -> None:
     """Runs the song recommendation function for user interaction
     """
-    print("Welcome to the Song Recommender! This returns new song recommendations from the regions that have the most similar"\
+    print("This choice returns new song recommendations from the regions that have the most similar"
           "top songs as your top list")
 
     max_rec = 0
     while max_rec <= 0:
-        curr_input = input('Enter the max number of recommendations you want to see scored in descending order (>= 1): ').strip()
+        curr_input = input('Enter the max number of recommendations you want scored in descending order (>= 1): ').strip()
         if curr_input.isnumeric() and int(curr_input) > 0:
             max_rec = int(curr_input)
         else:
@@ -91,7 +91,8 @@ def run_recommendation(tree: Tree, available_songs: set[str]) -> None:
 
     max_region = 0
     while max_region <= 0:
-        curr_input = input('Enter the max number of most similar regions you want to look through for a recommendation (>= 1): ').strip()
+        message = 'Enter the max number of most similar regions you want to look through for recommendations (>= 1): '
+        curr_input = input(message).strip()
         if curr_input.isnumeric() and int(curr_input) > 0:
             max_region = int(curr_input)
         else:
@@ -161,7 +162,8 @@ def choice1(tree: Tree, all_choice: set) -> None:
         choice = input("Enter any continent/country/city:(Capitalize the first letter): ").strip()
         
     n = input("Please enter the number of top songs you would like to see: ").lower().strip()
-    print("\nP.s. Only the top 5 songs will be shown if n is greater than 5 and only the top 5 songs are avaliable for that region.")
+    print("\nP.s. Only the top 5 songs will be shown if n is greater than 5"
+          "and only the top 5 songs are avaliable for that region.")
     while not n.isnumeric() or int(n) < 1:
         print("Invalid input. Please try again.")
         n = input("Please enter the number of top songs you would like to see: ").lower().strip()
@@ -256,23 +258,16 @@ if __name__ == "__main__":
     # invalid = False
     print("Welcome to the Spotify visualization program!")
 
-    while not stop:
-        # if not invalid:
-        #     invalid = False
-        #     print("This is the main menu. Please select an option:\n")
-        #     print("1. Get the top n songs for a continent/country/city\n2. Find the most common artists between two countries\n3. Find the most common songs between two countries\n4. Find the most common countries between a country of your choice and the rest of the world based on top artists\n5. Find the most common countries between a country of your choice and the rest of the world based on top songs\n6. Find the your nationality based on song preference\n7. Find new song recoåmmendations for a specific continent/country/city\n8. VISUALIZATION OPTIONSSSS\n9. Exit the program")
-    
-        #     choice = input("Please enter your choice(1 ~ 9): ").lower().strip()
-        
-        print("1. Get the top n songs for a continent/country/city"\
-        "2. Find the most common artists between two countries"\
-        "3. Find the most common songs between two countries"\
-        "4. Find the most common countries between a country of your choice and the rest of the world based on top artists"\
-        "5. Find the most common countries between a country of your choice and the rest of the world based on top songs"\
-        "6. Find the region with the most similar song tastes as you"\
-        "7. Find new song recommendations for a specific continent/country/city"\
-        "8. VISUALIZATION OPTIONSSSS"\
-        "9. Exit the program")
+    while not stop:        
+        print("1. Get the top n songs for a continent/country/city\n"
+        "2. Find the most common artists between two countries\n"
+        "3. Find the most common songs between two countries\n"
+        "4. Find the most common countries between a country of your choice and the rest of the world based on top artists\n"
+        "5. Find the most common countries between a country of your choice and the rest of the world based on top songs\n"
+        "6. Find the region with the most similar song tastes as you\n"
+        "7. Find new song recommendations for a specific continent/country/city\n"
+        "8. VISUALIZATION OPTIONSSSS\n"
+        "9. Exit the program\n")
         
         choice = input("Please enter your choice(1 ~ 9): ").lower().strip()
         while choice not in {"1", "2", "3", "4", "5", "6", "7", "8", "9"}:
