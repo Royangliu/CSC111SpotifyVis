@@ -71,7 +71,7 @@ def get_personality_test(tree: Tree, available_songs: set[str]):
     print('\nHere are the top regions with the most similar top songs:')
     count = 1
     for region in test:
-        print(f'{count}. {region[1][len(region[1]) - 1]}: {round(region[0], 2)}')
+        print(f'{count}. {region[1]}: {round(region[0], 2)}')
         count += 1
     print("\n")
 
@@ -258,7 +258,6 @@ if __name__ == "__main__":
     all_choice = all_continents.union(all_countries).union(all_cities)
 
     stop = False
-    # invalid = False
     print("Welcome to the Spotify visualization program!\n"
           "This is the main menu. Please select an option:\n")
 
