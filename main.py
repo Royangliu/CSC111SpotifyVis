@@ -59,7 +59,8 @@ def get_personality_test(tree: Tree, available_songs: set[str]):
     user_songs = get_user_top_songs(available_songs)
     region_range = get_region_range()
 
-    ranked = input("Do you want the score to consider the rankings of the songs? (type 'Y' for yes): ").strip().lower()
+    message = "Do you want the scores to consider the rankings of the songs? (type 'Y' for yes): "
+    ranked = input(message).strip().lower()
     if ranked == 'y':
         ranked = True
     else:
@@ -102,7 +103,8 @@ def run_recommendation(tree: Tree, available_songs: set[str]) -> None:
     user_songs = get_user_top_songs(available_songs)
     region = get_region_range()
 
-    ranked = input("Do you want the recommendation to consider the rankings of the songs? (type 'Y' for yes): ").strip().lower()
+    message = "Do you want the recommendation to consider the rankings of the songs? (type 'Y' for yes): "
+    ranked = input(message).strip().lower()
     if ranked == 'y':
         ranked = True
     else:
