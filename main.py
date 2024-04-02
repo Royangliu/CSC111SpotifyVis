@@ -83,7 +83,8 @@ def run_recommendation(tree: Tree, available_songs: set[str]) -> None:
 
     max_rec = 0
     while max_rec <= 0:
-        curr_input = input('Enter the max number of recommendations you want scored in descending order (>= 1): ').strip()
+        message = 'Enter the max number of recommendations you want scored in descending order (>= 1): '
+        curr_input = input(message).strip()
         if curr_input.isnumeric() and int(curr_input) > 0:
             max_rec = int(curr_input)
         else:
@@ -260,14 +261,16 @@ if __name__ == "__main__":
 
     while not stop:        
         print("1. Get the top n songs for a continent/country/city\n"
-        "2. Find the most common artists between two countries\n"
-        "3. Find the most common songs between two countries\n"
-        "4. Find the most common countries between a country of your choice and the rest of the world based on top artists\n"
-        "5. Find the most common countries between a country of your choice and the rest of the world based on top songs\n"
-        "6. Find the region with the most similar song tastes as you\n"
-        "7. Find new song recommendations for a specific continent/country/city\n"
-        "8. VISUALIZATION OPTIONSSSS\n"
-        "9. Exit the program\n")
+              "2. Find the most common artists between two countries\n"
+              "3. Find the most common songs between two countries\n"
+              "4. Find the most common countries between a country of your choice and the rest"
+              " of the world based on top artists\n"
+              "5. Find the most common countries between a country of your choice and the rest"
+              " of the world based on top songs\n"
+              "6. Find the region with the most similar song tastes as you\n"
+              "7. Find new song recommendations for a specific continent/country/city\n"
+              "8. VISUALIZATION OPTIONSSSS\n"
+              "9. Exit the program\n")
         
         choice = input("Please enter your choice(1 ~ 9): ").lower().strip()
         while choice not in {"1", "2", "3", "4", "5", "6", "7", "8", "9"}:
