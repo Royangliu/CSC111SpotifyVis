@@ -46,7 +46,7 @@ def create_song_object(string_data: str, rank: int) -> Song:
 def get_personality_test(tree: Tree, available_songs: set[str]):
     """Runs the personality test in the user input menu.
     """
-    print("This choice returns the regions who have the most similar top songs as your top list.")
+    print("This choice returns the regions who have the most similar top songs as your top list on a score of (0-1).")
 
     num_regions = 0
     while num_regions <= 0:
