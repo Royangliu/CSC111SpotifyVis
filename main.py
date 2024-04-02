@@ -245,18 +245,24 @@ if __name__ == "__main__":
         all_countries.add(item[1][1])
 
     stop = False
-    invalid = False
+    # invalid = False
     print("Welcome to the Spotify visualization program!")
 
     while not stop:
-        if not invalid:
-            invalid = False
-            print("This is the main menu. Please select an option:\n")
-            print("1. Get the top n songs for a continent/country/city\n2. Find the most common artists between two countries\n3. Find the most common songs between two countries\n4. Find the most common countries between a country of your choice and the rest of the world based on top artists\n5. Find the most common countries between a country of your choice and the rest of the world based on top songs\n6. Find the your nationality based on song preference\n7. Find new song recoåmmendations for a specific continent/country/city\n8. VISUALIZATION OPTIONSSSS\n9. Exit the program")
+        # if not invalid:
+        #     invalid = False
+        #     print("This is the main menu. Please select an option:\n")
+        #     print("1. Get the top n songs for a continent/country/city\n2. Find the most common artists between two countries\n3. Find the most common songs between two countries\n4. Find the most common countries between a country of your choice and the rest of the world based on top artists\n5. Find the most common countries between a country of your choice and the rest of the world based on top songs\n6. Find the your nationality based on song preference\n7. Find new song recoåmmendations for a specific continent/country/city\n8. VISUALIZATION OPTIONSSSS\n9. Exit the program")
     
-            choice = input("Please enter your choice(1 ~ 9): ").lower().strip()
+        #     choice = input("Please enter your choice(1 ~ 9): ").lower().strip()
         
-
+        print("1. Get the top n songs for a continent/country/city\n2. Find the most common artists between two countries\n3. Find the most common songs between two countries\n4. Find the most common countries between a country of your choice and the rest of the world based on top artists\n5. Find the most common countries between a country of your choice and the rest of the world based on top songs\n6. Find the your nationality based on song preference\n7. Find new song recoåmmendations for a specific continent/country/city\n8. VISUALIZATION OPTIONSSSS\n9. Exit the program")
+        choice = input("Please enter your choice(1 ~ 9): ").lower().strip()
+        
+        while choice not in {"1", "2", "3", "4", "5", "6", "7", "8", "9"}:
+            print("Invalid input. Please try again.")
+            choice = input("Please enter your choice(1 ~ 9)").lower().strip()
+        
         if choice == "1":
             choice1(spotify_tree, all_choice)
         elif choice == "2":
@@ -275,13 +281,6 @@ if __name__ == "__main__":
         #     #TODO VISUALSSS
         elif choice == "9":
             stop = True
-        else:
-            print("Invalid input. Please try again.")
-            while choice not in {"1", "2", "3", "4", "5", "6", "7", "8", "9"}:
-                choice = input("Please enter your choice(1 ~ 9)").lower().strip()
-
-            invalid = True
-
 
     print("Thank you for using the Spotify visualization program, we hope you enjoyed it!")
     
