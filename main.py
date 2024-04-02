@@ -42,7 +42,8 @@ def create_song_object(string_data: str, rank: int) -> Song:
     title, artist, streams = split_str[0].lower(), split_str[1].lower(), int(split_str[2].strip())
     return Song(title, artist, streams, rank)
 
-def get_personality_test(tree: Tree):
+
+def get_personality_test(tree: Tree, available_songs: set[str]):
     """Runs the personality test in the user input menu.
     """
     print("Welcome to the Region Personality Test! This returns the regions who have the most similar top songs as your top list.")
@@ -55,7 +56,6 @@ def get_personality_test(tree: Tree):
         else:
             print('Invalid input')
 
-    available_songs = tree.get_all_song_titles()
     user_songs = get_user_top_songs(available_songs)
     region_range = get_region_range()
 
@@ -67,18 +67,19 @@ def get_personality_test(tree: Tree):
 
     test = tree.region_personality(num_regions, user_songs, region_range, ranked)
 
-    print('Here are the top regions with the most similar top songs:')
+    print('\nHere are the top regions with the most similar top songs:')
     count = 1
     for region in test:
-        print(f'{count}. {region[1][len(region[1]) - 1]}: {region[0]}')
+        print(f'{count}. {region[1][len(region[1]) - 1]}: {round(region[0], 2)}')
         count += 1
     print("\n")
 
-def run_recommendation(tree: Tree) -> None:
+    
+def run_recommendation(tree: Tree, available_songs: set[str]) -> None:
     """Runs the song recommendation function for user interaction
     """
-    print("Welcome to the Song Recommender! This returns new song recommendations from the regions that have the most similar \
-    top songs as your top list")
+    print("Welcome to the Song Recommender! This returns new song recommendations from the regions that have the most similar"\
+          "top songs as your top list")
 
     max_rec = 0
     while max_rec <= 0:
@@ -96,7 +97,6 @@ def run_recommendation(tree: Tree) -> None:
         else:
             print('Invalid input')
     
-    available_songs = tree.get_all_song_titles()
     user_songs = get_user_top_songs(available_songs)
     region = get_region_range()
 
@@ -107,12 +107,13 @@ def run_recommendation(tree: Tree) -> None:
         ranked = False
 
     recommendations = tree.recommend_songs((max_rec, max_region), user_songs, region, ranked)
-    print('Here are your recommendations:')
+    print('\nHere are your recommendations:')
     count = 1
     for s in recommendations:
         print(f'{count}. {s.title} by {s.artist}')
         count += 1
     print("\n")
+
 
 def get_region_range() -> str:
     """Gets the user input for a region range ('continent', 'country', 'city')
@@ -123,6 +124,7 @@ def get_region_range() -> str:
         if region not in {'continent', 'country', 'city'}:
             print('Invalid input')
     return region
+
 
 def get_user_top_songs(song_set: set[str]) -> list[str]:
     """Gets the user input for their 1-5 top songs that are in song_set.
@@ -136,7 +138,7 @@ def get_user_top_songs(song_set: set[str]) -> list[str]:
             print("Invalid input. Please try again.")
         else:
             n = int(n)
-    i = 0
+    i = 1
     while i <= n:
         song = input(f'Enter song #{i}: ').lower().strip()
         if song not in song_set:
@@ -146,14 +148,12 @@ def get_user_top_songs(song_set: set[str]) -> list[str]:
             user_songs.append(song)
     return user_songs
 
-    
-    
 
 def choice1(tree: Tree, all_choice: set) -> None:
     """Prints the top n songs in a specific region of the user's choice.
     """
     print("\nLet's find the top songs in a region of your choice!")
-    choice = input("Enter any continent/country/city:(Capitalize the first letter): ").strip()
+    choice = input("Enter any continent/country/city:(Title Case): ").strip()
     print(choice)
         
     while choice not in all_choice:
@@ -191,6 +191,7 @@ def choice2(tree: Tree, all_countries: set) -> None:
     print(tree.common_artist(choice1, choice2))
     print("\n")
 
+    
 def choice3(tree: Tree, all_countries: set) -> None:
     print("You must be wondering what the most common songs between two countries of your choices are.\nAsk away!")
 
@@ -205,6 +206,7 @@ def choice3(tree: Tree, all_countries: set) -> None:
     print(tree.common_song(choice1, choice2))
     print("\n")
 
+
 def choice4(tree: Tree, all_countries: set) -> None:
     print("You must be wondering which country has the most artists in common with your chosen country.\n Ask away!")
   
@@ -216,6 +218,7 @@ def choice4(tree: Tree, all_countries: set) -> None:
   
     print("The country that has the most artists in common with yours is: ",tree.most_common_artist_country(choice1),"!")
     print("\n")
+
 
 def choice5(tree: Tree, all_countries: set) -> None:
     print("You must be wondering which country has the most songs in common with your chosen country.\n Ask away!")
@@ -233,16 +236,21 @@ def choice5(tree: Tree, all_countries: set) -> None:
 if __name__ == "__main__":
     file = "main_data.csv"
     spotify_tree = initialize_spotify_file(file)  # Make sure this is consistent with file names
-    all_choice = set()
 
-    for item in spotify_tree.get_all_cities_sequence():
-        all_choice.add(item[1][0])
-        all_choice.add(item[1][1])
-        all_choice.add(item[1][2])
-
+    # Initializes sets containing all song titles and location titles in the tree
+    all_continents = set() # delete if not needed
     all_countries = set()
-    for item in spotify_tree.get_all_countries_sequence():
+    all_cities = set() # delete if not needed
+    all_songs = set()
+    for item in spotify_tree.get_all_cities_sequence():
+        all_continents.add(item[1][0])
         all_countries.add(item[1][1])
+        all_cities.add(item[1][2])
+        
+        for song in item[0].get_songs():
+            all_songs.add(song.title)
+
+    all_choice = all_continents.union(all_countries).union(all_cities)
 
     stop = False
     # invalid = False
@@ -256,12 +264,20 @@ if __name__ == "__main__":
     
         #     choice = input("Please enter your choice(1 ~ 9): ").lower().strip()
         
-        print("1. Get the top n songs for a continent/country/city\n2. Find the most common artists between two countries\n3. Find the most common songs between two countries\n4. Find the most common countries between a country of your choice and the rest of the world based on top artists\n5. Find the most common countries between a country of your choice and the rest of the world based on top songs\n6. Find the your nationality based on song preference\n7. Find new song recoåmmendations for a specific continent/country/city\n8. VISUALIZATION OPTIONSSSS\n9. Exit the program")
-        choice = input("Please enter your choice(1 ~ 9): ").lower().strip()
+        print("1. Get the top n songs for a continent/country/city"\
+        "2. Find the most common artists between two countries"\
+        "3. Find the most common songs between two countries"\
+        "4. Find the most common countries between a country of your choice and the rest of the world based on top artists"\
+        "5. Find the most common countries between a country of your choice and the rest of the world based on top songs"\
+        "6. Find the region with the most similar song tastes as you"\
+        "7. Find new song recommendations for a specific continent/country/city"\
+        "8. VISUALIZATION OPTIONSSSS"\
+        "9. Exit the program")
         
+        choice = input("Please enter your choice(1 ~ 9): ").lower().strip()
         while choice not in {"1", "2", "3", "4", "5", "6", "7", "8", "9"}:
             print("Invalid input. Please try again.")
-            choice = input("Please enter your choice(1 ~ 9)").lower().strip()
+            choice = input("Please enter your choice(1 ~ 9): ").lower().strip()
         
         if choice == "1":
             choice1(spotify_tree, all_choice)
@@ -274,9 +290,9 @@ if __name__ == "__main__":
         elif choice == "5":
             choice5(spotify_tree, all_choice)
         elif choice == "6":
-            get_personality_test(spotify_tree)
+            get_personality_test(spotify_tree, all_songs)
         elif choice == "7":
-            run_recommendation(spotify_tree)
+            run_recommendation(spotify_tree, all_songs)
         # elif choice == "8":
         #     #TODO VISUALSSS
         elif choice == "9":

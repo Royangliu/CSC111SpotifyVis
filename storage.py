@@ -188,8 +188,6 @@ class Tree:
                     cities.append((city, [continent._root, country._root, city._root]))
         return cities
 
-      
-
     def get_songs(self) -> set[Song]:
         """Returns a set of all songs/leaves found in this tree
         """
@@ -202,14 +200,14 @@ class Tree:
             return songs
         return set()
 
-    def get_all_song_titles(self) -> set[str]:
-        """Returns all of the song titles in the tree
-        """
-        titles = set()
-        songs = self.get_songs()
-        for s in songs:
-            titles.add(s.title)
-        return titles
+    # def get_all_song_titles(self) -> set[str]:
+    #     """Returns all of the song titles in the tree
+    #     """
+    #     titles = set()
+    #     songs = self.get_songs()
+    #     for s in songs:
+    #         titles.add(s.title)
+    #     return titles
 
     def top_n(self, n: int, target: str) -> list[tuple]:
         """
