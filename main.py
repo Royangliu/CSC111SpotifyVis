@@ -259,7 +259,8 @@ if __name__ == "__main__":
 
     stop = False
     # invalid = False
-    print("Welcome to the Spotify visualization program!")
+    print("Welcome to the Spotify visualization program!"
+          "This is the main menu. Please select an option:\n")
 
     while not stop:        
         print("1. Get the top n songs for a continent/country/city\n"
