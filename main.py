@@ -27,8 +27,8 @@ def initialize_spotify_file(file_name: str) -> Tree:
             # Note, countries without cities still have a city child labeled '0'
             rank = 1
             for s in range(3, 8):
-                song = create_song_object(row[s], rank)
-                city.insert_sequence([song])
+                song_obj = create_song_object(row[s], rank)
+                city.insert_sequence([song_obj])
                 rank += 1
     return new_tree
 
@@ -174,7 +174,7 @@ def choice1(tree: Tree, all_choice: set) -> None:
         print("Invalid input. Please try again.")
         n = input("Please enter the number of top songs you would like to see: ").lower().strip()
 
-    output = spotify_tree.top_n(int(n), choice)
+    output = tree.top_n(int(n), choice)
     num = 1
     for item in output:
         print(str(num) + ". " + item[0] + " by " + item[1])
@@ -242,8 +242,8 @@ def choice5(tree: Tree, all_countries: set) -> None:
 
 
 if __name__ == "__main__":
-    file = "main_data.csv"
-    spotify_tree = initialize_spotify_file(file)  # Make sure this is consistent with file names
+    tree_file = "main_data.csv"
+    spotify_tree = initialize_spotify_file(tree_file)  # Make sure this is consistent with file names
 
     # Initializes sets containing all song titles and location titles in the tree
     all_continents = set()  # delete if not needed
