@@ -22,18 +22,21 @@ def initialize_spotify_file(file_name: str) -> Tree:
             country = row[1]
             continent = row[2]
             new_tree.insert_sequence([continent, country, city])
+            city = new_tree.navigate_sequence([continent, country, city])
 
-            # Note, this doesn't consider countries without cities (says the city name is "NAN")
+            # Note, countries without cities still have a city child labeled '0'
             rank = 1
             for s in range(3, 8):
                 song = create_song_object(row[s], rank)
-                new_tree.insert_sequence([continent, country, city, song])
+                city.insert_sequence([song])
                 rank += 1
     return new_tree
 
 
 def create_song_object(string_data: str, rank: int) -> Song:
     """Creates a Song object from the given string data.
+
+    A helper for initialize_spotify_file.
 
     The string should be in the following format:
             "<title>, <main_artist>, <streams>"
@@ -120,7 +123,7 @@ def run_recommendation(tree: Tree, available_songs: set[str]) -> None:
 
 
 def get_region_range() -> str:
-    """Gets the user input for a region range ('continent', 'country', 'city')
+    """Gets the user input for a region range in ('continent', 'country', 'city')
     """
     region = ''
     while region not in {'continent', 'country', 'city'}:
@@ -300,9 +303,6 @@ if __name__ == "__main__":
 
     print("Thank you for using the Spotify visualization program, we hope you enjoyed it!")
     
-    # print(spotify_tree.top_n(5, 'Canada'))
-    # # print(spotify_tree.most_common_song_country("Costa Rica"))
-
 
 
 

@@ -13,6 +13,8 @@ pandas = "2.2.1"
 country-converter = "1.2"
 numpy = "^1.26.4"
 python-ta = "^2.7.0"
+geopandas = "0.14.3"
+requests = "^2.31.0"
 
 
 [build-system]
