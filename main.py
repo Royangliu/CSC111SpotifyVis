@@ -196,7 +196,8 @@ def choice2(tree: Tree, countries: set) -> None:
         c2 = input("Enter the second country (Capitalize the first letter): ").strip()
 
     common = tree.common_artist(c1, c2)
-    
+
+    print("\nHere are the common artists between " + c1 + " and " + c2 + ":")
     for i in range(len(common)):
         print(f'{i + 1}: {common[i]}')
     print("\n")
@@ -216,7 +217,8 @@ def choice3(tree: Tree, countries: set) -> None:
         c2 = input("Enter the second country (Capitalize the first letter): ").strip()
 
     common = tree.common_song(c1, c2)
-    
+
+    print('\nHere are the common songs between ' + c1 + ' and ' + c2 + ':')
     for i in range(len(common)):
         print(f'{i + 1}: {common[i]}')
     print("\n")
