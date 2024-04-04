@@ -18,6 +18,19 @@ import country_converter as coco
 import storage
 
 
+def all_songs_table(songs_set: set) -> None:
+    """
+    Displays a table listing all the songs in the program.
+    
+    Preconditions:
+        - songs_set != set()
+    """
+    fig = go.Figure(data=[go.Table(header=dict(values=['Songs']),
+                                   cells=dict(values=[sorted(list(songs_set))]))
+                          ])
+    fig.show()
+    
+
 def generate_region_df_by_streams(data: storage.Tree, kind: str) -> pd.DataFrame:
     """
     Returns a processed dataframe listing the names of the members of the specified region, "Streams" for the total
