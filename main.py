@@ -66,16 +66,6 @@ def get_personality_test(tree: Tree, available_songs: set[str]) -> None:
           "The song MUST be listed in the program to be valid. Would you like to see a pop up listing all\n" +
           "the songs we have? Y/N")
 
-    # ask if the user wants to see the list of all songs
-    show_song_list = input("\nEnter your choice here: ").strip().lower()
-
-    while show_song_list not in {'y', 'yes', 'n', 'no'}:
-        print("\nSorry, but that's not a valid option. Please re-enter your choice.")
-        show_song_list = input("Enter your choice here: ").strip().lower()
-
-    if show_song_list in {'y', 'yes'}:
-        all_options_table(song_set)
-
     user_songs = get_user_top_songs(available_songs)
 
     message = "Do you want the scores to consider the rankings of the songs? (type 'Y' for yes): "
@@ -124,16 +114,6 @@ def run_recommendation(tree: Tree, available_songs: set[str]) -> None:
           "The song MUST be listed in the program to be valid. Would you like to see a pop up listing all\n" +
           "the songs we have? Y/N")
 
-    # ask if the user wants to see the list of all songs
-    show_song_list = input("\nEnter your choice here: ").strip().lower()
-
-    while show_song_list not in {'y', 'yes', 'n', 'no'}:
-        print("\nSorry, but that's not a valid option. Please re-enter your choice.")
-        show_song_list = input("Enter your choice here: ").strip().lower()
-
-    if show_song_list in {'y', 'yes'}:
-        all_options_table(song_set)
-
     user_songs = get_user_top_songs(available_songs)
 
     message = "Do you want the recommendation to consider the rankings of the songs? (type 'Y' for yes): "
@@ -175,6 +155,17 @@ def get_user_top_songs(song_set: set[str]) -> list[str]:
             print("Invalid input. Please try again.")
         else:
             n = int(n)
+            
+    # ask if the user wants to see the list of all songs
+    show_song_list = input("\nEnter your choice here: ").strip().lower()
+
+    while show_song_list not in {'y', 'yes', 'n', 'no'}:
+        print("\nSorry, but that's not a valid option. Please re-enter your choice.")
+        show_song_list = input("Enter your choice here: ").strip().lower()
+
+    if show_song_list in {'y', 'yes'}:
+        all_options_table(song_set, 'song')
+        
     i = 1
     while i <= n:
         s = input(f'Enter song #{i}: ').lower().strip()
@@ -350,7 +341,7 @@ def visualization_prompt(tree: Tree, song_set: set) -> None:
                 show_song_list = input("Enter your choice here: ").strip().lower()
 
             if show_song_list in {'y', 'yes'}:
-                all_options_table(song_set)
+                all_options_table(song_set, 'song')
 
             # prompt user for songs
             user_songs = get_user_top_songs(song_set)
@@ -396,9 +387,9 @@ if __name__ == "__main__":
     spotify_tree = initialize_spotify_file(tree_file)  # Make sure this is consistent with file names
 
     # Initializes sets containing all song titles and location titles in the tree
-    all_continents = set()  # delete if not needed
+    all_continents = set()
     all_countries = set()
-    all_cities = set()  # delete if not needed
+    all_cities = set()
     all_songs = set()
     for curr_city in spotify_tree.get_all_cities_sequence():
         all_continents.add(curr_city[1][0])
@@ -408,6 +399,7 @@ if __name__ == "__main__":
         for song in curr_city[0].get_songs():
             all_songs.add(song.title)
 
+    all_cities.discard(0)  # removes the instances where a country doesn't have a city
     all_choice = all_continents.union(all_countries).union(all_cities)
 
     stop = False
@@ -458,16 +450,16 @@ if __name__ == "__main__":
             stop = True
         elif choice == 'a':
             print('\nGenerating Table...\n')
-            all_options_table(all_continents)
+            all_options_table(all_continents, 'continent')
         elif choice == 'b':
             print('\nGenerating Table...\n')
-            all_options_table(all_countries)
+            all_options_table(all_countries, 'country')
         elif choice == 'c':
             print('\nGenerating Table...\n')
-            all_options_table(all_cities)
+            all_options_table(all_cities, 'city')
         elif choice == 'd':
             print('\nGenerating Table...\n')
-            all_options_table(all_songs)
+            all_options_table(all_songs, 'song')
 
     print("Thank you for using the Spotify visualization program, we hope you enjoyed it!")
 
