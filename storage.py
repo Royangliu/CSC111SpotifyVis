@@ -548,7 +548,7 @@ class Tree:
             return {continent._root: get_stream_stat(self, continent._root) for continent in continents}
         elif kind == "country":
             countries = self.get_regions_as_subtrees("country")
-            return {country._root: get_stream_stat(self, country._root) for country in countries}
+            return {curr_country._root: get_stream_stat(self, curr_country._root) for curr_country in countries}
         else:
             # TODO: since multiple cities have the same name, record the country of the city with a tuple
             countries = self.get_regions_as_subtrees("country")
@@ -578,7 +578,7 @@ class Tree:
             return {continent._root: continent.get_comparison_score(songs, ranked) for continent in continents}
         elif kind == "country":
             countries = self.get_regions_as_subtrees("country")
-            return {country._root: country.get_comparison_score(songs, ranked) for country in countries}
+            return {curr_country._root: curr_country.get_comparison_score(songs, ranked) for curr_country in countries}
         else:
             # TODO: since multiple cities have the same name, record the country of the city with a tuple
             countries = self.get_regions_as_subtrees("country")
@@ -611,7 +611,7 @@ class Tree:
             return {continent._root: get_top_5(self, continent._root) for continent in continents}
         elif kind == "country":
             countries = self.get_regions_as_subtrees("country")
-            return {country._root: get_top_5(self, country._root) for country in countries}
+            return {curr_country._root: get_top_5(self, curr_country._root) for curr_country in countries}
         else:
             countries = self.get_regions_as_subtrees("country")
 
