@@ -1,0 +1,17 @@
+# CSC111 Project 2: Wrap Mapped, Unpacked: Graphing Connections Between Geographical Region And Music Preference
+# Authors: Colleen Chang, Richard Li, Roy Liu, Mina (Chieh-Yi) Wu
+
+# Testing and code checking
+hypothesis~=6.96.3
+pytest~=7.4.4
+python-ta~=2.7.0
+
+# Data visualization
+plotly>=5.18.0
+pygame==2.5.2
+geopandas==0.14.3
+
+numpy
+
+pandas~=2.2.1
+requests~=2.31.0

@@ -1,10 +1,11 @@
 """
-CSC111 Project 2
-Group members: Colleen Chang, Richard Li, Roy Liu, Mina (Chieh-Yi) Wu
+CSC111 Project 2: Wrap Mapped, Unpacked
+Authors: Colleen Chang, Richard Li, Roy Liu, Mina (Chieh-Yi) Wu
 
 File Description
 =============================================================================
-This file contains the classes for the project.
+This file contains necessary classes for the program.
+
 """
 from __future__ import annotations
 from typing import Any, Optional, Union
@@ -121,7 +122,7 @@ class Tree:
 
     def insert_sequence(self, items: list) -> None:
         """Inserts a sequence of items into this tree.
-        
+
         (Definition from CSC111 Exercise 2)
         The inserted items form a chain of descendants, where:
         - items[0] is a child of this tree's root
@@ -176,7 +177,7 @@ class Tree:
 
     def get_all_cities_sequence(self) -> list[tuple[Tree, list[str]]]:
         """Returns a list of tuples for each city. Each tuple contains a subtree representing
-        a city in this tree and a list of the sequence from a continent to the city.
+        a city in this tree and a list of the path from a continent to the city.
 
         Mainly a helper for "region_personality" function.
 
@@ -361,7 +362,7 @@ class Tree:
             sorted(most_similar.items(), key=lambda x: x[1], reverse=True))
         most_similar = list(most_similar)
         most_similar = most_similar[0]
-      
+
         return most_similar[:1]
 
     def most_common_song_country(self, country1: str) -> list[str]:
@@ -518,7 +519,7 @@ class Tree:
                 if r_song.title not in songs and r_song.title not in recommended_songs:
                     recommendations.append(r_song)
                     recommended_songs.add(r_song.title)
-                    
+
         return recommendations[:min(lim[0], len(recommendations))]
 
     # TODO: fetch geographical regions
@@ -646,6 +647,7 @@ class Tree:
                     for city in country._subtrees:
                         cities.add(city)
                 return cities
+
 
 class Song:
     """A class storing metadata of a song.

@@ -78,7 +78,7 @@ def get_personality_test(tree: Tree, available_songs: set[str]):
         count += 1
     print("\n")
 
-    
+
 def run_recommendation(tree: Tree, available_songs: set[str]) -> None:
     """Runs the song recommendation function for user interaction
     """
@@ -102,7 +102,7 @@ def run_recommendation(tree: Tree, available_songs: set[str]) -> None:
             max_region = int(curr_input)
         else:
             print('Invalid input')
-    
+
     user_songs = get_user_top_songs(available_songs)
     region = get_region_range()
 
@@ -162,11 +162,11 @@ def choice1(tree: Tree, all_choice: set) -> None:
     print("\nLet's find the top songs in a region of your choice!")
     choice = input("Enter any continent/country/city:(Title Case): ").strip()
     print(choice)
-        
+
     while choice not in all_choice:
         print("The input is either invalid or not in the database. Please try again.")
         choice = input("Enter any continent/country/city:(Capitalize the first letter): ").strip()
-        
+
     n = input("Please enter the number of top songs you would like to see: ").lower().strip()
     print("\nP.s. Only the top 5 songs will be shown if n is greater than 5"
           "and only the top 5 songs are avaliable for that region.")
@@ -181,25 +181,25 @@ def choice1(tree: Tree, all_choice: set) -> None:
         num += 1
 
     print("\n")
-        
+
 
 def choice2(tree: Tree, all_countries: set) -> None:
     """
     """
     print("You must be wondering what the most common artists between two countries of your choice are.\nAsk away!")
-  
+
     choice1 = input("Enter the first country(Capitalize the first letter): ").strip()
     choice2 = input("Enter the second country(Capitalize the first letter): ").strip()
-  
+
     while choice1 not in all_countries:
-      print("Invalid input. Please try again.")
-      choice1 = input("Enter the first country(Capitalize the first letter): ").strip()
-      choice2 = input("Enter the second country(Capitalize the first letter): ").strip()
-      
+        print("Invalid input. Please try again.")
+        choice1 = input("Enter the first country(Capitalize the first letter): ").strip()
+        choice2 = input("Enter the second country(Capitalize the first letter): ").strip()
+
     print(tree.common_artist(choice1, choice2))
     print("\n")
 
-    
+
 def choice3(tree: Tree, all_countries: set) -> None:
     print("You must be wondering what the most common songs between two countries of your choices are.\nAsk away!")
 
@@ -207,9 +207,9 @@ def choice3(tree: Tree, all_countries: set) -> None:
     choice2 = input("Enter the second country(Capitalize the first letter): ").strip()
 
     while choice1 not in all_countries:
-      print("Invalid input. Please try again.")
-      choice1 = input("Enter the first country(Capitalize the first letter): ").strip()
-      choice2 = input("Enter the second country(Capitalize the first letter): ").strip()
+        print("Invalid input. Please try again.")
+        choice1 = input("Enter the first country(Capitalize the first letter): ").strip()
+        choice2 = input("Enter the second country(Capitalize the first letter): ").strip()
 
     print(tree.common_song(choice1, choice2))
     print("\n")
@@ -217,14 +217,15 @@ def choice3(tree: Tree, all_countries: set) -> None:
 
 def choice4(tree: Tree, all_countries: set) -> None:
     print("You must be wondering which country has the most artists in common with your chosen country.\n Ask away!")
-  
+
     choice1 = input("Enter the name of the country you're interested in(Capitalize the first letter): ").strip()
-  
+
     while choice1 not in all_countries:
-      print("Invalid input. Please try again.")
-      choice1 = input("Enter the name of the country you're interested in(Capitalize the first letter): ").strip()
-  
-    print("The country that has the most artists in common with yours is: ",tree.most_common_artist_country(choice1),"!")
+        print("Invalid input. Please try again.")
+        choice1 = input("Enter the name of the country you're interested in(Capitalize the first letter): ").strip()
+
+    print("The country that has the most artists in common with yours is: ", tree.most_common_artist_country(choice1),
+          "!")
     print("\n")
 
 
@@ -234,10 +235,10 @@ def choice5(tree: Tree, all_countries: set) -> None:
     choice1 = input("Enter the name of the country you're interested in(Capitalize the first letter): ").strip()
 
     while choice1 not in all_countries:
-      print("Invalid input. Please try again.")
-      choice1 = input("Enter the name of the country you're interested in(Capitalize the first letter): ").strip()
+        print("Invalid input. Please try again.")
+        choice1 = input("Enter the name of the country you're interested in(Capitalize the first letter): ").strip()
 
-    print("The country that has the most songs in common with yours is: ",tree.most_common_song_country(choice1),"!")
+    print("The country that has the most songs in common with yours is: ", tree.most_common_song_country(choice1), "!")
     print("\n")
 
 
@@ -254,7 +255,7 @@ if __name__ == "__main__":
         all_continents.add(item[1][0])
         all_countries.add(item[1][1])
         all_cities.add(item[1][2])
-        
+
         for song in item[0].get_songs():
             all_songs.add(song.title)
 
@@ -264,7 +265,7 @@ if __name__ == "__main__":
     print("Welcome to the Spotify visualization program!\n"
           "This is the main menu. Please select an option:\n")
 
-    while not stop:        
+    while not stop:
         print("1. Get the top n songs for a continent/country/city\n"
               "2. Find the most common artists between two countries\n"
               "3. Find the most common songs between two countries\n"
@@ -276,12 +277,12 @@ if __name__ == "__main__":
               "7. Find new song recommendations for a specific continent/country/city\n"
               "8. VISUALIZATION OPTIONSSSS\n"
               "9. Exit the program\n")
-        
+
         choice = input("Please enter your choice(1 ~ 9): ").lower().strip()
         while choice not in {"1", "2", "3", "4", "5", "6", "7", "8", "9"}:
             print("Invalid input. Please try again.")
             choice = input("Please enter your choice(1 ~ 9): ").lower().strip()
-        
+
         if choice == "1":
             choice1(spotify_tree, all_choice)
         elif choice == "2":
@@ -302,13 +303,7 @@ if __name__ == "__main__":
             stop = True
 
     print("Thank you for using the Spotify visualization program, we hope you enjoyed it!")
-    
 
-
-
-
-
-    
     # songs = ['lovin on me', 'stick season', 'greedy', 'i remember everything', 'cruel summer']
     # a = spotify_tree.region_personality(5, songs, 'city', True)
     # print(a)
@@ -320,12 +315,6 @@ if __name__ == "__main__":
 
     visualization.visualize_world_song_data(spotify_tree)
 
-
-
-
-
-
-    
     python_ta.check_all(config={
         # the names (strs) of imported modules
         'extra-imports': ['storage', 'csv'],

@@ -1,10 +1,10 @@
 """
-CSC111 Project 2
-Group members: Colleen Chang, Richard Li, Roy Liu, Mina (Chieh-Yi) Wu
+CSC111 Project 2: Wrap Mapped, Unpacked
+Authors: Colleen Chang, Richard Li, Roy Liu, Mina (Chieh-Yi) Wu
 
 File Description
 =============================================================================
-This file contains functions necessary to visualize the tree data within ""
+This file contains functions necessary to visualize tree data
 
 """
 import plotly.graph_objects as go
@@ -84,40 +84,21 @@ def generate_region_df_by_score(data: storage.Tree, songs: list[str], kind: str,
         - kind in {"continent", "country", "city"}
     """
     region_to_scores = data.get_region_scores(songs, kind, ranked)
-    region_top_5 = data.get_region_top_songs(kind)
 
     if kind == "continent":
         df_dict = {"continent": [name.lower() for name in region_to_scores],
-                   "scores": [region_to_scores[name] for name in region_to_scores],
-                   # "Top 1 Song": [region_top_5[code][0] for code in region_top_5],
-                   # "Top 2 Song": [region_top_5[code][1] for code in region_top_5],
-                   # "Top 3 Song": [region_top_5[code][2] for code in region_top_5],
-                   # "Top 4 Song": [region_top_5[code][3] for code in region_top_5],
-                   # "Top 5 Song": [region_top_5[code][4] for code in region_top_5]
-                   }
+                   "scores": [region_to_scores[name] for name in region_to_scores]}
         return pd.DataFrame(data=df_dict).sort_values("continent")
     elif kind == "country":
         df_dict = {"country": [name for name in region_to_scores],
                    "iso3": [coco.convert(names=name, to='ISO3') for name in region_to_scores],
-                   "scores": [region_to_scores[code] for code in region_to_scores],
-                   # "Top 1 Song": [region_top_5[code][0] for code in region_top_5],
-                   # "Top 2 Song": [region_top_5[code][1] for code in region_top_5],
-                   # "Top 3 Song": [region_top_5[code][2] for code in region_top_5],
-                   # "Top 4 Song": [region_top_5[code][3] for code in region_top_5],
-                   # "Top 5 Song": [region_top_5[code][4] for code in region_top_5]
-                   }
+                   "scores": [region_to_scores[code] for code in region_to_scores]}
 
         return pd.DataFrame(data=df_dict).sort_values("country")
     else:
         df_dict = {"city_ascii": [name[0] for name in region_to_scores],
                    "iso3": [coco.convert(names=name[1], to='ISO3') for name in region_to_scores],
-                   "scores": [region_to_scores[name] for name in region_to_scores],
-                   # "Top 1 Song": [region_top_5[code][0] for code in region_top_5],
-                   # "Top 2 Song": [region_top_5[code][1] for code in region_top_5],
-                   # "Top 3 Song": [region_top_5[code][2] for code in region_top_5],
-                   # "Top 4 Song": [region_top_5[code][3] for code in region_top_5],
-                   # "Top 5 Song": [region_top_5[code][4] for code in region_top_5]
-                   }
+                   "scores": [region_to_scores[name] for name in region_to_scores]}
 
         return pd.DataFrame(data=df_dict).sort_values("city_ascii")
 
@@ -135,7 +116,10 @@ def visualize_world_song_data(kind: str, stat: str, table: pd.DataFrame) -> None
         # where "table" = generate_region_df_by_streams(data, "continent")
         ct_df = table
 
-        # alter continent names to merge later
+        # add column with proper names to display
+        ct_df['continent_title'] = ['Africa', 'Asia', 'Europe', 'North America', 'Oceania', 'South America']
+
+        # alter continent names to merge with dataframe from json file
         ct_df['continent'] = ct_df['continent'].apply(lambda x: x.replace(" ", ""))
 
         # LOAD GEO DATA: latitude and longitude mapped for cities in the world
@@ -148,7 +132,7 @@ def visualize_world_song_data(kind: str, stat: str, table: pd.DataFrame) -> None
         gdf['continent'] = gdf['continent'].apply(lambda x: x.lower())
 
         # merge dataframes
-        gdf = gdf.merge(ct_df)
+        gdf = gdf.merge(ct_df).sort_values('continent')
 
         # generate plot
         if stat == 'streams':
@@ -158,7 +142,7 @@ def visualize_world_song_data(kind: str, stat: str, table: pd.DataFrame) -> None
                                 color="streams",
                                 color_continuous_scale="Reds",
                                 )
-            fig.update_traces(customdata=np.stack((gdf['continent'],
+            fig.update_traces(customdata=np.stack((gdf['continent_title'],
                                                    gdf['Top 1 Song'],
                                                    gdf['Top 2 Song'],
                                                    gdf['Top 3 Song'],
@@ -179,9 +163,9 @@ def visualize_world_song_data(kind: str, stat: str, table: pd.DataFrame) -> None
                                 color_continuous_scale="Reds",
                                 hover_data="scores"
                                 )
-            fig.update_traces(customdata=np.stack((ct_df['continent'],
+            fig.update_traces(customdata=np.stack((ct_df['continent_title'],
                                                    ct_df['scores']), axis=-1),
-                              hovertemplate="<b>Country: %{customdata[0]} </b><br>" +
+                              hovertemplate="<b>Continent: %{customdata[0]} </b><br>" +
                                             "Similarity Score: %{customdata[1]}</b>")
             fig.update_layout(title="Similarity Scores by Continent Based on Top 5 Streamed Songs" +
                                     " During the First Week of 2024")
@@ -211,7 +195,7 @@ def visualize_world_song_data(kind: str, stat: str, table: pd.DataFrame) -> None
                                                              "4th Top Song: %{customdata[4]}<br>" +
                                                              "5th Top Song: %{customdata[5]}</b>",
                                                colorscale='Greens', autocolorscale=False, reversescale=False,
-                                               # colorbar_title={'text': "Total Streams Among Top 5 Songs"}
+                                               colorbar_title={'text': "streams"}
                                                ))
             fig.update_layout(title="Top 5 Streamed Songs by Country During the First Week of 2024")
         else:
@@ -223,7 +207,7 @@ def visualize_world_song_data(kind: str, stat: str, table: pd.DataFrame) -> None
                                                hovertemplate="<b>Country: %{customdata[0]} </b><br>" +
                                                              "Similarity Score: %{customdata[1]}</b>",
                                                colorscale='Greens', autocolorscale=False, reversescale=False,
-                                               colorbar_title={'text': "Similarity Score"}))
+                                               colorbar_title={'text': "scores"}))
             fig.update_layout(title="Similarity Scores by Country Based on Top 5 Streamed Songs" +
                                     " During the First Week of 2024")
 
@@ -267,6 +251,7 @@ def visualize_world_song_data(kind: str, stat: str, table: pd.DataFrame) -> None
                                                    cities['scores']), axis=-1),
                               hovertemplate="<b>City: %{customdata[0]} </b><br>" +
                                             "Similarity Score: %{customdata[1]}</b>")
-            fig.update_layout(title='Top 5 Streamed Songs by City During the First Week of 2024')
+            fig.update_layout(title="Similarity Scores by City Based on Top 5 Streamed Songs" +
+                                    " During the First Week of 2024")
 
         fig.show()
