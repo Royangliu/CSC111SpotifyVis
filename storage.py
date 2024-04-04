@@ -524,7 +524,6 @@ class Tree:
 
         return recommendations[:min(lim[0], len(recommendations))]
 
-    # TODO: fetch geographical regions
     def get_region_streams(self, kind: str) -> dict[str, int] | dict[tuple, int]:
         """
         Returns dictionary mapping parts of a region with the total number of streams from their top 5 songs.
@@ -552,7 +551,6 @@ class Tree:
             countries = self.get_regions_as_subtrees("country")
             return {curr_country._root: get_stream_stat(self, curr_country._root) for curr_country in countries}
         else:
-            # TODO: since multiple cities have the same name, record the country of the city with a tuple
             countries = self.get_regions_as_subtrees("country")
 
             tups = []
@@ -582,7 +580,6 @@ class Tree:
             countries = self.get_regions_as_subtrees("country")
             return {curr_country._root: curr_country.get_comparison_score(songs, ranked) for curr_country in countries}
         else:
-            # TODO: since multiple cities have the same name, record the country of the city with a tuple
             countries = self.get_regions_as_subtrees("country")
 
             tups = []
