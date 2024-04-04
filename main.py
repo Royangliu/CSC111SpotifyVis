@@ -149,8 +149,8 @@ def get_user_top_songs(song_set: set[str]) -> list[str]:
             n = int(n)
 
     # ask if the user wants to see the list of all songs
-    print("\nFirst, provide us a few songs.\n" +
-          "The song MUST be listed in the program to be valid. Would you like to see a pop up listing all\n" +
+    print("\nFirst, provide us a few songs.\n"
+          "The song MUST be listed in the program to be valid. Would you like to see a pop up listing all\n"
           "the songs we have? Y/N")
     show_song_list = input("\nEnter your choice here: ").strip().lower()
 
