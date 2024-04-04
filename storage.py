@@ -433,6 +433,8 @@ class Tree:
                 if song is not in "songs" list: score = 0
                 else: score = 1 - (abs(rank_of_song_in_songs - rank_of_song_in_city) / 5)
 
+        The final score is rounded to the 5th decimal place.
+        
         Preconditions:
             - self is a tree representing a region
             - isinstance(self._root, str)
@@ -458,7 +460,7 @@ class Tree:
         if num_songs == 0:
             return 0.0
         else:
-            return total_score / num_songs
+            return round(total_score / num_songs, 5)
 
     def region_personality(self, n: int, songs: list[str],
                            region_range: str, ranked: bool = False) -> list[tuple[float, list[str]]]:

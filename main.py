@@ -76,7 +76,7 @@ def get_personality_test(tree: Tree, available_songs: set[str]) -> None:
     print('\nHere are the top regions with the most similar top songs:')
     count = 1
     for region in test:
-        print(f'{count}. {', '.join(region[1][::-1])}: {round(region[0], 5)}')
+        print(f'{count}. {', '.join(region[1][::-1])}: {region[0]}')
         count += 1
     print("\n")
 
@@ -323,21 +323,6 @@ def visualization_prompt(tree: Tree, song_set: set) -> None:
             vis_option = input("\nEnter your choice here: ").strip().lower()
 
         elif vis_option == 'similarity score':
-            # get list of songs
-            print("\nFirst, provide us a few songs.\n" 
-                  "The song MUST be listed in the program to be valid. Would you like to see a pop up listing all\n" 
-                  "the songs we have? Y/N")
-
-            # ask if the user wants to see the list of all songs
-            show_song_list = input("\nEnter your choice here: ").strip().lower()
-
-            while show_song_list not in {'y', 'yes', 'n', 'no'}:
-                print("\nSorry, but that's not a valid option. Please re-enter your choice.")
-                show_song_list = input("Enter your choice here: ").strip().lower()
-
-            if show_song_list in {'y', 'yes'}:
-                all_options_table(song_set, 'song')
-
             # prompt user for songs
             user_songs = get_user_top_songs(song_set)
 
