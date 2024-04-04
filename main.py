@@ -76,7 +76,7 @@ def get_personality_test(tree: Tree, available_songs: set[str]) -> None:
     print('\nHere are the top regions with the most similar top songs:')
     count = 1
     for region in test:
-        print(f'{count}. {', '.join(region[1][::-1])}: {region[0]}')
+        print(f"{count}. {', '.join(region[1][::-1])}: {region[0]}")
         count += 1
     print("\n")
 
@@ -241,7 +241,7 @@ def choice3(tree: Tree, countries: set) -> None:
 
 
 def choice4(tree: Tree, countries: set) -> None:
-    """Prints the countries who has the most artists in common with the user inputted country.
+    """Prints the country that has the most artists in common with the user inputted country.
     """
     print("You must be wondering which country has the most artists in common with your chosen country.\n Ask away!")
 
@@ -256,7 +256,7 @@ def choice4(tree: Tree, countries: set) -> None:
 
 
 def choice5(tree: Tree, countries: set) -> None:
-    """Prints the countries who has the most songs in common with the user inputted country.
+    """Prints the country that has the most songs in common with the user inputted country.
     """
     print("You must be wondering which country has the most songs in common with your chosen country.\n Ask away!")
 
