@@ -10,7 +10,7 @@ import csv
 import python_ta
 from storage import Tree, Song
 from visualization import generate_region_df_by_streams, generate_region_df_by_score, visualize_world_song_data, \
-all_options_table
+    all_options_table
 
 
 def initialize_spotify_file(file_name: str) -> Tree:
@@ -150,8 +150,8 @@ def get_user_top_songs(song_set: set[str]) -> list[str]:
 
     # ask if the user wants to see the list of all songs
     print("\nFirst, provide us a few songs.\n" +
-      "The song MUST be listed in the program to be valid. Would you like to see a pop up listing all\n" +
-      "the songs we have? Y/N")
+          "The song MUST be listed in the program to be valid. Would you like to see a pop up listing all\n" +
+          "the songs we have? Y/N")
     show_song_list = input("\nEnter your choice here: ").strip().lower()
 
     while show_song_list not in {'y', 'yes', 'n', 'no'}:
@@ -160,7 +160,7 @@ def get_user_top_songs(song_set: set[str]) -> list[str]:
 
     if show_song_list in {'y', 'yes'}:
         all_options_table(song_set, 'song')
-        
+
     i = 1
     while i <= n:
         s = input(f'Enter song #{i}: ').lower().strip()
@@ -277,8 +277,8 @@ def visualization_prompt(tree: Tree, song_set: set) -> None:
     running = True
 
     # graph descriptions
-    print("==============================================================================\n" 
-          " Welcome to the visualizer! Please select one of the following graph options.\n" 
+    print("==============================================================================\n"
+          " Welcome to the visualizer! Please select one of the following graph options.\n"
           "=============================================================================="
           )
     print("TOP 5:\n"
@@ -392,7 +392,7 @@ if __name__ == "__main__":
           "b. Show all countries\n"
           "c. Show all cities\n"
           "d. Show all songs\n")
-    
+
     while not stop:
         print("1. Get the top n songs for a continent/country/city\n"
               "2. Find the most common artists between two countries\n"
