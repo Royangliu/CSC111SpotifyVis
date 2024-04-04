@@ -399,14 +399,15 @@ if __name__ == "__main__":
         for song in curr_city[0].get_songs():
             all_songs.add(song.title)
 
-    all_cities.discard(0)  # removes the instances where a country doesn't have a city
+    all_cities.discard('0')  # removes the instances where a country doesn't have a city
     all_choice = all_continents.union(all_countries).union(all_cities)
 
     stop = False
     print("Welcome to the Spotify visualization program!\n"
           "This is the main menu. Please select an option:\n")
 
-    print("To generate a table of all available geographic and song options, please choose the following:"
+    print("To generate a table of all available geographic and song options, please choose the following\n"
+          "(This is recommended before running the other options!):\n"
           "a. Show all continents\n"
           "b. Show all countries\n"
           "c. Show all cities\n"
@@ -425,7 +426,7 @@ if __name__ == "__main__":
               "8. Visualization options\n"
               "9. Exit the program\n")
 
-        choice = input("Please enter your choice(1 ~ 9) or (a ~ d): ").lower().strip()
+        choice = input("Please enter your choice (1 ~ 9) or (a ~ d): ").lower().strip()
         while choice not in {"1", "2", "3", "4", "5", "6", "7", "8", "9", 'a', 'b', 'c', 'd'}:
             print("Invalid input. Please try again.")
             choice = input("Please enter your choice(1 ~ 9): ").lower().strip()
