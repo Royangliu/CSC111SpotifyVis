@@ -333,7 +333,7 @@ class Tree:
         common_song = list(common_song)
         return common_song
 
-    def most_common_artist_country(self, country1: str) -> list[str]:
+    def most_common_artist_country(self, country1: str) -> str:
         """
         This function takes in a country name as an input and compares the artists of the top songs from
         this country to all other countries in the tree and outputs a list of the most common country
@@ -363,9 +363,9 @@ class Tree:
         most_similar = list(most_similar)
         most_similar = most_similar[0]
 
-        return most_similar[:1]
+        return most_similar
 
-    def most_common_song_country(self, country1: str) -> list[str]:
+    def most_common_song_country(self, country1: str) -> str:
         """
         This function takes in a country name as an input and compares the top songs from
         this country to the top songs in all other countries in the tree and outputs a list
