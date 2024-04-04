@@ -235,8 +235,7 @@ def choice4(tree: Tree, countries: set) -> None:
         print("Invalid input. Please try again.")
         c1 = input("Enter the name of the country you're interested in (Capitalize the first letter): ").strip()
 
-    print("The country that has the most artists in common with yours is: ", tree.most_common_artist_country(c1),
-          "!")
+    print(f"The country that has the most artists in common with yours is: {tree.most_common_artist_country(c1)}!")
     print("\n")
 
 
@@ -251,7 +250,7 @@ def choice5(tree: Tree, countries: set) -> None:
         print("Invalid input. Please try again.")
         c1 = input("Enter the name of the country you're interested in (Capitalize the first letter): ").strip()
 
-    print("The country that has the most songs in common with yours is: ", tree.most_common_song_country(c1), "!")
+    print(f"The country that has the most songs in common with yours is: {tree.most_common_song_country(c1)}!")
     print("\n")
 
 
