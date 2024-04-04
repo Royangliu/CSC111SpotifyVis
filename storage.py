@@ -491,9 +491,10 @@ class Tree:
         else:
             cities = self.get_all_cities_sequence()
             for city in cities:
-                com_score = city[0].get_comparison_score(songs, ranked)
-                sequence = city[1]
-                scores.append((com_score, sequence))
+                if city[0]._root != '0':
+                    com_score = city[0].get_comparison_score(songs, ranked)
+                    sequence = city[1]
+                    scores.append((com_score, sequence))
 
         scores.sort(reverse=True)
         return scores[:min(len(scores), n)]
