@@ -190,7 +190,7 @@ def choice2(tree: Tree, countries: set) -> None:
     c1 = input("Enter the first country (Capitalize the first letter): ").strip()
     c2 = input("Enter the second country (Capitalize the first letter): ").strip()
 
-    while c1 not in countries:
+    while c1 not in countries or c2 not in countries:
         print("Invalid input. Please try again.")
         c1 = input("Enter the first country (Capitalize the first letter): ").strip()
         c2 = input("Enter the second country (Capitalize the first letter): ").strip()
@@ -198,7 +198,7 @@ def choice2(tree: Tree, countries: set) -> None:
     common = tree.common_artist(c1, c2)
     
     for i in range(len(common)):
-        print(f'{i}: {common[i]}')
+        print(f'{i + 1}: {common[i]}')
     print("\n")
 
 
@@ -210,7 +210,7 @@ def choice3(tree: Tree, countries: set) -> None:
     c1 = input("Enter the first country (Capitalize the first letter): ").strip()
     c2 = input("Enter the second country (Capitalize the first letter): ").strip()
 
-    while choice1 not in countries:
+    while c1 not in countries or c2 not in countries:
         print("Invalid input. Please try again.")
         c1 = input("Enter the first country (Capitalize the first letter): ").strip()
         c2 = input("Enter the second country (Capitalize the first letter): ").strip()
@@ -218,7 +218,7 @@ def choice3(tree: Tree, countries: set) -> None:
     common = tree.common_song(c1, c2)
     
     for i in range(len(common)):
-        print(f'{i}: {common[i]}')
+        print(f'{i + 1}: {common[i]}')
     print("\n")
 
 
