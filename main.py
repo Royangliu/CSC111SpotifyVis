@@ -46,7 +46,7 @@ def create_song_object(string_data: str, rank: int) -> Song:
     return Song(title, artist, streams, rank)
 
 
-def get_personality_test(tree: Tree, available_songs: set[str]):
+def get_personality_test(tree: Tree, available_songs: set[str]) -> None:
     """Runs the personality test in the user input menu.
     """
     print("This choice returns the regions who have the most similar top songs as your top list on a score of (0-1).")
@@ -160,12 +160,12 @@ def choice1(tree: Tree, choices: set) -> None:
     """Prints the top n songs in a specific region of the user's choice.
     """
     print("\nLet's find the top songs in a region of your choice!")
-    choice = input("Enter any continent/country/city:(Title Case): ").strip()
-    print(choice)
+    c = input("Enter any continent/country/city:(Title Case): ").strip()
+    print(c)
 
-    while choice not in choices:
+    while c not in choices:
         print("The input is either invalid or not in the database. Please try again.")
-        choice = input("Enter any continent/country/city:(Capitalize the first letter): ").strip()
+        c = input("Enter any continent/country/city:(Capitalize the first letter): ").strip()
 
     n = input("Please enter the number of top songs you would like to see: ").lower().strip()
     print("\nP.s. Only the top 5 songs will be shown if n is greater than 5"
@@ -174,7 +174,7 @@ def choice1(tree: Tree, choices: set) -> None:
         print("Invalid input. Please try again.")
         n = input("Please enter the number of top songs you would like to see: ").lower().strip()
 
-    output = tree.top_n(int(n), choice)
+    output = tree.top_n(int(n), c)
     num = 1
     for item in output:
         print(str(num) + ". " + item[0] + " by " + item[1])
@@ -184,7 +184,7 @@ def choice1(tree: Tree, choices: set) -> None:
 
 
 def choice2(tree: Tree, countries: set) -> None:
-    """
+    """Prints the common artists of two user inputted countries.
     """
     print("You must be wondering what the most common artists between two countries of your choice are.\nAsk away!")
 
@@ -201,6 +201,8 @@ def choice2(tree: Tree, countries: set) -> None:
 
 
 def choice3(tree: Tree, countries: set) -> None:
+    """Prints the common songs between two user inputted countries.
+    """
     print("You must be wondering what the most common songs between two countries of your choices are.\nAsk away!")
 
     c1 = input("Enter the first country(Capitalize the first letter): ").strip()
@@ -216,6 +218,8 @@ def choice3(tree: Tree, countries: set) -> None:
 
 
 def choice4(tree: Tree, countries: set) -> None:
+    """Prints the countries who has the most artists in common with the user inputted country.
+    """
     print("You must be wondering which country has the most artists in common with your chosen country.\n Ask away!")
 
     c1 = input("Enter the name of the country you're interested in(Capitalize the first letter): ").strip()
@@ -230,6 +234,8 @@ def choice4(tree: Tree, countries: set) -> None:
 
 
 def choice5(tree: Tree, countries: set) -> None:
+    """Prints the countries who has the most songs in common with the user inputted country.
+    """
     print("You must be wondering which country has the most songs in common with your chosen country.\n Ask away!")
 
     c1 = input("Enter the name of the country you're interested in(Capitalize the first letter): ").strip()
@@ -251,12 +257,12 @@ if __name__ == "__main__":
     all_countries = set()
     all_cities = set()  # delete if not needed
     all_songs = set()
-    for city in spotify_tree.get_all_cities_sequence():
-        all_continents.add(city[1][0])
-        all_countries.add(city[1][1])
-        all_cities.add(city[1][2])
+    for curr_city in spotify_tree.get_all_cities_sequence():
+        all_continents.add(curr_city[1][0])
+        all_countries.add(curr_city[1][1])
+        all_cities.add(curr_city[1][2])
 
-        for song in city[0].get_songs():
+        for song in curr_city[0].get_songs():
             all_songs.add(song.title)
 
     all_choice = all_continents.union(all_countries).union(all_cities)
