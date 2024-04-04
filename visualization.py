@@ -20,7 +20,7 @@ import country_converter as coco
 import storage
 
 
-def all_options_table(available_set: set, type: str) -> None:
+def all_options_table(available_set: set, kind: str) -> None:
     """
     Displays a table listing all the options in the given set for the program.
 
@@ -28,18 +28,18 @@ def all_options_table(available_set: set, type: str) -> None:
         - available_set != set()
         - type in {'continent', 'country', 'city', 'song'}
     """
-    if type == 'continent':
+    if kind == 'continent':
         fig = go.Figure(data=[go.Table(header={"values": ['Continents']},
-                   cells={"values": [sorted(list(available_set))]})
-          ])
-    elif type == 'country':
+                                       cells={"values": [sorted(list(available_set))]})
+                              ])
+    elif kind == 'country':
         fig = go.Figure(data=[go.Table(header={"values": ['Countries']},
-                   cells={"values": [sorted(list(available_set))]})
-          ])
-    elif type == 'city':
+                                       cells={"values": [sorted(list(available_set))]})
+                              ])
+    elif kind == 'city':
         fig = go.Figure(data=[go.Table(header={"values": ['Cities']},
-                   cells={"values": [sorted(list(available_set))]})
-          ])
+                                       cells={"values": [sorted(list(available_set))]})
+                              ])
     else:
         fig = go.Figure(data=[go.Table(header={"values": ['Songs']},
                                        cells={"values": [sorted(list(available_set))]})
