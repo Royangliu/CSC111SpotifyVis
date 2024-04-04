@@ -84,7 +84,7 @@ def get_personality_test(tree: Tree, available_songs: set[str]) -> None:
 def run_recommendation(tree: Tree, available_songs: set[str]) -> None:
     """Runs the song recommendation function for user interaction
     """
-    print("This choice returns new song recommendations from the regions that have the most similar"
+    print("This choice returns new song recommendations from the regions that have the most similar "
           "top songs as your top list")
 
     max_rec = 0
