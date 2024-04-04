@@ -429,6 +429,6 @@ if __name__ == "__main__":
     python_ta.check_all(config={
         # the names (strs) of imported modules
         'extra-imports': ['storage', 'csv', 'visualization'],
-        "forbidden-io-functions": [],   
+        "forbidden-io-functions": [],  # allows for print and input functions  
         'max-line-length': 120
     })
