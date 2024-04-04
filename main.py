@@ -161,14 +161,13 @@ def choice1(tree: Tree, choices: set) -> None:
     """
     print("\nLet's find the top songs in a region of your choice!")
     c = input("Enter any continent/country/city:(Title Case): ").strip()
-    print(c)
 
     while c not in choices:
         print("The input is either invalid or not in the database. Please try again.")
         c = input("Enter any continent/country/city:(Capitalize the first letter): ").strip()
 
     n = input("Please enter the number of top songs you would like to see: ").lower().strip()
-    print("\nP.s. Only the top 5 songs will be shown if n is greater than 5"
+    print("\nP.s. Only the top 5 songs will be shown if n is greater than 5 "
           "and only the top 5 songs are avaliable for that region.")
     while not n.isnumeric() or int(n) < 1:
         print("Invalid input. Please try again.")
