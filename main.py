@@ -10,7 +10,7 @@ import csv
 import python_ta
 from storage import Tree, Song
 from visualization import generate_region_df_by_streams, generate_region_df_by_score, visualize_world_song_data, \
-all_songs_table
+all_options_table
 
 
 def initialize_spotify_file(file_name: str) -> Tree:
@@ -62,6 +62,20 @@ def get_personality_test(tree: Tree, available_songs: set[str]) -> None:
         else:
             print('Invalid input')
 
+    print("\nFirst, provide us a few songs.\n" +
+          "The song MUST be listed in the program to be valid. Would you like to see a pop up listing all\n" +
+          "the songs we have? Y/N")
+
+    # ask if the user wants to see the list of all songs
+    show_song_list = input("\nEnter your choice here: ").strip().lower()
+
+    while show_song_list not in {'y', 'yes', 'n', 'no'}:
+        print("\nSorry, but that's not a valid option. Please re-enter your choice.")
+        show_song_list = input("Enter your choice here: ").strip().lower()
+
+    if show_song_list in {'y', 'yes'}:
+        all_options_table(song_set)
+
     user_songs = get_user_top_songs(available_songs)
 
     message = "Do you want the scores to consider the rankings of the songs? (type 'Y' for yes): "
@@ -105,6 +119,20 @@ def run_recommendation(tree: Tree, available_songs: set[str]) -> None:
             max_region = int(curr_input)
         else:
             print('Invalid input')
+
+    print("\nFirst, provide us a few songs.\n" +
+          "The song MUST be listed in the program to be valid. Would you like to see a pop up listing all\n" +
+          "the songs we have? Y/N")
+
+    # ask if the user wants to see the list of all songs
+    show_song_list = input("\nEnter your choice here: ").strip().lower()
+
+    while show_song_list not in {'y', 'yes', 'n', 'no'}:
+        print("\nSorry, but that's not a valid option. Please re-enter your choice.")
+        show_song_list = input("Enter your choice here: ").strip().lower()
+
+    if show_song_list in {'y', 'yes'}:
+        all_options_table(song_set)
 
     user_songs = get_user_top_songs(available_songs)
 
@@ -322,7 +350,7 @@ def visualization_prompt(tree: Tree, song_set: set) -> None:
                 show_song_list = input("Enter your choice here: ").strip().lower()
 
             if show_song_list in {'y', 'yes'}:
-                all_songs_table(song_set)
+                all_options_table(song_set)
 
             # prompt user for songs
             user_songs = get_user_top_songs(song_set)
@@ -386,6 +414,12 @@ if __name__ == "__main__":
     print("Welcome to the Spotify visualization program!\n"
           "This is the main menu. Please select an option:\n")
 
+    print("To generate a table of all available geographic and song options, please choose the following:"
+          "a. Show all continents\n"
+          "b. Show all countries\n"
+          "c. Show all citie\ns"
+          "d. Show all songs\n")
+    
     while not stop:
         print("1. Get the top n songs for a continent/country/city\n"
               "2. Find the most common artists between two countries\n"
@@ -399,8 +433,8 @@ if __name__ == "__main__":
               "8. Visualization options\n"
               "9. Exit the program\n")
 
-        choice = input("Please enter your choice(1 ~ 9): ").lower().strip()
-        while choice not in {"1", "2", "3", "4", "5", "6", "7", "8", "9"}:
+        choice = input("Please enter your choice(1 ~ 9) or (a ~ d): ").lower().strip()
+        while choice not in {"1", "2", "3", "4", "5", "6", "7", "8", "9", 'a', 'b', 'c', 'd'}:
             print("Invalid input. Please try again.")
             choice = input("Please enter your choice(1 ~ 9): ").lower().strip()
 
@@ -422,9 +456,16 @@ if __name__ == "__main__":
             visualization_prompt(spotify_tree, all_songs)
         elif choice == "9":
             stop = True
+        elif choice == 'a':
+            all_option_table(all_continents)
+        elif choice == 'b':
+            all_option_table(all_countries)
+        elif choice == 'c':
+            all_option_table(all_cities)
+        elif choice == 'd':
+            all_option_table(all_songs)
 
     print("Thank you for using the Spotify visualization program, we hope you enjoyed it!")
-
 
     python_ta.check_all(config={
         # the names (strs) of imported modules

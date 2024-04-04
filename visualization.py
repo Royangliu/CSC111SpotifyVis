@@ -20,15 +20,15 @@ import country_converter as coco
 import storage
 
 
-def all_songs_table(songs_set: set) -> None:
+def all_options_table(available_set: set) -> None:
     """
-    Displays a table listing all the songs in the program.
+    Displays a table listing all the options in the given set for the program.
 
     Preconditions:
         - songs_set != set()
     """
     fig = go.Figure(data=[go.Table(header={"values": ['Songs']},
-                                   cells={"values": [sorted(list(songs_set))]})
+                                   cells={"values": [sorted(list(available_set))]})
                           ])
     fig.show()
 
