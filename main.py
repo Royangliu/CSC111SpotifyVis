@@ -417,7 +417,7 @@ if __name__ == "__main__":
     print("To generate a table of all available geographic and song options, please choose the following:"
           "a. Show all continents\n"
           "b. Show all countries\n"
-          "c. Show all citie\ns"
+          "c. Show all cities\n"
           "d. Show all songs\n")
     
     while not stop:
@@ -457,13 +457,17 @@ if __name__ == "__main__":
         elif choice == "9":
             stop = True
         elif choice == 'a':
-            all_option_table(all_continents)
+            print('\nGenerating Table...\n')
+            all_options_table(all_continents)
         elif choice == 'b':
-            all_option_table(all_countries)
+            print('\nGenerating Table...\n')
+            all_options_table(all_countries)
         elif choice == 'c':
-            all_option_table(all_cities)
+            print('\nGenerating Table...\n')
+            all_options_table(all_cities)
         elif choice == 'd':
-            all_option_table(all_songs)
+            print('\nGenerating Table...\n')
+            all_options_table(all_songs)
 
     print("Thank you for using the Spotify visualization program, we hope you enjoyed it!")
 
