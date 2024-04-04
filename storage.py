@@ -629,8 +629,9 @@ class Tree:
         Preconditions:
             - kind in {"continent", "country", "city"}
             - self.is_empty == False
+            - self._root == "World"
         """
-        continents = {continent for continent in self._subtrees}
+        continents = set(self._subtrees)
 
         if kind == "continent":
             return continents
@@ -639,14 +640,14 @@ class Tree:
             for continent in continents:
                 for country in continent._subtrees:
                     countries.add(country)
-            if kind == 'country':
-                return countries
-            else:
-                cities = set()
-                for country in countries:
-                    for city in country._subtrees:
-                        cities.add(city)
-                return cities
+        if kind == 'country':
+            return countries
+        else:
+            cities = set()
+            for country in countries:
+                for city in country._subtrees:
+                    cities.add(city)
+            return cities
 
 
 class Song:

@@ -53,7 +53,7 @@ def get_personality_test(tree: Tree, available_songs: set[str]) -> None:
 
     num_regions = 0
     while num_regions <= 0:
-        curr_input = input('Enter the number of scores you want to see in descending order (>= 1): ').strip()
+        curr_input = input('Enter the max number of scores you want to see in descending order (>= 1): ').strip()
         if curr_input.isnumeric() and int(curr_input) > 0:
             num_regions = int(curr_input)
         else:
@@ -74,7 +74,7 @@ def get_personality_test(tree: Tree, available_songs: set[str]) -> None:
     print('\nHere are the top regions with the most similar top songs:')
     count = 1
     for region in test:
-        print(f'{count}. {', '.join(region[1][::-1])}: {round(region[0], 2)}')
+        print(f'{count}. {', '.join(region[1][::-1])}: {round(region[0], 5)}')
         count += 1
     print("\n")
 
@@ -188,13 +188,13 @@ def choice2(tree: Tree, countries: set) -> None:
     """
     print("You must be wondering what the most common artists between two countries of your choice are.\nAsk away!")
 
-    c1 = input("Enter the first country(Capitalize the first letter): ").strip()
-    c2 = input("Enter the second country(Capitalize the first letter): ").strip()
+    c1 = input("Enter the first country (Capitalize the first letter): ").strip()
+    c2 = input("Enter the second country (Capitalize the first letter): ").strip()
 
     while c1 not in countries:
         print("Invalid input. Please try again.")
-        c1 = input("Enter the first country(Capitalize the first letter): ").strip()
-        c2 = input("Enter the second country(Capitalize the first letter): ").strip()
+        c1 = input("Enter the first country (Capitalize the first letter): ").strip()
+        c2 = input("Enter the second country (Capitalize the first letter): ").strip()
 
     print(tree.common_artist(c1, c2))
     print("\n")
@@ -205,13 +205,13 @@ def choice3(tree: Tree, countries: set) -> None:
     """
     print("You must be wondering what the most common songs between two countries of your choices are.\nAsk away!")
 
-    c1 = input("Enter the first country(Capitalize the first letter): ").strip()
-    c2 = input("Enter the second country(Capitalize the first letter): ").strip()
+    c1 = input("Enter the first country (Capitalize the first letter): ").strip()
+    c2 = input("Enter the second country (Capitalize the first letter): ").strip()
 
     while choice1 not in countries:
         print("Invalid input. Please try again.")
-        c1 = input("Enter the first country(Capitalize the first letter): ").strip()
-        c2 = input("Enter the second country(Capitalize the first letter): ").strip()
+        c1 = input("Enter the first country (Capitalize the first letter): ").strip()
+        c2 = input("Enter the second country (Capitalize the first letter): ").strip()
 
     print(tree.common_song(c1, c2))
     print("\n")
@@ -222,11 +222,11 @@ def choice4(tree: Tree, countries: set) -> None:
     """
     print("You must be wondering which country has the most artists in common with your chosen country.\n Ask away!")
 
-    c1 = input("Enter the name of the country you're interested in(Capitalize the first letter): ").strip()
+    c1 = input("Enter the name of the country you're interested in (Capitalize the first letter): ").strip()
 
     while c1 not in countries:
         print("Invalid input. Please try again.")
-        c1 = input("Enter the name of the country you're interested in(Capitalize the first letter): ").strip()
+        c1 = input("Enter the name of the country you're interested in (Capitalize the first letter): ").strip()
 
     print("The country that has the most artists in common with yours is: ", tree.most_common_artist_country(c1),
           "!")
@@ -238,18 +238,18 @@ def choice5(tree: Tree, countries: set) -> None:
     """
     print("You must be wondering which country has the most songs in common with your chosen country.\n Ask away!")
 
-    c1 = input("Enter the name of the country you're interested in(Capitalize the first letter): ").strip()
+    c1 = input("Enter the name of the country you're interested in (Capitalize the first letter): ").strip()
 
     while c1 not in countries:
         print("Invalid input. Please try again.")
-        c1 = input("Enter the name of the country you're interested in(Capitalize the first letter): ").strip()
+        c1 = input("Enter the name of the country you're interested in (Capitalize the first letter): ").strip()
 
     print("The country that has the most songs in common with yours is: ", tree.most_common_song_country(c1), "!")
     print("\n")
 
 
 if __name__ == "__main__":
-    tree_file = "main_data.csv"
+    tree_file = "FINAL_DATA.csv"
     spotify_tree = initialize_spotify_file(tree_file)  # Make sure this is consistent with file names
 
     # Initializes sets containing all song titles and location titles in the tree
