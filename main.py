@@ -51,6 +51,7 @@ def get_personality_test(tree: Tree, available_songs: set[str]) -> None:
     """
     print("This choice returns the regions who have the most similar top songs as your top list on a score of (0-1).")
 
+    region_range = get_region_range()
     num_regions = 0
     while num_regions <= 0:
         curr_input = input('Enter the max number of scores you want to see in descending order (>= 1): ').strip()
@@ -60,7 +61,6 @@ def get_personality_test(tree: Tree, available_songs: set[str]) -> None:
             print('Invalid input')
 
     user_songs = get_user_top_songs(available_songs)
-    region_range = get_region_range()
 
     message = "Do you want the scores to consider the rankings of the songs? (type 'Y' for yes): "
     ranked = input(message).strip().lower()
@@ -94,6 +94,7 @@ def run_recommendation(tree: Tree, available_songs: set[str]) -> None:
         else:
             print('Invalid input')
 
+    region = get_region_range()
     max_region = 0
     while max_region <= 0:
         message = 'Enter the max number of most similar regions you want to look through for recommendations (>= 1): '
@@ -104,7 +105,6 @@ def run_recommendation(tree: Tree, available_songs: set[str]) -> None:
             print('Invalid input')
 
     user_songs = get_user_top_songs(available_songs)
-    region = get_region_range()
 
     message = "Do you want the recommendation to consider the rankings of the songs? (type 'Y' for yes): "
     ranked = input(message).strip().lower()
