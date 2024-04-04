@@ -62,10 +62,6 @@ def get_personality_test(tree: Tree, available_songs: set[str]) -> None:
         else:
             print('Invalid input')
 
-    print("\nFirst, provide us a few songs.\n" +
-          "The song MUST be listed in the program to be valid. Would you like to see a pop up listing all\n" +
-          "the songs we have? Y/N")
-
     user_songs = get_user_top_songs(available_songs)
 
     message = "Do you want the scores to consider the rankings of the songs? (type 'Y' for yes): "
@@ -110,10 +106,6 @@ def run_recommendation(tree: Tree, available_songs: set[str]) -> None:
         else:
             print('Invalid input')
 
-    print("\nFirst, provide us a few songs.\n" +
-          "The song MUST be listed in the program to be valid. Would you like to see a pop up listing all\n" +
-          "the songs we have? Y/N")
-
     user_songs = get_user_top_songs(available_songs)
 
     message = "Do you want the recommendation to consider the rankings of the songs? (type 'Y' for yes): "
@@ -155,8 +147,11 @@ def get_user_top_songs(song_set: set[str]) -> list[str]:
             print("Invalid input. Please try again.")
         else:
             n = int(n)
-            
+
     # ask if the user wants to see the list of all songs
+    print("\nFirst, provide us a few songs.\n" +
+      "The song MUST be listed in the program to be valid. Would you like to see a pop up listing all\n" +
+      "the songs we have? Y/N")
     show_song_list = input("\nEnter your choice here: ").strip().lower()
 
     while show_song_list not in {'y', 'yes', 'n', 'no'}:
