@@ -74,7 +74,7 @@ def get_personality_test(tree: Tree, available_songs: set[str]) -> None:
     print('\nHere are the top regions with the most similar top songs:')
     count = 1
     for region in test:
-        print(f'{count}. {region[1]}: {round(region[0], 2)}')
+        print(f'{count}. {', '.join(region[1][::-1])}: {round(region[0], 2)}')
         count += 1
     print("\n")
 
