@@ -263,19 +263,19 @@ def visualization_prompt(tree: Tree, song_set: set) -> None:
     running = True
 
     # graph descriptions
-    print("==============================================================================\n" +
-          " Welcome to the visualizer! Please select one of the following graph options.\n" +
+    print("==============================================================================\n" 
+          " Welcome to the visualizer! Please select one of the following graph options.\n" 
           "=============================================================================="
           )
     print("TOP 5:\n"
-          + "These maps will visualize all specified regions by the number of total streamed accured by their top\n"
-          + "5 songs, represented by its shade; darker regions correspond to higher stream counts. If you\n"
-          + "hover over a certain region, a pop up will display the names of the top 5 songs.\n"
-          + "\nSIMILARITY SCORE:\n"
-          + "You'll be prompted to list 1 - 5 songs that must be recorded within this program's dataset, as well as\n"
-          + "a rank specification. Then, the program will calculate the comparison score of all specified regions and\n"
-          + "represent them by shade, similar to 'Top 5 maps.' If you hover over a certain region, a pop up will\n"
-          + "display the exact comparison score calculated."
+          "These maps will visualize all specified regions by the number of total streamed accured by their top\n"
+          "5 songs, represented by its shade; darker regions correspond to higher stream counts. If you\n"
+          "hover over a certain region, a pop up will display the names of the top 5 songs.\n"
+          "\nSIMILARITY SCORE:\n"
+          "You'll be prompted to list 1 - 5 songs that must be recorded within this program's dataset, as well as\n"
+          "a rank specification. Then, the program will calculate the comparison score of all specified regions and\n"
+          "represent them by shade, similar to 'Top 5 maps.' If you hover over a certain region, a pop up will\n"
+          "display the exact comparison score calculated."
           )
     print("\nEnter 'quit' to return to the other options.")
 
@@ -310,8 +310,8 @@ def visualization_prompt(tree: Tree, song_set: set) -> None:
 
         elif vis_option == 'similarity score':
             # get list of songs
-            print("\nFirst, provide us a few songs.\n" +
-                  "The song MUST be listed in the program to be valid. Would you like to see a pop up listing all\n" +
+            print("\nFirst, provide us a few songs.\n" 
+                  "The song MUST be listed in the program to be valid. Would you like to see a pop up listing all\n" 
                   "the songs we have? Y/N")
 
             # ask if the user wants to see the list of all songs
@@ -355,7 +355,7 @@ def visualization_prompt(tree: Tree, song_set: set) -> None:
             # prompt for another graph
             print("\nA graph should have popped up in your browser!")
             print("To generate a new visualization, enter whether you want a 'top 5' or 'similarity score' graph.\n"
-                  + "If you want to return to the previous options, enter 'quit.'"
+                  "If you want to return to the previous options, enter 'quit.'"
                   )
             vis_option = input("\nEnter your choice here: ").strip().lower()
 
@@ -429,8 +429,6 @@ if __name__ == "__main__":
     python_ta.check_all(config={
         # the names (strs) of imported modules
         'extra-imports': ['storage', 'csv', 'visualization'],
-
-        # the names (strs) of functions that call print/open/input
-        'allowed-io': [],
+        "forbidden-io-functions": [],   
         'max-line-length': 120
     })

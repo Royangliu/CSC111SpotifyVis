@@ -624,7 +624,7 @@ class Tree:
 
     def get_regions_as_subtrees(self, kind: str) -> set[Tree]:
         """
-        Returns set of all different regions based on the kind specified.
+        Helper that returns set of all different regions based on the kind specified.
 
         Preconditions:
             - kind in {"continent", "country", "city"}
@@ -676,7 +676,5 @@ class Song:
 
 if __name__ == "__main__":
     python_ta.check_all(config={
-        # 'extra-imports': [],  # the names (strs) of imported modules
-        # 'allowed-io': [],  # the names (strs) of functions that call print/open/input
         'max-line-length': 120
     })
